@@ -1,0 +1,70 @@
+@import "global/variables";
+
+.btn {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 8px 16px;
+  min-width: 64px;
+  min-height: 36px;
+
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+  font-family: $font-base;
+  text-transform: uppercase;
+
+  background-color: $default-primary-color;
+  border: none;
+  border-radius: 4px;
+
+  cursor: pointer;
+  outline:none;
+
+  &.disabled,
+  &.is-disabled,
+  &[disabled] {
+    cursor: default;
+    background-color: $secondary-text-color;
+  }
+  &:hover:not([disabled]) {
+    background-color: darken($default-primary-color, 10%);
+  }
+
+  &-margin {
+    margin: 0 calc(var(--indent) / 2);
+  }
+
+  &-accent {
+    background-color: $accent-color;
+  }
+
+  &-accent:hover:not([disabled]) {
+    background-color: darken($accent-color, 10%);
+  }
+
+  &-link {
+    background-color: transparent;
+    text-transform: none;
+    color: $default-primary-color;
+
+    &:hover:not([disabled]) {
+      background-color: darken(#fff, 10%);
+    }
+  }
+
+  &-link-footer {
+    background-color: transparent;
+    text-decoration: underline;
+    text-transform: none;
+    color: #fff;
+
+    &:hover:not([disabled]) {
+      background-color: transparent;
+      color: darken(#fff, 10%);
+    }
+  }
+}

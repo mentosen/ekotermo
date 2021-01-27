@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cabin&display=swap');
+
+$font-base: 'Roboto', sans-serif;
+$font-placeholder: 'Open Sans', sans-serif;
+$font-headers: 'Montserrat', sans-serif;
+$font-buttons: 'Montserrat', sans-serif;
+$font-text: 'Cabin', sans-serif;
+
+$dark-primary-color: #0288D1;
+$default-primary-color: #03A9F4;
+$light-primary-color: #B3E5FC;
+$text-primary-color: #FFFFFF;
+$accent-color: #8BC34A;
+$primary-text-color: #212121;
+$secondary-text-color: #757575;
+$divider-color: #BDBDBD;
+$error-color: #ef5350;
+
+// breakpoints
+$min-width: 320px; // or 1024px
+$max-width: 1440px; // 1440px
+$sm: 600px;
+$md: 960px;
+$lg: 1280px;
+$xl: 1920px;
+
+$main-container-width: 1440px;
+
+@mixin container {
+  $padding: var(--indent);
+  $paddings: calc(var(--indent) * 2);
+
+  width: 100vw;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: calc(100vw - #{$paddings});
+    @content;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: $main-container-width - 16px;
+    @content;
+  }
+}
+
+@mixin container-control {
+  $padding: var(--indent);
+  $paddings: calc(var(--indent) * 2);
+
+  width: 100vw;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: calc(100vw - #{$paddings} - 400px);
+    @content;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: $main-container-width - 300px;
+    @content;
+  }
+}

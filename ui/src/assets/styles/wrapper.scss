@@ -1,0 +1,27 @@
+@import "global/variables";
+
+.wrapper {
+  &--main {
+    @include container;
+    flex-grow: 1;
+  }
+  &--content {
+    width: min-content;
+    flex-grow: 1;
+    flex-shrink: 0;
+    max-width: $main-container-width - 16px;
+    padding: var(--indent);
+
+    .left-sidebar--opened + & {
+      max-width: $main-container-width - 16px;
+    }
+  }
+  &--control{
+    @include container-control;
+    flex-grow: 1;
+  }
+}
+
+.main {
+  display: flex;
+}

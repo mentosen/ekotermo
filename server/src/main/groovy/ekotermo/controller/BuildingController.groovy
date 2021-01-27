@@ -1,0 +1,33 @@
+package ekotermo.controller
+
+import ekotermo.dto.BuildingDto
+import ekotermo.service.BuildingService
+import ekotermo.service.security.model.UserPrincipal
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+@RequestMapping("/api/building")
+class BuildingController {
+
+    @Autowired private BuildingService buildingService
+
+    @PostMapping("/")
+    void create(@AuthenticationPrincipal UserPrincipal principal,
+                                  @RequestBody BuildingDto buildingDto) {
+
+        buildingService.create(principal.userId, buildingDto)
+    }
+
+    @PutMapping("/")
+    void edit(@AuthenticationPrincipal UserPrincipal principal,
+                                     @RequestBody BuildingDto buildingDto) {
+
+        buildingService.edit(principal.userId, buildingDto)
+    }
+}

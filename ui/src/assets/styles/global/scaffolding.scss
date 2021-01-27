@@ -1,0 +1,82 @@
+@import "variables";
+
+html {
+  font-size: 12px;
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 1366px) {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin: 0 auto;
+  font-family: $font-base;
+  font-size: 1rem;
+  //line-height: $line-height-standard;
+  background-color: $light-primary-color;
+
+  min-height: 100vh;
+
+  @media screen and (max-width: 320px) {
+    max-width: 320px;
+  }
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+/**
+user select none
+ */
+.user-select-none {
+
+  user-select: none;
+
+}
+
+.desktop-only {
+  display: none!important;
+
+  @media (min-width: 1024px) {
+    display: block!important;
+  }
+}
+
+.mobile-only {
+  display: none!important;
+
+  @media (max-width: 1023px) {
+    display: block!important;
+  }
+}
+
+#main-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color:  $light-primary-color;
+  height: auto;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+:root {
+  --indent: 10px;
+}
+
+@media (min-width:768px) {
+  :root {
+    --indent: 16px;
+  }
+}
+

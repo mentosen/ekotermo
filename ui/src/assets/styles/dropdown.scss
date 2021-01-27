@@ -1,0 +1,67 @@
+@import "global/variables";
+.dropdown {
+  position: relative;
+  &--lang {
+    display: flex;
+  }
+}
+
+.dropdown__trigger {
+  display: block;
+  width: calc(var(--indent) * 2);
+  height: var(--indent);
+  padding-right: 3px;
+  text-align: right;
+}
+
+.dropdown__list {
+  position: absolute;
+  top: calc(var(--indent) + 8px);
+  right: 0;
+  width: 140px;
+  z-index: 150;
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+
+  background: #ffffff;
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+
+  .dropdown--lang & {
+    width: auto;
+    min-width: 55px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+}
+
+.dropdown__item {
+  padding: calc(var(--indent) / 2);
+  color: black;
+  background-color: $light-primary-color;
+
+  &:hover {
+    background-color: darken($light-primary-color, 10%);;
+    cursor: pointer;
+  }
+}
+
+.dropdown__trigger--arrow {
+  position: relative;
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 5px;
+    height: 5px;
+    border: 2px solid black;
+    transform: rotate(45deg);
+    border-top-color: transparent;
+    border-left-color: transparent;
+    cursor: pointer;
+  }
+}
