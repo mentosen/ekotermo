@@ -14,7 +14,8 @@
             </div>
             <div class="tile__row tile__row--flex-end">
                 <language-selector/>
-                <span v-if="name !== ''" class="text-logo tile__row--margin-left">{{name}}</span>
+                <span v-if="isNameExists()" class="text-logo tile__row--margin-left">{{name}}</span>
+                <span v-if="isNameExists()" class="text-logo tile__row--margin-left">{{name}}</span>
                 <button-component
                         v-if="name === ''"
                         :name="$t('common.login')"
@@ -38,22 +39,31 @@
         name: "AppHeader",
         components:{ButtonComponent, LanguageSelector},
         props:{
-            isNameExists:{
-              type: Boolean,
-              required: true
-          }
         },
         data(){
             return{
                 name: ''
             }
         },
-        watch:{
-            isNameExists(){
-                this.name = this.$store.getters.getUserInfo.name
-            }
+        mounted() {
+            let that = this;
+
+            that.$bus.$on("setUser", function() {
+                debugger
+                that.name = that.$store.getters.getUserInfo.name
+            });
         },
         methods:{
+            isNameExists(){
+                let that = this;
+                debugger
+                that.$store.dispatch("GetUserInfo").then(() => {
+                    debugger
+                    that.name = that.$store.getters.getUserInfo.name
+                });
+
+                return this.name !== '';
+            },
             login(){
                 this.$router.push('/login')
             },

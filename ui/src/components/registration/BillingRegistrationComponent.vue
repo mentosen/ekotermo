@@ -24,6 +24,7 @@
                             autocomplete='off'
                             v-validate="rules.login"
                             id="input_login"
+                            @change="findDuplicate"
                     />
                     <span v-if="!!errors.first('input_login')" class="form__error">{{form.login === '' ? $t('errors.emptyField') : $t('errors.registration.login')}}</span>
                 </float-label>
@@ -85,6 +86,7 @@
                             autocomplete='off'
                             v-validate="rules.email"
                             id="input_email"
+                            @change="findDuplicate"
                     />
                     <span v-if="!!errors.first('input_email')" class="form__error">{{form.login === '' ? $t('errors.emptyField') : $t('errors.registration.email')}}</span>
                 </float-label>
@@ -105,6 +107,7 @@
                             autocomplete='off'
                             v-validate="rules.phone"
                             id="input_phone"
+                            @change="findDuplicate"
                     />
                     <span v-if="!!errors.first('input_phone')" class="form__error">{{form.phone === '' ? $t('errors.emptyField') : $t('errors.registration.phone')}}</span>
                 </float-label>
@@ -138,6 +141,10 @@
 </template>
 
 <script>
+    import {signup} from '@/api/auth';
+    import {findDuplicate} from '@/api/user';
+    import { setToken } from "@/utils/auth";
+
     export default {
         name: "BillingRegistrationComponent",
         data(){
@@ -166,7 +173,44 @@
                 this.$router.push('/')
             },
             submit(){
+                let that = this;
 
+                that.$validator.validate().then(valid => {
+                    if (!valid || that.isLoginExists || that.isEmailExists || that.isPhoneExists || !that.isPasswordsEquals) {
+                        return that.handleValidationErrorBasic();
+                    } else {
+                        let form = {...that.form};
+                        that.addPlus(form);
+                        signup(form).then(response => {
+                            debugger
+                            setToken(response.data.access_token);
+                            that.$store.commit("SET_TOKEN", response.data.access_token);
+                            that.$store.dispatch("GetUserInfo").then(() => {
+                                that.currentUser = that.$store.getters.getUserInfo;
+                                this.$router.push('/')
+                            });
+                            debugger
+                        }).catch((e) => {
+                            debugger
+                            console.log(e.message);
+                        });
+                    }
+                });
+            },
+            findDuplicate(){
+                let that = this;
+
+                let checkDto = {
+                    login: that.form.login,
+                    email: that.form.email,
+                    phone: that.form.phone
+                }
+
+                findDuplicate(checkDto).then(response => {
+                    that.isLoginExists = response.data.is_login_exists;
+                    that.isEmailExists = response.data.is_email_exists;
+                    that.isPhoneExists = response.data.is_phone_exists;
+                })
             }
         }
     }

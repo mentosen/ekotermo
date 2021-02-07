@@ -26,11 +26,15 @@ import Notifications from 'vue-notification'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+const EventBus = new Vue();
+
 let locale = {
   ru: ru,
   uk: uk,
   en: en,
 };
+
+Vue.prototype.$bus = EventBus;
 
 Vue.use(VeeValidate);
 

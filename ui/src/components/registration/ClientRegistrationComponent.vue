@@ -319,6 +319,8 @@
             submit(){
                 let that = this;
 
+                // that.testUser();
+
                 that.$validator.validate().then(valid => {
                     if (!valid || that.isLoginExists || that.isEmailExists || that.isPhoneExists || !that.isPasswordsEquals) {
                         return that.handleValidationErrorBasic();
@@ -328,10 +330,12 @@
                         signup(form).then(response => {
                             debugger
                             setToken(response.data.access_token);
-                            this.$store.commit("SET_TOKEN", response.data.access_token);
-                            this.$store.dispatch("GetUserInfo").then(() => {
-                                        this.currentUser = this.$store.getters.getUserInfo;
+                            that.$store.commit("SET_TOKEN", response.data.access_token);
+                            that.$store.dispatch("GetUserInfo").then(() => {
+                                that.currentUser = that.$store.getters.getUserInfo;
+                                this.$router.push('/')
                                     });
+                            debugger
                         }).catch((e) => {
                             debugger
                             console.log(e.message);
@@ -339,7 +343,44 @@
                     }
                 });
             },
+            testUser(){
+                let that = this;
+                debugger
+                that.form = {
+                    login:'000',
+                        password:'00000000',
+                        repeat_password:'00000000',
+                        email:'mentosentrue0'+ that.getRandomIntInclusive(0,10)+'@gmail.com',
+                        phone:'380688982769',
+                        city:'000',
+                        street:'000',
+                        building:'000',
+                        apartment:'000',
 
+                        serialNumber:'000'
+                }
+                let form = {...that.form};
+                that.addPlus(form);
+                signup(form).then(response => {
+                    debugger
+                    setToken(response.data.access_token);
+                    that.$store.commit("SET_TOKEN", response.data.access_token);
+                    that.$store.dispatch("GetUserInfo").then(() => {
+                        that.currentUser = that.$store.getters.getUserInfo;
+                        // this.$emit('setUser');
+                        that.$router.push('/')
+                    });
+                    debugger
+                }).catch((e) => {
+                    debugger
+                    console.log(e.message);
+                });
+            },
+            getRandomIntInclusive(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+            },
             // setCurrentUser: function (authUser) {
             //     this.$store.commit("SET_TOKEN", authUser.access_token);
             //     this.$store.dispatch("GetUserInfo").then(() => {

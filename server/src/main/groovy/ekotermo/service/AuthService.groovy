@@ -35,11 +35,25 @@ class AuthService {
     }
 
     /**
-     * Логин пользователя
+     * Регистрация пользователя
      * @param dto
      * @return
      */
     CredentialViewModel singUp(RegistrationRequestDto dto) {
+
+        log.info("Login user by name [$dto.login] and password [$dto.password]")
+
+        User user = userService.create(dto)
+
+        return generateTokensAndBuildResponse(user)
+    }
+
+    /**
+     * Регистрация компании
+     * @param dto
+     * @return
+     */
+    CredentialViewModel singUpCompany(RegistrationRequestDto dto) {
 
         log.info("Login user by name [$dto.login] and password [$dto.password]")
 
