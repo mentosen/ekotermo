@@ -74,9 +74,19 @@ export default new Router({
                     component: () => import('@/components/mainBtnPages/HeatPoint.vue'),
                 },
                 {
-                    path: '/object',
-                    name: 'Object registration',
-                    component: () => import('@/components/objectRegistration/objectRegistraionMain.vue'),
+                    path: '/objectRegistration1',
+                    name: 'Object registration1',
+                    component: () => import('@/components/objectRegistration1/ObjectRegistration1.vue'),
+                },
+                {
+                    path: '/objectRegistration2',
+                    name: 'Object registration2',
+                    component: () => import('@/components/objectRegistration2/ObjectRegistration2.vue'),
+                },
+                {
+                    path: '/objectRegistration3',
+                    name: 'Object registration3',
+                    component: () => import('@/components/objectRegistration3/ObjectRegistration3.vue'),
                 }
             ],
         },
