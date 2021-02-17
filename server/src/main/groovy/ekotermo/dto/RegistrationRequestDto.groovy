@@ -1,5 +1,6 @@
 package ekotermo.dto
 
+import ekotermo.data.enums.Role
 import groovy.transform.ToString
 
 @ToString(includeNames = true, includePackage = false)
@@ -22,4 +23,6 @@ class RegistrationRequestDto {
     String email
 
     String serialNumber
+
+    List<Role> roles
 }

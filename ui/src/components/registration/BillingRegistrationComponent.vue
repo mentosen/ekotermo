@@ -9,7 +9,7 @@
             <div class="tile__row tile__row--column-direction tile__row--margin-right">
                 <!--login*-->
                 <float-label
-                        :dispatch="true"
+                        :dispatch="false"
                         :read-only="false"
                         :fixed="false"
                         :label="$t('registration.login')"
@@ -24,9 +24,12 @@
                             autocomplete='off'
                             v-validate="rules.login"
                             id="input_login"
+                            @input="removeCyrillic"
                             @change="findDuplicate"
                     />
-                    <span v-if="!!errors.first('input_login')" class="form__error">{{form.login === '' ? $t('errors.emptyField') : $t('errors.registration.login')}}</span>
+                    <span v-if="!!errors.first('input_login') || isLoginExists" class="font--error">
+                        {{form.login === '' ? $t('errors.emptyField') : isLoginExists ? $t('errors.registration.loginExists') : $t('errors.registration.login')}}
+                    </span>
                 </float-label>
 
                 <!--password*-->
@@ -47,7 +50,9 @@
                             v-validate="rules.password"
                             id="input_password"
                     />
-                    <span v-if="!!errors.first('input_login')" class="form__error">{{form.login === '' ? $t('errors.emptyField') : $t('errors.registration.login')}}</span>
+                    <span v-if="!!errors.first('input_password')" class="font--error">
+                        {{form.password === '' ? $t('errors.emptyField') : $t('errors.registration.password')}}
+                    </span>
                 </float-label>
 
                 <!--repeat password*-->
@@ -59,6 +64,7 @@
                         :is-error="!!errors.first('input_repeat_password')"
                 >
                     <input
+                            type="password"
                             :placeholder="$t('registration.repeatPassword')"
                             v-model="form.repeat_password"
                             ref="input_repeat_password"
@@ -66,8 +72,11 @@
                             autocomplete='off'
                             v-validate="rules.repeat_password"
                             id="input_repeat_password"
+                            @input="checkPasswords"
                     />
-                    <span v-if="!!errors.first('input_repeat_password')" class="form__error">{{form.login === '' ? $t('errors.emptyField') : $t('errors.registration.login')}}</span>
+                    <span v-if="!!errors.first('input_repeat_password') || !isPasswordsEquals" class="font--error">
+                        {{form.repeat_password === '' ? $t('errors.emptyField') : isPasswordsEquals ? $t('errors.registration.password') : $t('errors.registration.repeatPassword')}}
+                    </span>
                 </float-label>
 
                 <!--email-->
@@ -88,7 +97,9 @@
                             id="input_email"
                             @change="findDuplicate"
                     />
-                    <span v-if="!!errors.first('input_email')" class="form__error">{{form.login === '' ? $t('errors.emptyField') : $t('errors.registration.email')}}</span>
+                    <span v-if="!!errors.first('input_email') || isEmailExists" class="font--error">
+                        {{form.email === '' ? $t('errors.emptyField') : isEmailExists ? $t('errors.registration.emailExists') : $t('errors.incorrectField')}}
+                    </span>
                 </float-label>
 
                 <!--phone* vue-tel-component-->
@@ -100,7 +111,8 @@
                         :is-error="!!errors.first('input_phone')"
                 >
                     <input
-                            :placeholder="$t('registration.phone')"
+                            type="number"
+                            :placeholder="$t('registration.phone') "
                             v-model="form.phone"
                             ref="input_phone"
                             name="input_phone"
@@ -109,7 +121,9 @@
                             id="input_phone"
                             @change="findDuplicate"
                     />
-                    <span v-if="!!errors.first('input_phone')" class="form__error">{{form.phone === '' ? $t('errors.emptyField') : $t('errors.registration.phone')}}</span>
+                    <span v-if="!!errors.first('input_phone') || isPhoneExists" class="font--error">
+                        {{form.phone === '' ? $t('errors.emptyField') : isPhoneExists ? $t('errors.registration.phoneExists') : $t('errors.incorrectField')}}
+                    </span>
                 </float-label>
 
                 <!--access code-->
@@ -152,18 +166,22 @@
                 form: {
                     login:'',
                     password:'',
-                    doublePassword:'',
+                    repeat_password:'',
                     email:'',
                     phone:'',
                     accessCode:'',
                 },
+                isLoginExists: false,
+                isEmailExists: false,
+                isPhoneExists: false,
+                isPasswordsEquals: false,
 
                 rules: {
                     login: 'required|min:3|max:30',
                     password: 'required|min:8',
-                    doublePassword: 'required|min:8',
-                    email:"required|email",
-                    phone:"required|min:13|maw:13",
+                    repeat_password: 'required|min:8',
+                    email:"email",
+                    phone:"required|min:12|max:12",
                     accessCode:"required"
                 },
             }
@@ -171,6 +189,24 @@
         methods: {
             close(){
                 this.$router.push('/')
+            },
+            handleValidationErrorBasic() {
+                const firstField = Object.keys(this.errors.collect())[0];
+                if(typeof firstField !== 'undefined'){
+                    this.$refs[firstField].focus();
+                }
+            },
+            checkPasswords(){
+                let that = this;
+                that.isPasswordsEquals = that.form.password === that.form.repeat_password
+            },
+            removeCyrillic(){
+                this.form.login = this.form.login.replace(/[а-яА-ЯЁё]/, '');
+            },
+            addPlus(form) {
+                if(!form.phone.includes('+')){
+                    form.phone = '+' + form.phone;
+                }
             },
             submit(){
                 let that = this;
@@ -187,7 +223,7 @@
                             that.$store.commit("SET_TOKEN", response.data.access_token);
                             that.$store.dispatch("GetUserInfo").then(() => {
                                 that.currentUser = that.$store.getters.getUserInfo;
-                                this.$router.push('/')
+                                this.$router.push('/billingMainPage')
                             });
                             debugger
                         }).catch((e) => {

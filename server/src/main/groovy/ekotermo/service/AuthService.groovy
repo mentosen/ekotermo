@@ -1,6 +1,13 @@
 package ekotermo.service
 
+import ekotermo.data.domain.AccessCode
+import ekotermo.data.domain.CounterSerialNumber
 import ekotermo.data.domain.User
+import ekotermo.data.enums.AccessCodeStatus
+import ekotermo.data.enums.CounterSerialNumberStatus
+import ekotermo.data.enums.Role
+import ekotermo.data.service.AccessCodeDataService
+import ekotermo.data.service.CounterSerialNumberDataService
 import ekotermo.data.service.UserDataService
 import ekotermo.dto.LoginRequestDto
 import ekotermo.dto.RegistrationRequestDto
@@ -16,7 +23,10 @@ import org.springframework.stereotype.Service
 class AuthService {
 
     @Autowired private JwtTokenProvider jwtTokenProvider
+
     @Autowired private UserDataService userDataService
+    @Autowired private AccessCodeDataService accessCodeDataService
+    @Autowired private CounterSerialNumberDataService counterSerialNumberDataService
 
     @Autowired private UserService userService
 
@@ -43,7 +53,17 @@ class AuthService {
 
         log.info("Login user by name [$dto.login] and password [$dto.password]")
 
-        User user = userService.create(dto)
+        User user = null
+
+        CounterSerialNumber counterSerialNumber = counterSerialNumberDataService.findByNumber(registrationRequestDto.serialNumber)
+
+        if(counterSerialNumber.status == CounterSerialNumberStatus.FREE){
+            dto.roles = [Role.ROLE_USER]
+
+            user = userService.create(dto)
+
+            counterSerialNumberDataService.makeDisabled(counterSerialNumber)
+        }
 
         return generateTokensAndBuildResponse(user)
     }
@@ -57,7 +77,17 @@ class AuthService {
 
         log.info("Login user by name [$dto.login] and password [$dto.password]")
 
-        User user = userService.create(dto)
+        User user = null
+
+        AccessCode accessCode = accessCodeDataService.findByCode(registrationRequestDto.serialNumber)
+
+        if(accessCode.status == AccessCodeStatus.FREE){
+            dto.roles = [Role.ROLE_COMPANY]
+
+            user = userService.create(dto)
+
+            accessCodeDataService.makeDisabled(accessCode)
+        }
 
         return generateTokensAndBuildResponse(user)
     }

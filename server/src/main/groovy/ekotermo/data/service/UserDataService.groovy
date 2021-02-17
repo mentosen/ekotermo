@@ -75,7 +75,7 @@ class UserDataService {
                 building: registrationRequestDto.building,
                 apartment: registrationRequestDto.apartment,
                 serialNumber: registrationRequestDto.serialNumber,
-                roles: [Role.ROLE_USER]
+                roles: registrationRequestDto.roles
         )
 
         user = userRepository.save(user)
