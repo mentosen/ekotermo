@@ -38,8 +38,8 @@ export default {
     }
   },
   state:{
-    regions:[],
-    cities:[],
+    regions:[{title: null, value:null }],
+    cities:[{title: null, value:null }],
     flatInfo:{},
     accountState: false,
     isDel: false

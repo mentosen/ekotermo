@@ -89,7 +89,7 @@ export default {
   components:{slider:slider},
   methods:{
     ...mapActions(['saveFlatData']),
-    ...mapMutations(["changeIsAllFilled"]),
+    ...mapMutations(["changeIsAllFilled1"]),
     addPhoto(e){
       var files = e.target.files;
 
@@ -126,11 +126,12 @@ export default {
         this.data = Object.assign(this.data, obj);
         this.saveFlatData(this.data);
         this.isEdit = false;
-        if(this.getApartments.length === this.getDataFlat.length) this.changeIsAllFilled(true);
+        if(this.getApartments.length === this.getDataFlat.length) this.changeIsAllFilled1(true);
       }
     },
     edit(){
       this.isEdit = true;
+      this.changeIsAllFilled1(false);
     },
     validateCounter(e){
       if(e.key == "Backspace"){

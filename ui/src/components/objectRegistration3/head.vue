@@ -1,6 +1,6 @@
 <template>
     <div class="head">
-      <div class="headHeading">Регестрация объекта<br>раздел №3</div>
+      <div class="headHeading">Регистрация объекта<br>раздел №3</div>
       <div class="headInfo">
         <div class="headAddress">
           <div>Адрес объекта: </div>
@@ -65,7 +65,7 @@ export default {
   }
 
   .headInfo{
-    width: 1000px;
+    width: 1100px;
   }
 
   .headAddress,.houseInfo, .headCategory,.headTitle{

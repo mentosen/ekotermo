@@ -1,6 +1,6 @@
 <template>
   <div id="registrationForm1">
-    <div class="headHeading">Регестрация объекта<br>раздел №1</div>
+    <div class="headHeading">Регистрация объекта<br>раздел №1</div>
     <div class="address">
       <div class="addressTitle">Адрес объекта</div>
       <div class="addressInfo">
@@ -46,7 +46,7 @@
             <div>
               <div>
                 <div class="categoryItemTitle">Раздел II пункт 2</div>
-                <div>В здании помещения всех потребителей в здании оборудованы  узлами распределительного учета (счетчиками тепла)"</div>
+                <div>В здании помещения всех потребителей в здании оборудованы  узлами распределительного учета (счетчиками тепла)</div>
               </div>
               <input type="checkbox" value="2" @change="changeChbChecked"  name="buildingCategory">
             </div>
@@ -85,7 +85,7 @@
             <div>
               <div>
                 <div class="categoryItemTitle">Раздел II пункт 5</div>
-                <div>В здании 100% самостоятельных объектов недвижемого имущества оборудованыузлами
+                <div>В здании 100% самостоятельных объектов недвижемого имущества оборудованы узлами
                   распределительного учета расхода теплоносителя (приборами учета гарячей воды)</div>
               </div>
               <input type="checkbox" value="5" @change="changeChbChecked" name="buildingCategory">
@@ -519,11 +519,11 @@ export default {
  .yellowBtn:hover{
    background-color: #ffffa1;
  }
- .greenBtn:hover{
-   background-color: #a7fda7;
- }
  .greyBtn:hover{
    background-color: #e6e6de;
+ }
+ .greenBtn:hover{
+   background-color: #a7fda7;
  }
 
  /*//*/

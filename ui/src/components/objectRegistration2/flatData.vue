@@ -300,8 +300,9 @@ table,td,th{
 }
 
 th{
-  font-size: 15px;
+  font-weight: 400;
 }
+
 th:last-child{
   padding: 0;
 }

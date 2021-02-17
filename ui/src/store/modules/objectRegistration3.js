@@ -14,6 +14,9 @@ export default {
     },
     removeImage(ctx, index){
 
+    },
+    saveHeatingCofs(ctx, data){
+      ctx.commit("changeHeatingCofs", data);
     }
   },
   mutations:{
@@ -69,19 +72,27 @@ export default {
     changeShowPopUp(state, value){
       state.showPopUp = value;
     },
-    changeIsAllFilled(state, value){
-      state.isAllFilled = value;
+    changeIsAllFilled1(state, value){
+      state.isAllFilled1 = value;
+    },
+    changeIsAllFilled2(state, value){
+      state.isAllFilled2 = value;
+    },
+    changeHeatingCofs(state, data){
+      state.heatingCofs = data;
     }
 
   },
   state:{
+    heatingCofs:{},
     dataFlat:[],
     apartments: [],
     entrance:[],
     floors:[],
     flatType:[],
     cof:[],
-    isAllFilled: false,
+    isAllFilled1: false,
+    isAllFilled2: false,
     showPopUp: false
   },
 
@@ -101,14 +112,20 @@ export default {
     getFloors(state){
       return state.floors;
     },
-    getIsAllFilled(state){
-      return state.isAllFilled;
+    getIsAllFilled1(state){
+      return state.isAllFilled1;
+    },
+    getIsAllFilled2(state){
+      return state.isAllFilled2;
     },
     getDataFlat(state){
       return state.dataFlat;
     },
     getShowPopUp(state){
       return state.showPopUp;
+    },
+    getHeatingCofs(state){
+      return state.heatingCofs;
     }
   }
 }

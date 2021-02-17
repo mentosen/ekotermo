@@ -1,6 +1,6 @@
 <template>
     <div class="head">
-      <div class="headHeading">Регестрация объекта<br>раздел №2</div>
+      <div class="headHeading">Регистрация объекта<br>раздел №2</div>
       <div class="headInfo">
         <div class="headAddress">
           <div>Адрес объекта: </div>

@@ -1,13 +1,14 @@
 <template>
   <div id="registrationForm3">
     <Head></Head>
+    <afterHead></afterHead>
     <table>
       <thead>
       <th width="75">№ квартиры</th>
       <th>№ подъезда</th>
       <th width="110">№ этажа</th>
       <th>Тип квартиры</th>
-      <th width="180">Поправочный коэфициент согласно расположения квартиры (помещения)</th>
+      <th width="180">Поправочный коэффициент согласно расположения квартиры (помещения)</th>
       <th width="140">Серийный номер счетчика</th>
       <th width="140">Начальные показания счетчика</th>
       <th width="110">Фото объекта</th>
@@ -21,7 +22,7 @@
       <router-link to="/objectRegistration2">
         <button class="yellowBtn" @click="toRegForm2">НАЗАД В РАЗДЕЛ №2</button>
       </router-link>
-      <button class="greenBtn" @click="register" v-bind:disabled="!getIsAllFilled">Ввести в учет</button>
+      <button class="greenBtn" @click="register" v-bind:disabled="!getIsAllFilled1 || !getIsAllFilled2">Ввести в учет</button>
     </div>
     <confirmPopUp v-if="getShowPopUp"></confirmPopUp>
   </div>
@@ -32,6 +33,8 @@ import {mapGetters, mapActions, mapMutations} from 'vuex'
 import appTr from './appTr'
 import Head from './head'
 import confirmPopUp from './confirmPopUp.vue'
+import afterHead from "@/components/objectRegistration3/afterHead";
+
 export default {
   name: 'registrationForm3',
   mounted() {
@@ -41,7 +44,7 @@ export default {
     return{
     }
   },
-  computed: mapGetters(["getApartments", "getIsAllFilled","getShowPopUp"]),
+  computed: mapGetters(["getApartments", "getIsAllFilled1","getIsAllFilled2","getShowPopUp"]),
   methods:{
     ...mapActions(["getData"]),
     ...mapMutations(["changeShowPopUp"]),
@@ -53,7 +56,7 @@ export default {
       //
     }
   } ,
-  components:{Head: Head, appTr: appTr, confirmPopUp:confirmPopUp}
+  components:{Head: Head, appTr: appTr, confirmPopUp:confirmPopUp,afterHead:afterHead}
 
 }
 </script>
@@ -77,6 +80,9 @@ export default {
    border-collapse: collapse;
    padding: 3px;
    text-align: center;
+ }
+ th{
+   font-weight: 400;
  }
 
  .btnPart{
