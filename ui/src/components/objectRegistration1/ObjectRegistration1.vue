@@ -450,7 +450,7 @@ export default {
       }
     },
     textValidate(e){
-      if(e.target.name === "personPosition" && e.key === " ") return
+      if(e.target.name === "personPosition" ||e.target.name == "street" && e.key === " ") return
       if(e.target.name === "firstName" && e.key == "-") return
       if(e.key == "Backspace"){
         return

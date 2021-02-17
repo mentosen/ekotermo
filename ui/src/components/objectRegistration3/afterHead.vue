@@ -112,7 +112,7 @@ export default {
       this.isEditCof1 = false;
       this.saveHeatingCofs(obj);
       this.data = obj;
-      if(this.isSavedCof1 && this.isSavedCof1) this.changeIsAllFilled2(true);
+      if(this.isSavedCof1 && this.isSavedCof2) this.changeIsAllFilled2(true);
     },
     saveCof2(e){
       var cof1 = document.querySelector("select[name=cofSelect]").value;
@@ -137,14 +137,14 @@ export default {
       this.isEditCof2 = false;
       this.saveHeatingCofs(obj);
       this.data = obj;
-      if(this.isSavedCof1 && this.isSavedCof1) this.changeIsAllFilled2(true);
+      if(this.isSavedCof1 && this.isSavedCof2) this.changeIsAllFilled2(true);
     },
-    editCof1(e){
+    editCof1(){
       this.isSavedCof1 = false;
       this.isEditCof1 = true;
       this.changeIsAllFilled2(false);
     },
-    editCof2(e){
+    editCof2(){
       this.isSavedCof2 = false;
       this.isEditCof2 = true;
       this.changeIsAllFilled2(false);

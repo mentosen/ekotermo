@@ -6,6 +6,7 @@ import user from './modules/user'
 import objectRegistration1 from "./modules/objectRegistration1";
 import objectRegistration2 from "./modules/objectRegistration2";
 import objectRegistration3 from "./modules/objectRegistration3";
+import billingMainPage from "./modules/billingMainPage";
 
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
         user,
         objectRegistration1: objectRegistration1,
         objectRegistration2: objectRegistration2,
-        objectRegistration3: objectRegistration3
+        objectRegistration3: objectRegistration3,
+        billingMainPage: billingMainPage
     },
     getters
 });

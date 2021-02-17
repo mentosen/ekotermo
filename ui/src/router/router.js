@@ -87,6 +87,11 @@ export default new Router({
                     path: '/objectRegistration3',
                     name: 'Object registration3',
                     component: () => import('@/components/objectRegistration3/ObjectRegistration3.vue'),
+                },
+                {
+                    path: '/billingMainPage',
+                    name: 'Billing Main Page',
+                    component: () => import('@/components/billingMainPage/billingMainPage'),
                 }
             ],
         },

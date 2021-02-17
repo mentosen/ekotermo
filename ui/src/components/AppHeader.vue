@@ -56,7 +56,7 @@
         methods:{
             isNameExists(){
                 let that = this;
-                debugger
+                // debugger
                 that.$store.dispatch("GetUserInfo").then(() => {
                     debugger
                     that.name = that.$store.getters.getUserInfo.name
