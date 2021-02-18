@@ -1,24 +1,28 @@
 <template>
   <div class="content">
     <BillingHead></BillingHead>
-    <div class="bilingTableTitle">Перечень объектов</div>
+    <div class="billingTableTitle">Перечень объектов</div>
     <table>
       <thead>
-      <th>№ п/п</th>
-      <th colspan="4">Адрес объекта</th>
-      <th>Статус объекта</th>
+      <tr>
+        <th rowspan="2" width="50px">№ п/п</th>
+        <th colspan="4">Адрес</th>
+        <th width="70px" rowspan="2">Тип учета</th>
+        <th width="50px" rowspan="2">Статус</th>
+        <th rowspan="2">Перейти</th>
+      </tr>
+      <tr>
+        <th width="150px">Область</th>
+        <th width="150px">Город</th>
+        <th width="200px">Улица</th>
+        <th width="70px">№ дома</th>
+      </tr>
+
       </thead>
       <tbody>
         <BillingTr v-for="(item, key) in billingObjects" v-bind:index="key" :key="key"></BillingTr>
       </tbody>
     </table>
-    <div class="btnPart">
-      <router-link to="/objectRegistration1">
-        <button class="yellowBtn">Регистрация нового объекта</button>
-      </router-link>
-
-      <button class="greenBtn">Работа с объектами</button>
-    </div>
   </div>
 </template>
 
@@ -49,58 +53,25 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.bilingTableTitle{
+.billingTableTitle{
   text-align: center;
   margin-top: 40px;
   margin-bottom: 10px;
 }
 table{
-  width: 850px;
-  table-layout: fixed;
-
+  /*width: 850px;*/
+  /*table-layout: fixed;*/
 }
 
 table,td,th{
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   border-collapse: collapse;
   padding: 3px;
   text-align: center;
 }
 
 th{
-  font-weight: 400;
-}
-.btnPart{
-  margin-top: 50px;
+  font-weight: 500;
 }
 
-.yellowBtn,.greenBtn,.greyBtn{
-  width: 200px;
-  height: 36px;
-  padding: 5px;
-  border: 1px solid #f9ed17;
-  border-radius: 3px;
-  outline: none;
-  text-decoration: none;
-  background-color: yellow;
-  cursor: pointer;
-  margin-right: 20px;
-}
-.greenBtn{
-  background-color: #13f113;
-  border: 1px solid #1bd400;
-}
-.greyBtn{
-  background-color: #d4d4cb;
-  border: 1px solid #757572;
-}
-.yellowBtn:hover{
-  background-color: #ffffa1;
-}
-.greenBtn:hover{
-  background-color: #a7fda7;
-}
-.greyBtn:hover{
-  background-color: #e6e6de;
-}
 </style>

@@ -29,7 +29,14 @@ export default {
             street:"Соборна",
             buildingNumber:"14",
             status: "onDeleted"
-        }
+        }, {
+            number:3,
+            region:"Херсонська",
+            city:"Херсон",
+            street:"Мазепи",
+            buildingNumber:"29",
+            status: "onRegister"
+            }
         ]
     },
     getters:{

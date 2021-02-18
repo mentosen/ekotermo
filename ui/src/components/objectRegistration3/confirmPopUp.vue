@@ -57,7 +57,7 @@
   width: 400px;
   padding: 20px;
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   border-radius: 2px;
   text-align: center;
 }

@@ -56,7 +56,7 @@ export default {
     align-items: center;
     margin-top: 50px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #3c3a3a;
   }
   .headHeading{
     text-align: center;

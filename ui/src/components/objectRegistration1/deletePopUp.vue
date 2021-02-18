@@ -58,7 +58,7 @@
   width: 400px;
   padding: 20px;
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   border-radius: 2px;
   text-align: center;
 }
@@ -72,7 +72,7 @@
   width: 120px;
   height: 36px;
   padding: 5px;
-  border: 1px solid #f9ed17;
+  border: 1px solid #3c3a3a;
   border-radius: 3px;
   outline: none;
   text-decoration: none;

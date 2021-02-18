@@ -1,5 +1,9 @@
 <template>
   <div id="registrationForm1">
+    <router-link to="/billingMainPage">
+      <button class="home"></button>
+    </router-link>
+
     <div class="headHeading">Регистрация объекта<br>раздел №1</div>
     <div class="address">
       <div class="addressTitle">Адрес объекта</div>
@@ -479,7 +483,24 @@ export default {
 </script>
 
 <style scoped>
-
+.home{
+  width: 40px;
+  height: 40px;
+  background-color: #13f113;
+  border: 1px solid #3c3a3a;
+  background-image: url("../../assets/icons/home.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  outline: none;
+}
+.home:hover{
+  background-color: #6ace6a;
+}
  #registrationForm1{
    display: flex;
    flex-direction: column;
@@ -536,7 +557,7 @@ export default {
  .address{
    margin-top: 20px;
    padding-bottom: 20px;
-   border-bottom: 1px solid #a7a4a4;
+   border-bottom: 1px solid #3c3a3a;
  }
  .addressTitle,.parametersTitle{
    text-align: center;
@@ -554,7 +575,7 @@ export default {
   align-items: center;
 }
  .addressData input,.addressData select{
-   border: 1px solid #ccc;
+   border: 1px solid #3c3a3a;
    padding: 2px;
    font-size: 17px;
    border-radius: 2px;
@@ -589,7 +610,7 @@ export default {
   font-weight: 550;
 }
 .category>div{
-  border: 1px solid #a7a4a4;
+  border: 1px solid #3c3a3a;
   margin-top: 20px;
   padding: 10px;
   border-radius: 3px;
@@ -602,7 +623,7 @@ export default {
 input[type=checkbox]{
    width: 20px;
    height: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
  }
 
 
@@ -619,7 +640,7 @@ input[type=checkbox]{
    width: 500px;
  }
 .buildingInfo,.personInfo{
-  border: 1px solid #a7a4a4;
+  border: 1px solid #3c3a3a;
   padding: 10px;
   border-radius: 3px;
   width: 450px;
@@ -636,7 +657,7 @@ input[type=checkbox]{
  }
 
 .buildingInfo input,.personInfo input{
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   padding: 2px;
   font-size: 17px;
   border-radius: 2px;
