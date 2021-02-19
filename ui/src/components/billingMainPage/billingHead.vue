@@ -19,11 +19,11 @@
 
     <div class="headDivs">
       <div>
-        <span>Колличество объектов:</span>
+        <span>Количество объектов:</span>
         <span class="countSpan"></span>
       </div>
       <div>
-        <span>Колличество зарегестрированых распределителей:</span>
+        <span>Количество зарегистрированых распределителей:</span>
         <span class="countSpan"></span>
       </div>
       <div>
