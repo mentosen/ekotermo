@@ -10,7 +10,7 @@
     <td v-if="data.status == 'onRegister'" class="yellow" title="На регистрации"></td>
     <td v-if="data.status == 'onDeleted'" class="red" title="Удален"></td>
     <td>
-      <input type="text" class="counterVal" placeholder="000000,00">
+      <input type="text" class="counterVal" placeholder="000000,00" @keydown="validateCounterValue" @keyup="validateCounterValueKeyUp">
     </td>
     <td>
       <div class="btnPart">
@@ -36,7 +36,20 @@ export default {
   },
   computed:mapGetters(["billingObjects"]),
   methods:{
-
+    validateCounterValue(e){
+      if(e.key == "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight"|| e.key == ","){
+        return
+      } else if(isNaN(e.key) || e.key == " " ||e.target.value.length === 9){
+        e.preventDefault();
+        return
+      }
+    },
+    validateCounterValueKeyUp(e){
+      if(e.target.value.length == 6){
+        if(e.key === "Backspace") return
+        e.target.value += ",";
+      }
+    }
   }
 }
 </script>

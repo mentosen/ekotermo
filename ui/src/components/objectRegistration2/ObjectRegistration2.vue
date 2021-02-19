@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="content">
     <router-link to="/billingMainPage">
       <button class="home"></button>
     </router-link>
@@ -10,6 +10,7 @@
     <FlatData v-bind:flatData="{title: 'Трехкомнатная квартира', dataTitle: 'threeFlatRoom', tableTitle: 'Трехкомнатные квартиры'}"></FlatData>
     <FlatData v-bind:flatData="{title: 'Четырехкомнатная квартира', dataTitle: 'fourFlatRoom', tableTitle: 'Четырехкомнатные квартиры'}"></FlatData>
     <FlatData v-bind:flatData="{title: 'Пятикомнатная квартира', dataTitle: 'fiveFlatRoom', tableTitle: 'Пятикомнатные квартиры'}"></FlatData>
+    <FlatData v-bind:flatData="{title: 'Нежилые помещения', dataTitle: 'nonLivePremises', tableTitle: 'Нежилые помещения'}"></FlatData>
     <div class="btnPart">
       <router-link to="/objectRegistration1">
         <button class="yellowBtn" @click="toRegForm1">НАЗАД В РАЗДЕЛ №1</button>
@@ -61,6 +62,7 @@ export default {
   background-image: url("../../assets/icons/home.png");
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
   position: absolute;
@@ -72,10 +74,11 @@ export default {
   background-color: #6ace6a;
 }
 
- #app{
+.content{
    display: flex;
    flex-direction: column;
    align-items: center;
+   justify-content: center;
  }
  .btnPart{
    margin-top: 70px;

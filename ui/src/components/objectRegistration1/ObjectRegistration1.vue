@@ -144,7 +144,6 @@
               <input type="text" class="required"
                      @keydown="validateGeneralCounterValue"
                      @keyup="validateGeneralCounterValueKeyUp"
-                     @focus="counterFocus"
                      name="generalCounterValue"
                      value=","
                      placeholder="000000,00" v-if="isEdit"
@@ -385,7 +384,7 @@ export default {
       },1000)
     },
     validate(e){
-      if(e.key == "Backspace"){
+      if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(isNaN(e.key) || e.key == " " || e.target.value.length > 3){
         e.preventDefault();
@@ -400,7 +399,10 @@ export default {
       }
     },
     validateGeneralCounterValueKeyUp(e){
-      if(e.target.value.length == 6) e.target.value += ",";
+      if(e.target.value.length == 6){
+        if(e.key === "Backspace") return
+        e.target.value += ",";
+      }
     },
     counterFocus(e){
       e.target.selectionStart = 0;
@@ -412,7 +414,7 @@ export default {
       if(e.target.name == "flatsCount")limit = this.flatLimit;
       if(e.target.name == "floorsCount")limit = this.floorsLimit;
 
-      if(e.key == "Backspace"){
+      if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(isNaN(e.key) || e.key == " " || e.target.value.length > limit){
         e.preventDefault();
@@ -431,7 +433,7 @@ export default {
       }
     },
     validatePhoneNumber(e){
-      if(e.key == "Backspace" || e.key === "+"){
+      if(e.key == "Backspace" || e.key === "+"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(isNaN(e.key) || e.key == " "|| e.target.value.length > 12){
         e.preventDefault();
@@ -456,7 +458,7 @@ export default {
     textValidate(e){
       if(e.target.name === "personPosition" ||e.target.name == "street" && e.key === " ") return
       if(e.target.name === "firstName" && e.key == "-") return
-      if(e.key == "Backspace"){
+      if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(!isNaN(e.key) || e.key == " "||e.key =="+"||e.key =="-"||e.key =="?"||e.key =="."||e.key ==","||e.key =="_"
         ||e.key =="/"||e.key ==">"||e.key =="<"||e.key =="%"||e.key =="&"||e.key =="*"||e.key =="#"||e.key =="@"||e.key =="!"
@@ -491,6 +493,7 @@ export default {
   background-image: url("../../assets/icons/home.png");
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
   position: absolute;

@@ -45,7 +45,8 @@ export default {
       twoFlatRoom:{},
       threeFlatRoom:{},
       fourFlatRoom:{},
-      fiveFlatRoom:{}
+      fiveFlatRoom:{},
+      nonLivePremises:{}
     },
     isSaved: false
   },

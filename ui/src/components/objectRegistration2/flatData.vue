@@ -246,14 +246,17 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
       },
 
       validate(e){
-        if(e.key == "Backspace"|| e.key === ","){
+        if(e.key == "Backspace"|| e.key === ","|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
           return
         } else if(isNaN(e.key) || e.key == " " ||e.target.value.length > 8){
           e.preventDefault();
         }
       },
       validateKeyUp(e){
-        if(e.target.value.length === 5 ) e.target.value += ",";
+        if(e.target.value.length == 5){
+          if(e.key === "Backspace") return
+          e.target.value += ",";
+        }
       },
       changeTotalValue(e){
         var typeNumber = (e.target.parentElement.parentElement.children[0].innerText).split("")[5];
@@ -265,7 +268,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
         this.editedData[typeFull].flatType = this.flatData.dataTitle;
       },
 
-      changeHeatingValue(e, type){
+      changeHeatingValue(e){
         var typeNumber = (e.target.parentElement.parentElement.children[0].innerText).split("")[5];
         var typeFull = "type"+typeNumber;
         if(!this.editedData[typeFull]) this.editedData[typeFull]= {};
@@ -285,6 +288,8 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
   margin-top: 25px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 17px;
 }
 table{
@@ -405,9 +410,7 @@ input[type=checkbox]{
 }
 
 .mainTitle2{
-  width: 280px;
-  display: flex;
-  justify-content: flex-start;
+
 }
 
 .mainTitle>div{
