@@ -43,7 +43,7 @@ table,td,th{
   font-size: 15px;
 }
 td{
-  height: 24px;
+  height: 30px;
 }
 .green,.yellow,.red{
   background-repeat: no-repeat;

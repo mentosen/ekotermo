@@ -26,8 +26,6 @@
       <counterValueTr v-for="(item, key) in billingObjects" v-bind:index="key" :key="key"></counterValueTr>
       </tbody>
     </table>
-    <div class="green"></div>
-    <div class="green2"></div>
   </div>
 </template>
 
@@ -55,17 +53,7 @@ export default {
 
 
 <style scoped>
-.green,.green2{
-  width: 100px;
-  height: 100px;
-  margin-top: 100px;
-}
-.green{
-  background-color: rgb(0,255,0);
-}
-.green2{
-  background-color: rgb(0,255,0);
-}
+
 .home{
   width: 40px;
   height: 40px;
