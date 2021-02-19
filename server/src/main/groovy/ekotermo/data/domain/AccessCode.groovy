@@ -10,4 +10,5 @@ class AccessCode extends BaseDomain{
 
     String code
     AccessCodeStatus status
+    User user
 }

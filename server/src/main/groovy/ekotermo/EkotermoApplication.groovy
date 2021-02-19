@@ -1,7 +1,14 @@
 package ekotermo
 
 import ekotermo.config.JwtAuthenticationConfig
+import ekotermo.data.domain.AccessCode
+import ekotermo.data.domain.CounterSerialNumber
+import ekotermo.data.enums.AccessCodeStatus
+import ekotermo.data.enums.CounterSerialNumberStatus
+import ekotermo.data.service.AccessCodeDataService
+import ekotermo.data.service.CounterSerialNumberDataService
 import groovy.util.logging.Slf4j
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration

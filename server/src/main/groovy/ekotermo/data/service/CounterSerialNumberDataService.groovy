@@ -2,7 +2,9 @@ package ekotermo.data.service
 
 import ekotermo.data.domain.AccessCode
 import ekotermo.data.domain.CounterSerialNumber
+import ekotermo.data.domain.User
 import ekotermo.data.enums.AccessCodeStatus
+import ekotermo.data.enums.CounterSerialNumberStatus
 import ekotermo.data.repository.AccessCodeRepository
 import ekotermo.data.repository.CounterSerialNumberRepository
 import ekotermo.exceptions.AccessCodeNotFoundException
@@ -16,13 +18,13 @@ class CounterSerialNumberDataService {
 
     @Autowired private CounterSerialNumberRepository counterSerialNumberRepository
 
-    CounterSerialNumber findByNumber(String number){
+    CounterSerialNumber findByNumberAndStatus(String number, CounterSerialNumberStatus status){
 
         log.debug("Find access code by code [${number}]")
 
-        CounterSerialNumber counterSerialNumber = counterSerialNumberRepository.findByNumber(number)
+        CounterSerialNumber counterSerialNumber = counterSerialNumberRepository.findByNumberAndStatus(number, status)
 
-        if(!number){
+        if(!counterSerialNumber){
             log.debug("Serial number not found by number [$number]")
             throw new AccessCodeNotFoundException("Serial number number [${number}] not found")
         }
@@ -30,8 +32,13 @@ class CounterSerialNumberDataService {
         return counterSerialNumber
     }
 
-    void makeDisabled(CounterSerialNumber serialNumber){
-        serialNumber.status = AccessCodeStatus.DISABLED
+    void makeDisabled(User user, CounterSerialNumber serialNumber){
+        serialNumber.user = user
+        serialNumber.status = CounterSerialNumberStatus.DISABLED
         counterSerialNumberRepository.save(serialNumber)
+    }
+
+    void saveAll(List<CounterSerialNumber> counterSerialNumbers){
+        counterSerialNumberRepository.saveAll(counterSerialNumbers)
     }
 }

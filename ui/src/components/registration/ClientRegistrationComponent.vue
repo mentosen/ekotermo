@@ -231,21 +231,22 @@
                     <input
                             type="number"
                             :placeholder="$t('registration.serialNumber')"
-                            v-model="form.serialNumber"
+                            v-model="form.serial_number"
                             ref="input_serialNumber"
                             name="input_serialNumber"
                             autocomplete='off'
-                            v-validate="rules.serialNumber"
+                            v-validate="rules.serial_number"
                             id="input_serialNumber"
                     />
                     <span v-if="!!errors.first('input_serialNumber')" class="font--error">
-                        {{form.serialNumber === '' ? $t('errors.emptyField') : $t('errors.incorrectField')}}
+                        {{form.serial_number === '' ? $t('errors.emptyField') : $t('errors.incorrectField')}}
                     </span>
                 </float-label>
             </div>
         </div>
         <div  class="tile__row tile__row--flex-end shadow--top">
             <button class="btn" @click.prevent="submit">{{$t('registration.registration')}}</button>
+            <button class="btn" @click="testUser">Fill in test user</button>
         </div>
     </div>
 </template>
@@ -271,7 +272,7 @@
                     building:'',
                     apartment:'',
 
-                    serialNumber:'',
+                    serial_number:'',
                 },
                 isLoginExists: false,
                 isEmailExists: false,
@@ -290,7 +291,7 @@
                     building:"required",
                     apartment:"required",
 
-                    serialNumber:"required"
+                    serial_number:"required"
                 },
             }
         },
@@ -319,14 +320,13 @@
             submit(){
                 let that = this;
 
-                // that.testUser();
-
                 that.$validator.validate().then(valid => {
                     if (!valid || that.isLoginExists || that.isEmailExists || that.isPhoneExists || !that.isPasswordsEquals) {
                         return that.handleValidationErrorBasic();
                     } else {
                         let form = {...that.form};
                         that.addPlus(form);
+                        debugger
                         signup(form).then(response => {
                             debugger
                             setToken(response.data.access_token);
@@ -356,25 +356,7 @@
                         street:'000',
                         building:'000',
                         apartment:'000',
-
-                        serialNumber:'000'
                 }
-                let form = {...that.form};
-                that.addPlus(form);
-                signup(form).then(response => {
-                    debugger
-                    setToken(response.data.access_token);
-                    that.$store.commit("SET_TOKEN", response.data.access_token);
-                    that.$store.dispatch("GetUserInfo").then(() => {
-                        that.currentUser = that.$store.getters.getUserInfo;
-                        // this.$emit('setUser');
-                        that.$router.push('/')
-                    });
-                    debugger
-                }).catch((e) => {
-                    debugger
-                    console.log(e.message);
-                });
             },
             getRandomIntInclusive(min, max) {
                 min = Math.ceil(min);

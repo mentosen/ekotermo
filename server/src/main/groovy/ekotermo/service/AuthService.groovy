@@ -53,17 +53,14 @@ class AuthService {
 
         log.info("Login user by name [$dto.login] and password [$dto.password]")
 
-        User user = null
+        CounterSerialNumber counterSerialNumber = counterSerialNumberDataService.findByNumberAndStatus(dto.serialNumber,
+                CounterSerialNumberStatus.FREE)
 
-        CounterSerialNumber counterSerialNumber = counterSerialNumberDataService.findByNumber(registrationRequestDto.serialNumber)
+        dto.roles = [Role.ROLE_USER]
 
-        if(counterSerialNumber.status == CounterSerialNumberStatus.FREE){
-            dto.roles = [Role.ROLE_USER]
+        User user = userService.create(dto)
 
-            user = userService.create(dto)
-
-            counterSerialNumberDataService.makeDisabled(counterSerialNumber)
-        }
+        counterSerialNumberDataService.makeDisabled(user, counterSerialNumber)
 
         return generateTokensAndBuildResponse(user)
     }
@@ -77,17 +74,13 @@ class AuthService {
 
         log.info("Login user by name [$dto.login] and password [$dto.password]")
 
-        User user = null
+        AccessCode accessCode = accessCodeDataService.findByCodeAndStatus(dto.serialNumber, AccessCodeStatus.FREE)
 
-        AccessCode accessCode = accessCodeDataService.findByCode(registrationRequestDto.serialNumber)
+        dto.roles = [Role.ROLE_COMPANY]
 
-        if(accessCode.status == AccessCodeStatus.FREE){
-            dto.roles = [Role.ROLE_COMPANY]
+        User user = userService.create(dto)
 
-            user = userService.create(dto)
-
-            accessCodeDataService.makeDisabled(accessCode)
-        }
+        accessCodeDataService.makeDisabled(user, accessCode)
 
         return generateTokensAndBuildResponse(user)
     }

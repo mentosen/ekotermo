@@ -11,5 +11,5 @@ class CounterSerialNumber extends BaseDomain{
 
     String number
     CounterSerialNumberStatus status
-    int userId
+    User user
 }

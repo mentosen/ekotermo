@@ -30,7 +30,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .anonymous()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/signup", "/api/auth/signin", "/api/user/duplicate").permitAll()
+                .antMatchers("/api/auth/signup", "/api/auth/signin", "/api/user/duplicate", "/api/init/hello").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(new JwtTokenAuthenticationFilter(config), UsernamePasswordAuthenticationFilter.class)
@@ -40,14 +40,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/api/auth/signup", "/api/auth/signin", "/api/user/duplicate");
+                .antMatchers("/api/auth/signup", "/api/auth/signin", "/api/user/duplicate", "/api/init/hello");
     }
 }
-//.authorizeRequests()
-//        .antMatchers("/ping**")
-//        .permitAll()
-//        .and()
-//        .authorizeRequests()
-//        .anyRequest()
-//        .authenticated()
-//        .and()
