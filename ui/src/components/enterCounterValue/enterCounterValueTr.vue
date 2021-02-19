@@ -5,10 +5,7 @@
     <td>{{ data.city }}</td>
     <td>{{ data.street }}</td>
     <td>{{ data.buildingNumber }}</td>
-    <td></td>
-    <td v-if="data.status == 'onAccount'" class="green" title="В учете"></td>
-    <td v-if="data.status == 'onRegister'" class="yellow" title="На регистрации"></td>
-    <td v-if="data.status == 'onDeleted'" class="red" title="Удален"></td>
+    <td>{{data.category}}</td>
     <td>
       <input type="text" class="counterVal" placeholder="000000,00"
              @keydown="validateCounterValue" @keyup="validateCounterValueKeyUp"
@@ -40,8 +37,8 @@ export default {
   computed:mapGetters(["billingObjects"]),
   methods:{
     ...mapActions(["saveCounterValue"]),
-    save(){
-      var result = this.validate();
+    save(e){
+      var result = this.validate(e.target);
       if(result){
         this.data.isSaved = true;
         this.data.isEdit = false;
@@ -52,9 +49,9 @@ export default {
       this.data.isSaved = false;
       this.data.isEdit = true;
     },
-    validate(){
+    validate(el){
       var regEx = /^\d{6}\,\d{2}$/;
-      var input = document.querySelector("input[name=counterValue]");
+      var input = el.closest("tr").querySelector("input[name=counterValue]");
 
       if(input.value.match(regEx)){
         this.data.counterValue = input.value;

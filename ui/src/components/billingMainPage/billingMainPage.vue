@@ -7,7 +7,7 @@
       <tr>
         <th rowspan="2" width="50px">№ п/п</th>
         <th colspan="4">Адрес</th>
-        <th width="70px" rowspan="2">Тип учета</th>
+        <th width="200px" rowspan="2">Категория дома</th>
         <th width="50px" rowspan="2">Статус</th>
         <th rowspan="2">Перейти</th>
       </tr>

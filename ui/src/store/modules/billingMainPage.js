@@ -24,11 +24,12 @@ export default {
         billingDataHead: null,
         billingObjects:[{
             number:1,
-            region:"Київська",
-            city:"Київ",
+            region:"Івано-Франківська",
+            city:"Івано-Франківськ",
             street:"Богдана Хмельницького",
             buildingNumber:"5",
             status: "onAccount",
+            category:"Розділ ІІ пункт 3 підпункт 2",
             isSaved:false,
             isEdit: true,
             counterValue: null
@@ -39,6 +40,7 @@ export default {
             street:"Соборна",
             buildingNumber:"14",
             status: "onDeleted",
+            category:"Розділ ІІ пункт 3 підпункт 2",
             isSaved:false,
             isEdit: true,
             counterValue: null
@@ -49,6 +51,7 @@ export default {
             street:"Мазепи",
             buildingNumber:"29",
             status: "onRegister",
+            category:"Розділ ІІ пункт 3 підпункт 2",
             isSaved:false,
             isEdit: true,
             counterValue: null
