@@ -2,7 +2,7 @@
   <div class="content">
     <div>
       <span>Не учитывать</span>
-      <button  @click="accountedBtnClick" v-bind:class="{redBtn: isAccounted, greenBtn:!isAccounted}">ON/OFF</button>
+      <button  @click="accountedBtnClick" v-bind:class="{redBtn: !isAccounted, greenBtn:isAccounted}" class="switch">OFF</button>
     </div>
     <div class="content-div">
       <div>Объем потребленного тепла для мест общего пользования и вспомогательных помещений:</div>
@@ -34,6 +34,9 @@ export default {
   name:"afterHead",
   mounted() {
     var cofInput = document.querySelector("input[name=cofInput]");
+    var switchBtn = document.querySelector(".switch");
+    var click = new Event("click");
+
     this.data = this.getHeatingCofs();
 
     if(this.data.cof1){
@@ -42,6 +45,10 @@ export default {
       this.isEditCof1 = this.data.isEditCof1;
       this.isSavedCof2 = this.data.isSavedCof2;
       this.isEditCof2 = this.data.isEditCof2;
+    }
+
+    if(!this.isAccounted){
+      switchBtn.dispatchEvent(click);
     }
     cofInput.value = "1,00";
   },
@@ -80,18 +87,20 @@ export default {
       this.saveHeatingCofs(Object.assign({},this.startCofValue));
       this.data = this.getHeatingCofs();
 
-      if(this.isAccounted){
-        this.isSavedCof1 = true;
-        this.isEditCof1 = false;
-        this.isSavedCof2 = true;
-        this.isEditCof2 = false;
-        this.changeIsAllFilled2(true);
-      }else{
+      if(!this.isAccounted){
         this.isSavedCof1 = false;
         this.isEditCof1 = true;
         this.isSavedCof2 = false;
         this.isEditCof2 = true;
         this.changeIsAllFilled2(false);
+        e.target.innerText = "ON";
+      }else{
+        this.isSavedCof1 = true;
+        this.isEditCof1 = false;
+        this.isSavedCof2 = true;
+        this.isEditCof2 = false;
+        this.changeIsAllFilled2(true);
+        e.target.innerText = "OFF";
       }
     },
     saveCof1(e){
@@ -101,7 +110,7 @@ export default {
       var obj = {
         cof1: cof1,
         cof2: value,
-        isAccounted: false,
+        isAccounted: true,
         isSavedCof1: true,
         isEditCof1: false,
         isSavedCof2: true,
@@ -126,7 +135,7 @@ export default {
       var obj = {
         cof1: cof1,
         cof2: value,
-        isAccounted: false,
+        isAccounted: true,
         isSavedCof1: true,
         isEditCof1: false,
         isSavedCof2: true,
@@ -205,7 +214,7 @@ export default {
 .content{
   padding-top: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #969393;
+  border-bottom: 1px solid #3c3a3a;
   width: 1100px;
 }
 

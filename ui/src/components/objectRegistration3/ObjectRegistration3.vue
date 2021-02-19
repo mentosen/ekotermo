@@ -1,5 +1,9 @@
 <template>
   <div id="registrationForm3">
+    <router-link to="/billingMainPage">
+      <button class="home"></button>
+    </router-link>
+
     <Head></Head>
     <afterHead></afterHead>
     <table>
@@ -62,6 +66,24 @@ export default {
 </script>
 
 <style scoped>
+.home{
+  width: 40px;
+  height: 40px;
+  background-color: #13f113;
+  border: 1px solid #3c3a3a;
+  background-image: url("../../assets/icons/home.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  outline: none;
+}
+.home:hover{
+  background-color: #6ace6a;
+}
 
  #registrationForm3{
    display: flex;
@@ -76,7 +98,7 @@ export default {
  }
 
  table,td,th{
-   border: 1px solid #969393;
+   border: 1px solid #3c3a3a;
    border-collapse: collapse;
    padding: 3px;
    text-align: center;

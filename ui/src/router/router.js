@@ -92,6 +92,11 @@ export default new Router({
                     path: '/billingMainPage',
                     name: 'Billing Main Page',
                     component: () => import('@/components/billingMainPage/billingMainPage'),
+                },
+                {
+                    path: '/enterCounterValue',
+                    name: 'Enter Counter Value',
+                    component: () => import('@/components/enterCounterValue/enterCounterValue'),
                 }
             ],
         },

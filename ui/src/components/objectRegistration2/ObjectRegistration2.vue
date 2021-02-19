@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <router-link to="/billingMainPage">
+      <button class="home"></button>
+    </router-link>
+
     <Head></Head>
     <FlatData v-bind:flatData="{title: 'Однокомнатная квартира', dataTitle: 'oneFlatRoom', tableTitle: 'Однокомнатные квартиры'}" style="margin-top: 50px"></FlatData>
     <FlatData v-bind:flatData="{title: 'Двухкомнатная квартира', dataTitle: 'twoFlatRoom', tableTitle: 'Двухкомнатные квартиры'}"></FlatData>
@@ -49,6 +53,24 @@ export default {
 </script>
 
 <style scoped>
+.home{
+  width: 40px;
+  height: 40px;
+  background-color: #13f113;
+  border: 1px solid #3c3a3a;
+  background-image: url("../../assets/icons/home.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  outline: none;
+}
+.home:hover{
+  background-color: #6ace6a;
+}
 
  #app{
    display: flex;

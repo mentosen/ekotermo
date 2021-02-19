@@ -1,6 +1,22 @@
 <template>
   <div class="head">
-    <div class="title">Название билинговой компании</div>
+    <div class="headDivsTop">
+      <div class="title">Название билинговой компании</div>
+      <div class="dropMenu" @mouseover="onMenuOver" @mouseout="onMenuOut">
+        <button class="dropMenuItem">Дополнительные функции</button>
+
+        <router-link to="/enterCounterValue" class="dropMenuItemRouter">
+          <button class="dropMenuItem">Внести показания счетчика</button>
+        </router-link>
+
+        <button class="dropMenuItem">Бланк анкеты объекта</button>
+        <button class="dropMenuItem">Счет на оплату</button>
+        <button class="dropMenuItem">Статистика</button>
+        <button class="dropMenuItem">Нормативная документация</button>
+        <button class="dropMenuItem">Обратная связь</button>
+      </div>
+    </div>
+
     <div class="headDivs">
       <div>
         <span>Колличество объектов:</span>
@@ -10,13 +26,10 @@
         <span>Колличество зарегестрированых распределителей:</span>
         <span class="countSpan"></span>
       </div>
-      <div class="dropMenu" @mouseover="onMenuOver" @mouseout="onMenuOut">
-        <button class="dropMenuItem">Дополнительные функции</button>
-        <button class="dropMenuItem">Бланк анкеты объекта</button>
-        <button class="dropMenuItem">Счет на оплату</button>
-        <button class="dropMenuItem">Статистика</button>
-        <button class="dropMenuItem">Нормативная документация</button>
-        <button class="dropMenuItem">Обратная связь</button>
+      <div>
+        <router-link to="/objectRegistration1">
+          <button class="yellowBtn">Регистрация нового объекта</button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -35,7 +48,7 @@ export default {
   computed: mapGetters(["billingDataHead"]),
   methods:{
     onMenuOver(e){
-      var parent = e.target.parentElement;
+      var parent = e.target.closest(".dropMenu");
       !this.top? this.top = e.target.offsetTop: "";
       !this.left? this.left = e.target.offsetLeft: "";
 
@@ -52,7 +65,7 @@ export default {
       parent.parentElement.appendChild(clone);
     },
     onMenuOut(e){
-      var parent = e.target.parentElement;
+      var parent = e.target.closest(".dropMenu");
       var clone = parent.parentElement.querySelector(".clone");
       parent.parentElement.removeChild(clone);
       parent.style.position = "";
@@ -67,15 +80,26 @@ export default {
   .head{
     width: 1000px;
     padding: 20px 5px 20px 5px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #3c3a3a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .headDivsTop{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
   .title{
-    width: 100%;
     text-align: center;
-    margin-bottom: 20px;
     font-size: 18px;
+    margin-left: 340px
   }
   .headDivs{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -102,10 +126,41 @@ export default {
     box-sizing: border-box;
     font-size: 15px;
   }
-  .dropMenuItem:last-child{
-    margin-bottom: 0;
-  }
+
   .dropMenuItem:hover{
     background-color: #01beff;
+  }
+
+  .dropMenu>.dropMenuItem:hover:first-child{
+    background-color: #f3f3f3;
+  }
+
+  .yellowBtn,.greenBtn,.greyBtn{
+    width: 210px;
+    height: 36px;
+    padding: 5px;
+    border: 1px solid #f9ed17;
+    border-radius: 3px;
+    outline: none;
+    text-decoration: none;
+    background-color: yellow;
+    cursor: pointer;
+  }
+  .greenBtn{
+    background-color: #13f113;
+    border: 1px solid #1bd400;
+  }
+  .greyBtn{
+    background-color: #d4d4cb;
+    border: 1px solid #757572;
+  }
+  .yellowBtn:hover{
+    background-color: #ffffa1;
+  }
+  .greenBtn:hover{
+    background-color: #a7fda7;
+  }
+  .greyBtn:hover{
+    background-color: #e6e6de;
   }
 </style>

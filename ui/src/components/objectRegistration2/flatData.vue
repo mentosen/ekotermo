@@ -293,7 +293,7 @@ table{
 }
 
 table,td,th{
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   border-collapse: collapse;
   padding: 3px;
   text-align: center;
@@ -319,12 +319,13 @@ input[type=text]{
   font-size: 16px;
   outline: none;
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
+  margin-right: 5px;
 }
 
 input[type=file]{
   width: 105px;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   outline: none;
 }
 
@@ -333,7 +334,7 @@ input[type=file]{
 }
 
 input[type=checkbox]{
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
 }
 .editInput{
   width: 30px;
@@ -425,7 +426,7 @@ input[type=checkbox]{
 }
 .data{
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   padding: 25px;
 }
 .leftPart{

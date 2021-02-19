@@ -186,7 +186,7 @@ export default {
 }
 
 table,td,th{
-  border: 1px solid #969393;
+  border: 1px solid #3c3a3a;
   border-collapse: collapse;
   padding: 3px;
   text-align: center;
@@ -220,12 +220,12 @@ table input[type=text]{
   font-size: 16px;
   outline: none;
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
 }
 
 table input[type=file]{
   width: 103px;
-  border: 1px solid #ccc;
+  border: 1px solid #3c3a3a;
   outline: none;
 }
 /*buttons*/
@@ -296,18 +296,6 @@ button{
   font-size: 15px;
   text-align: center;
   border-radius: 0px;
-}
-/*a*/
-a.preview{
-  font-size: 15px;
-  text-decoration: none;
-  color: black;
-}
-a.preview:active{
-  color: black;
-}
-a.preview:visited{
-  color: black;
 }
 
 /*inputs*/
