@@ -1,4 +1,5 @@
 export default {
+    /// billingMain Page
     actions:{
 
     },
@@ -6,7 +7,7 @@ export default {
 
     },
     state:{
-
+        counterValues:{}
     },
     getters:{
 

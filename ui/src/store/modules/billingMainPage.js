@@ -4,12 +4,19 @@ export default {
           //get data
             var data = [];
             ctx.commit("saveBillingData", data);
+        },
+        saveCounterValue(ctx, data){
+            ///
+            ctx.commit("updateCounterValue", data);
         }
     },
     mutations:{
         saveBillingData(state, data){
             state.billingData = data;
             ///
+        },
+        updateCounterValue(state, data){
+            state.billingObjects[data.index] = data.data;
         }
     },
     state:{
@@ -21,21 +28,30 @@ export default {
             city:"Київ",
             street:"Богдана Хмельницького",
             buildingNumber:"5",
-            status: "onAccount"
+            status: "onAccount",
+            isSaved:false,
+            isEdit: true,
+            counterValue: null
         }, {
             number:2,
             region:"Миколаївська",
             city:"Миколаїв",
             street:"Соборна",
             buildingNumber:"14",
-            status: "onDeleted"
+            status: "onDeleted",
+            isSaved:false,
+            isEdit: true,
+            counterValue: null
         }, {
             number:3,
             region:"Херсонська",
             city:"Херсон",
             street:"Мазепи",
             buildingNumber:"29",
-            status: "onRegister"
+            status: "onRegister",
+            isSaved:false,
+            isEdit: true,
+            counterValue: null
             }
         ]
     },

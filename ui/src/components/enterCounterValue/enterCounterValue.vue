@@ -31,10 +31,13 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 import counterValueTr from './enterCounterValueTr'
 export default {
   name: "enterCounterValue",
+  mounted() {
+    this.getBillingData();
+  },
   data(){
     return{
 
@@ -43,6 +46,7 @@ export default {
   computed:mapGetters(["billingObjects"]),
   components:{counterValueTr:counterValueTr},
   methods:{
+    ...mapActions(["getBillingData"]),
 
   }
 }
