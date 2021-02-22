@@ -50,18 +50,18 @@ td{
   background-position: center center;
 }
 .green{
-  background-image: url("../../assets/icons/saved.png");
+  background-image: url("../../assets/icons/saved24.png");
 }
 .yellow{
-  background-image: url("../../assets/icons/onRegister.png");
+  background-image: url("../../assets/icons/onRegister24.png");
 }
 .red{
-  background-image: url("../../assets/icons/deleted.png");
+  background-image: url("../../assets/icons/deleted24.png");
 }
 .arrowRight{
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url("../../assets/icons/whiteArrowRight.png");
+  background-image: url("../../assets/icons/whiteArrowRight24.png");
   opacity: 0.85;
   cursor: pointer;
 }
