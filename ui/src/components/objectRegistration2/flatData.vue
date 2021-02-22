@@ -123,7 +123,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
 
     methods:{
       ...mapMutations(["addFlatData", "editFlatData","changeIsSaved"]),
-      ...mapActions(["saveData"]),
+      ...mapActions(["saveFlatData"]),
 
       changeType(){
         this.typeCount++;
@@ -169,13 +169,14 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
               scan: this.scan
             };
 
-            this.addFlatData(data);
+
             this.totalArea = this.heatingArea = "";
             inpFile.value = "";
             this.changeType();
             this.data = this.getFlatsData[this.flatData.dataTitle];
             this.changeIsSaved(true);
-            this.saveData();
+            this.saveFlatData(data);
+
           }
         }
       },

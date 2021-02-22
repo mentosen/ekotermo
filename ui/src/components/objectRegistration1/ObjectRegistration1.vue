@@ -223,6 +223,7 @@ export default {
   mounted() {
     this.getAllRegions();
     this.data = this.getFlatInfo;
+
     if(this.data.personPhoneNum1 || this.data.personPhoneNum2){
       if(this.data.personPhoneNum1) this.phoneNumbers.phone1 = this.data.personPhoneNum1;
       if(this.data.personPhoneNum2) this.phoneNumbers.phone2 = this.data.personPhoneNum2;
