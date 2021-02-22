@@ -1,32 +1,32 @@
 <template>
     <div class="head">
-      <div class="headHeading">Регистрация объекта<br>раздел №2</div>
+      <div class="headHeading">{{ $t('objectRegistrationHead.objectRegistration')}}<br>{{ $t('objectRegistrationHead.section')}} №2</div>
       <div class="headInfo">
         <div class="headAddress">
-          <div>Адрес объекта: </div>
+          <div>{{ $t('objectRegistrationHead.objectAddress')}}</div>
           <div>Region</div>
           <div>City</div>
           <div>Street</div>
           <div>HouseNumber</div>
         </div>
         <div class="houseInfo">
-          <div>Количество подъездов:</div>
+          <div>{{ $t('objectRegistrationHead.porchNumber')}}</div>
           <div></div>
-          <div>Количество этажей:</div>
+          <div>{{ $t('objectRegistrationHead.floorNumber')}}</div>
           <div></div>
-          <div>Количество квартир:</div>
+          <div>{{ $t('objectRegistrationHead.flatNumber')}}</div>
           <div></div>
-          <div>Нумерация квартир с</div>
+          <div>{{ $t('objectRegistrationHead.flatNumeration')}} {{ $t('common.from')}}</div>
           <div></div>
-          <div>по</div>
+          <div>{{ $t('common.to')}}</div>
           <div></div>
         </div>
         <div class="headCategory">
-          <div>Категория дома:</div>
+          <div>{{ $t('objectRegistrationHead.buildingCategory')}}</div>
           <div></div>
         </div>
         <div class="headTitle">
-          <div>Описание:</div>
+          <div>{{ $t('objectRegistrationHead.buildingTitle')}}</div>
           <div></div>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default {
   }
 
   .headInfo{
-    width: 1000px;
+    width: 1100px;
   }
 
   .headAddress,.houseInfo, .headCategory,.headTitle{

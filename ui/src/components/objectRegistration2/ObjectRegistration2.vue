@@ -5,19 +5,31 @@
     </router-link>
 
     <Head></Head>
-    <FlatData v-bind:flatData="{title: 'Однокомнатная квартира', dataTitle: 'oneFlatRoom', tableTitle: 'Однокомнатные квартиры'}" style="margin-top: 50px"></FlatData>
-    <FlatData v-bind:flatData="{title: 'Двухкомнатная квартира', dataTitle: 'twoFlatRoom', tableTitle: 'Двухкомнатные квартиры'}"></FlatData>
-    <FlatData v-bind:flatData="{title: 'Трехкомнатная квартира', dataTitle: 'threeFlatRoom', tableTitle: 'Трехкомнатные квартиры'}"></FlatData>
-    <FlatData v-bind:flatData="{title: 'Четырехкомнатная квартира', dataTitle: 'fourFlatRoom', tableTitle: 'Четырехкомнатные квартиры'}"></FlatData>
-    <FlatData v-bind:flatData="{title: 'Пятикомнатная квартира', dataTitle: 'fiveFlatRoom', tableTitle: 'Пятикомнатные квартиры'}"></FlatData>
-    <FlatData v-bind:flatData="{title: 'Нежилые помещения', dataTitle: 'nonLivePremises', tableTitle: 'Нежилые помещения'}"></FlatData>
+    <FlatData v-bind:flatData="{title: $t('objectRegistration2.oneFlatRoom'),
+        dataTitle: 'oneFlatRoom',
+        tableTitle: $t('objectRegistration2.oneFlatRoomTableTitle')}" style="margin-top: 50px"></FlatData>
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.twoFlatRoom'),
+        dataTitle: 'twoFlatRoom',
+        tableTitle: this.$t('objectRegistration2.twoFlatRoomTableTitle')}"></FlatData>
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.threeFlatRoom'),
+        dataTitle: 'threeFlatRoom',
+        tableTitle: this.$t('objectRegistration2.threeFlatRoomTableTitle')}"></FlatData>
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.fourFlatRoom'),
+        dataTitle: 'fourFlatRoom',
+        tableTitle: this.$t('objectRegistration2.fourFlatRoomTableTitle')}"></FlatData>
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.fiveFlatRoom'),
+        dataTitle: 'fiveFlatRoom',
+        tableTitle: this.$t('objectRegistration2.fiveFlatRoomTableTitle')}"></FlatData>
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.nonLivePremises'),
+        dataTitle: 'nonLivePremises',
+        tableTitle: this.$t('objectRegistration2.nonLivePremisesTableTitle')}"></FlatData>
     <div class="btnPart">
       <router-link to="/objectRegistration1">
-        <button class="yellowBtn" @click="toRegForm1">НАЗАД В РАЗДЕЛ №1</button>
+        <button class="yellowBtn" @click="toRegForm1">{{ $t('buttons.backToSection1')}}</button>
       </router-link>
 
       <router-link to="/objectRegistration3">
-        <button class="greenBtn" @click="toRegForm3" v-bind:disabled="!getIsSaved">ПЕРЕЙТИ К РАЗДЕЛУ №3</button>
+        <button class="greenBtn" @click="toRegForm3" v-bind:disabled="!getIsSaved">{{ $t('buttons.toSection3')}}</button>
       </router-link>
     </div>
   </div>

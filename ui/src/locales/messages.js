@@ -10,6 +10,9 @@ import designAndInstall from "@/locales/designAndInstall";
 import objectRegistration from "./objectRegistration";
 import objectRegistrationSecondPoint from "./objectRegistrationSecondPoint";
 import errors from "./errors";
+import objectRegistrationHead from './objectRegistrationHead';
+import objectRegistration2 from './objectRegistration2';
+import buttons from './buttons'
 
 const locales = {
         common,
@@ -23,7 +26,10 @@ const locales = {
         designAndInstall,
         objectRegistration,
         objectRegistrationSecondPoint,
-        errors
+        errors,
+        objectRegistrationHead,
+        objectRegistration2,
+        buttons
     },
     messages = {};
 
