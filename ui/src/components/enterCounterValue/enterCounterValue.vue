@@ -15,7 +15,7 @@
         <th rowspan="2" width="100px">Действие</th>
       </tr>
       <tr>
-        <th width="150px">Область</th>
+        <th width="170px">Область</th>
         <th width="150px">Город</th>
         <th width="200px">Улица</th>
         <th width="70px">№ дома</th>
