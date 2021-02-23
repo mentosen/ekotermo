@@ -1,28 +1,28 @@
 <template>
   <div class="content">
     <div>
-      <span>Не учитывать</span>
+      <span>{{ $t('objectRegistration3.ignore')}}</span>
       <button  @click="accountedBtnClick" v-bind:class="{redBtn: !isAccounted, greenBtn:isAccounted}" class="switch">OFF</button>
     </div>
     <div class="content-div">
-      <div>Объем потребленного тепла для мест общего пользования и вспомогательных помещений:</div>
+      <div>{{ $t('objectRegistration3.ancillaryPremises')}}:</div>
       <div class="content-div-flex">
         <select name="cofSelect" id=""  @focus="selectFocus" @blur="selectBlur" @click="selectClick" v-show="!isSavedCof1">
           <option v-bind:value="item.value" v-for="item in changedOption" v-bind:selected="data.cof1 == item.value">{{item.title}}</option>
         </select>
         <div v-if="isSavedCof1" class="cofDiv">{{data.cof1}}</div>
-        <button class="yellowBtn" @click="saveCof1" v-bind:disabled="isSavedCof1 || isAccounted">Сохранить</button>
-        <button class="greyBtn" @click="editCof1"  v-bind:disabled="isEditCof1 || isAccounted">Редактировать</button>
+        <button class="yellowBtn" @click="saveCof1" v-bind:disabled="isSavedCof1 || isAccounted">{{ $t('buttons.save')}}</button>
+        <button class="greyBtn" @click="editCof1"  v-bind:disabled="isEditCof1 || isAccounted">{{ $t('buttons.edit')}}</button>
       </div>
     </div>
     <div class="content-div">
-      <div>Поправочный коэффициент(понижающий или повышающий) принятый жильцами дома:</div>
+      <div>{{ $t('objectRegistration3.correctionFactor')}}:</div>
       <div class="content-div-flex">
         <input type="text" name="cofInput" @keydown="validate" @keyup="validateKeyUp" v-show="!isSavedCof2"
                v-bind:value="data.cof2" placeholder="0,00">
         <div v-if="isSavedCof2" class="cofDiv">{{data.cof2}}</div>
-        <button class="yellowBtn" @click="saveCof2" v-bind:disabled="isSavedCof2 || isAccounted">Сохранить</button>
-        <button class="greyBtn" @click="editCof2" v-bind:disabled="isEditCof2 || isAccounted">Редактировать</button>
+        <button class="yellowBtn" @click="saveCof2" v-bind:disabled="isSavedCof2 || isAccounted">{{ $t('buttons.save')}}</button>
+        <button class="greyBtn" @click="editCof2" v-bind:disabled="isEditCof2 || isAccounted">{{ $t('buttons.edit')}}</button>
       </div>
     </div>
   </div>

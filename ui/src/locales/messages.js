@@ -12,6 +12,7 @@ import objectRegistrationSecondPoint from "./objectRegistrationSecondPoint";
 import errors from "./errors";
 import objectRegistrationHead from './objectRegistrationHead';
 import objectRegistration2 from './objectRegistration2';
+import objectRegistration3 from './objectRegistration3';
 import buttons from './buttons'
 
 const locales = {
@@ -29,7 +30,8 @@ const locales = {
         errors,
         objectRegistrationHead,
         objectRegistration2,
-        buttons
+        buttons,
+        objectRegistration3
     },
     messages = {};
 

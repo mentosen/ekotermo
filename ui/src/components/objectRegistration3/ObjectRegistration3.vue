@@ -8,15 +8,15 @@
     <afterHead></afterHead>
     <table>
       <thead>
-      <th width="75">№ квартиры</th>
-      <th>№ подъезда</th>
-      <th width="110">№ этажа</th>
-      <th>Тип квартиры</th>
-      <th width="180">Поправочный коэффициент согласно расположения квартиры (помещения)</th>
-      <th width="140">Серийный номер счетчика</th>
-      <th width="140">Начальные показания счетчика</th>
-      <th width="110">Фото объекта</th>
-      <th width="110">Действие</th>
+      <th width="75">{{ $t('objectRegistration3.flatNumber')}}</th>
+      <th>{{ $t('objectRegistration3.porchNumber') }}</th>
+      <th width="110">{{ $t('objectRegistration3.floorNumber')}}</th>
+      <th>{{ $t('objectRegistration3.flatType')}}</th>
+      <th width="180">{{ $t('objectRegistration3.tableCorrectionFactor')}}</th>
+      <th width="140">{{ $t('objectRegistration3.meterSerialNumber')}}</th>
+      <th width="140">{{ $t('objectRegistration3.initialMeterValue')}}</th>
+      <th width="110">{{ $t('objectRegistration3.objectPhoto')}}</th>
+      <th width="110">{{ $t('objectRegistration3.action')}}</th>
       </thead>
       <tbody>
         <appTr v-for="(data, key) in getApartments" v-bind:flatNumber="key+1" :key="data.num"></appTr>
@@ -24,9 +24,9 @@
     </table>
     <div class="btnPart">
       <router-link to="/objectRegistration2">
-        <button class="yellowBtn" @click="toRegForm2">НАЗАД В РАЗДЕЛ №2</button>
+        <button class="yellowBtn" @click="toRegForm2">{{ $t('buttons.backToSection2')}}</button>
       </router-link>
-      <button class="greenBtn" @click="register" v-bind:disabled="!getIsAllFilled1 || !getIsAllFilled2">Ввести в учет</button>
+      <button class="greenBtn" @click="register" v-bind:disabled="!getIsAllFilled1 || !getIsAllFilled2">{{ $t('buttons.register')}}</button>
     </div>
     <confirmPopUp v-if="getShowPopUp"></confirmPopUp>
   </div>

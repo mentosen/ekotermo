@@ -11,7 +11,8 @@ export default {
         saveType:"Сохранить тип",
         addType:"Добавить тип",
         addPhoto:"Добавить +",
-        viewPhoto:"Просмотреть"
+        viewPhoto:"Просмотреть",
+        register: "ВВЕСТИ В УЧЕТ"
     },
     uk:{
         save:"Зберегти",
@@ -24,8 +25,9 @@ export default {
         toSection3:"ПЕРЕЙТИ ДО РОЗДІЛУ №3",
         saveType:"Зберегти тип",
         addType:"Додати тип",
-        addPhoto:"Длдати +",
-        viewPhoto:"Переглянути"
+        addPhoto:"Додати +",
+        viewPhoto:"Переглянути",
+        register: "ВВЕСТИ В ОБЛІК"
     },
     en:{
         save:"Save",
@@ -39,6 +41,7 @@ export default {
         saveType:"Save type",
         addType:"Add type",
         addPhoto:"Add +",
-        viewPhoto:"Review"
+        viewPhoto:"Review",
+        register: "REGISTER"
     }
 }

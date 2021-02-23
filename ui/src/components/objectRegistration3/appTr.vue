@@ -15,9 +15,9 @@
     </td>
     <td class="selectTd">
       <select class="tableSelect" v-if="isEdit">
-        <option v-for="(num, key) in getFlatType" v-bind:value="num.num" v-bind:selected="data.flatType == num.num">Тип №{{key+1}}</option>
+        <option v-for="(num, key) in getFlatType" v-bind:value="num.num" v-bind:selected="data.flatType == num.num">{{ $t('objectRegistration3.type')}}{{key+1}}</option>
       </select>
-      <div v-if="!isEdit">Тип №{{data.flatType}}</div>
+      <div v-if="!isEdit">{{ $t('objectRegistration3.type')}} {{data.flatType}}</div>
     </td>
     <td class="selectTd">
       <select class="tableSelect" v-if="isEdit">
@@ -26,7 +26,7 @@
       <div v-if="!isEdit">{{data.cof}}</div>
     </td>
     <td>
-      <input type="text" class="tableInpText" @keydown="validateCounter" placeholder="12-значное число"
+      <input type="text" class="tableInpText" @keydown="validateCounter" v-bind:placeholder="$t('objectRegistration3.meterPlaceholder')"
              v-if="isEdit" v-bind:value="data.counterNum" @change="saveValue" name="counterNum">
       <div v-if="!isEdit">{{data.counterNum}}</div>
     </td>
@@ -38,16 +38,16 @@
     <td>
       <div class="btnPart">
         <label>
-          <div class="greenBtn btnDiv" v-bind:class="{disabled:!isEdit}">Добавить +</div>
+          <div class="greenBtn btnDiv" v-bind:class="{disabled:!isEdit}">{{ $t('buttons.addPhoto')}}</div>
           <input type="file" class="tableInpFile" @change="addPhoto" accept="application/pdf,image/*" multiple v-bind:disabled="!isEdit">
         </label>
-        <button class="blueBtn" v-bind:disabled="!isPhotos" @click="showAllPhotos">Просмотреть</button>
+        <button class="blueBtn" v-bind:disabled="!isPhotos" @click="showAllPhotos">{{ $t('buttons.viewPhoto')}}</button>
       </div>
     </td>
     <td>
       <div class="btnPart">
-        <button class="yellowBtn" @click="save" v-bind:disabled="!isEdit">Сохранить</button>
-        <button class="greyBtn" @click="edit" v-bind:disabled="isEdit">Редактировать</button>
+        <button class="yellowBtn" @click="save" v-bind:disabled="!isEdit">{{ $t('buttons.save')}}</button>
+        <button class="greyBtn" @click="edit" v-bind:disabled="isEdit">{{ $t('buttons.edit')}}</button>
       </div>
     </td>
     <slider v-if="showPhotos" v-bind:photos="urls" @closeSlider="closeSlider" @isPhoto="isPhotos = false"></slider>
