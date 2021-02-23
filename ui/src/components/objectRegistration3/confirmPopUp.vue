@@ -1,10 +1,10 @@
 <template>
   <div class="overlay">
     <div class="popUp">
-      <div class="message">После нажатия кнопки "ОК" удаление учётной записи объекта возможно только через администрацию сайта.</div>
+      <div class="message">{{$t('objectRegistration3.popUpMessage')}}</div>
       <div class="buttons">
-        <button @click="cancel" class="redBtn">Отмена</button>
-        <button @click="accept" class="greenBtn">Ок</button>
+        <button @click="cancel" class="redBtn">{{$t('buttons.discardFilter')}}</button>
+        <button @click="accept" class="greenBtn">{{$t('buttons.confirmDeleted')}}</button>
       </div>
     </div>
   </div>

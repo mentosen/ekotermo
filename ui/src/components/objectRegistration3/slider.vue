@@ -1,8 +1,8 @@
 <template>
   <div class="overlay">
     <div class="controls">
-      <div class="count">Фото {{count}} из {{photos.length}}</div>
-      <button class="redBtn remove" @click="remove">Удалить</button>
+      <div class="count">{{$t('objectRegistration3.photo')}} {{count}} {{$t('objectRegistration3.of')}} {{photos.length}}</div>
+      <button class="redBtn remove" @click="remove">{{$t('buttons.delete')}}</button>
       <button @click="close" class="close"></button>
     </div>
 

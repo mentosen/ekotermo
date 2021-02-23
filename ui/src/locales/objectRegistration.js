@@ -27,7 +27,8 @@ export default {
         flatNumeration:'Нумерация квартир:',
         buildingInfo:'Показания общедомового прибора учета тепла ',
         buildingOwnerInfo:'Данные лица ответственного за регестрацию объекта',
-
+        popUpMessage1:"После нажатия кнопки \"Подтвердить\", объект будет удален.",
+        popUpMessage2:"Ваш запрос на удаление объекта будет отправлен администратору и обработан в течении друх рабочих дней."
     },
     uk: {
         objectRegistration:"Реєстрація об'єкта",
@@ -56,6 +57,8 @@ export default {
         flatNumeration:'Нумерація квартир',
         buildingInfo:'Показання загальнобудинкового приладу обліку тепла',
         buildingOwnerInfo:'Дані особи відповідальної за реєстрацію об\'єкта',
+        popUpMessage1:"Після натискання кнопки \"Підтвердити\", об\'єкт буде видалено.",
+        popUpMessage2:"Ваш запит на видалення об\'єкта буде відправлний адміністратору і опрацьований напротязі двох робочих днів."
     },
     en: {
         objectRegistration:'Object registration',
@@ -83,6 +86,8 @@ export default {
         floorNumber:'Number of floors',
         flatNumeration:'Numbering of apartments:',
         buildingInfo:'Indications of a common house heat meter',
-        buildingOwnerInfo:'Data of the person responsible for the registration of the object'
+        buildingOwnerInfo:'Data of the person responsible for the registration of the object',
+        popUpMessage1:"After clicking the \"Confirm\" button, the object will be deleted.",
+        popUpMessage2:"Your request to delete an object will be sent to the administrator and processed within two business days."
     }
 };

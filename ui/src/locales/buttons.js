@@ -14,7 +14,8 @@ export default {
         viewPhoto:"Просмотреть",
         register: "ВВЕСТИ В УЧЕТ",
         confirmFilter:"Применить",
-        discardFilter:"Отмена"
+        discardFilter:"Отмена",
+        confirmDeleted:"Подтвердить",
     },
     uk:{
         save:"Зберегти",
@@ -31,7 +32,8 @@ export default {
         viewPhoto:"Переглянути",
         register: "ВВЕСТИ В ОБЛІК",
         confirmFilter:"Застосувати",
-        discardFilter:"Відмінити"
+        discardFilter:"Відмінити",
+        confirmDeleted:"Підтвердити",
     },
     en:{
         save:"Save",
@@ -48,6 +50,7 @@ export default {
         viewPhoto:"Review",
         register: "REGISTER",
         confirmFilter:"Apply",
-        discardFilter:"Cancel"
+        discardFilter:"Cancel",
+        confirmDeleted:"Confirm",
     }
 }

@@ -14,6 +14,9 @@ export default {
         action:"Действие",
         type: "Тип №",
         meterPlaceholder: "12-значное число",
+        photo:"Фото",
+        of:"из",
+        popUpMessage:"После нажатия кнопки \"Подтвердить\" удаление учётной записи объекта возможно только через администрацию сайта."
     },
     uk:{
         ignore:"Не враховувати",
@@ -30,6 +33,9 @@ export default {
         action:"Дія",
         type: "Тип №",
         meterPlaceholder: "12-значнe число",
+        photo:"Фото",
+        of:"із",
+        popUpMessage:"Після натискання кнопки \"Підтвердити\" видалення облікового запису об\'єкта можливе тільки через адміністрацію сайту."
     },
     en:{
         ignore:"Ignore",
@@ -46,5 +52,8 @@ export default {
         action:"Action",
         type: "Type №",
         meterPlaceholder: "12-digit number",
+        photo:"Photo",
+        of:"of",
+        popUpMessage:"After clicking the \"Confirm\" button, deleting the account of the object is possible only through the site administration."
     }
 }
