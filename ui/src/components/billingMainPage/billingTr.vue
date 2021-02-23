@@ -6,9 +6,9 @@
     <td>{{ data.street }}</td>
     <td>{{ data.buildingNumber }}</td>
     <td>{{data.category}}</td>
-    <td v-if="data.status == 'onAccount'" class="green" title="В учете"></td>
-    <td v-if="data.status == 'onRegister'" class="yellow" title="На регистрации"></td>
-    <td v-if="data.status == 'onDeleted'" class="red" title="Удален"></td>
+    <td v-if="data.status == 'onAccount'" class="green" v-bind:title="$t('billingMainPage.objectStatus1')"></td>
+    <td v-if="data.status == 'onRegister'" class="yellow" v-bind:title="$t('billingMainPage.objectStatus2')"></td>
+    <td v-if="data.status == 'onDeleted'" class="red" v-bind:title="$t('billingMainPage.objectStatus3')"></td>
     <td class="arrowRight"></td>
   </tr>
 </template>

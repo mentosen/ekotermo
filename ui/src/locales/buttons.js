@@ -12,7 +12,9 @@ export default {
         addType:"Добавить тип",
         addPhoto:"Добавить +",
         viewPhoto:"Просмотреть",
-        register: "ВВЕСТИ В УЧЕТ"
+        register: "ВВЕСТИ В УЧЕТ",
+        confirmFilter:"Применить",
+        discardFilter:"Отмена"
     },
     uk:{
         save:"Зберегти",
@@ -27,7 +29,9 @@ export default {
         addType:"Додати тип",
         addPhoto:"Додати +",
         viewPhoto:"Переглянути",
-        register: "ВВЕСТИ В ОБЛІК"
+        register: "ВВЕСТИ В ОБЛІК",
+        confirmFilter:"Застосувати",
+        discardFilter:"Відмінити"
     },
     en:{
         save:"Save",
@@ -42,6 +46,8 @@ export default {
         addType:"Add type",
         addPhoto:"Add +",
         viewPhoto:"Review",
-        register: "REGISTER"
+        register: "REGISTER",
+        confirmFilter:"Apply",
+        discardFilter:"Cancel"
     }
 }

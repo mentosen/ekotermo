@@ -1,29 +1,29 @@
 <template>
   <div class="content">
     <BillingHead></BillingHead>
-    <div class="billingTableTitle">Перечень объектов</div>
+    <div class="billingTableTitle">{{$t('billingMainPage.objectList')}}</div>
     <table class="billingTable">
       <thead>
       <tr>
-        <th rowspan="2" width="50px">№ п/п</th>
-        <th colspan="4">Адрес</th>
-        <th width="200px" rowspan="2">Категория дома</th>
-        <th width="50px" rowspan="2">Статус</th>
-        <th rowspan="2">Перейти</th>
+        <th rowspan="2" width="50px">{{$t('billingMainPage.serialNumber')}}</th>
+        <th colspan="4">{{$t('billingMainPage.address')}}</th>
+        <th width="200px" rowspan="2">{{$t('billingMainPage.buildingCategory')}}</th>
+        <th width="50px" rowspan="2">{{$t('billingMainPage.status')}}</th>
+        <th rowspan="2" width="50px">{{$t('billingMainPage.goTo')}}</th>
       </tr>
       <tr>
         <th width="170px" @click="onThClick" class="filter">
-          Область
+          {{$t('billingMainPage.region')}}
           <tableFilter v-bind:arr="filter.regions" title="region" v-show="filter.regionsIsShow"
                        @cancelFilter="hideFilter" @filtered="confirmFilter"></tableFilter>
         </th>
-        <th width="150px">Город</th>
+        <th width="150px">{{$t('billingMainPage.city')}}</th>
         <th width="200px" @click="onThClick" class="filter">
-          Улица
+          {{$t('billingMainPage.street')}}
           <tableFilter v-bind:arr="filter.streets" title="street" v-show="filter.streetsIsShow"
                        @cancelFilter="hideFilter" @filtered="confirmFilter"></tableFilter>
         </th>
-        <th width="70px">№ дома</th>
+        <th width="70px">{{$t('billingMainPage.buildingNumber')}}</th>
       </tr>
 
       </thead>

@@ -2,7 +2,7 @@
   <div class="tableFilter" v-bind:class="arr[0]">
     <div class="tableFilterDiv">
       <input type="checkbox" value="ALL" checked @click="onClickAll">
-      <div class="tableFilterTitle">ВСЕ</div>
+      <div class="tableFilterTitle">{{$t('billingMainPage.filterAll')}}</div>
     </div>
 
     <div class="tableFilterDiv" v-for="title in arr">
@@ -13,8 +13,8 @@
     </div>
 
     <div class="btnPart">
-      <button @click="confirm" class="greenBtn">Применить</button>
-      <button @click="cancel" class="redBtn">Отмена</button>
+      <button @click="confirm" class="greenBtn">{{$t('buttons.confirmFilter')}}</button>
+      <button @click="cancel" class="redBtn">{{$t('buttons.discardFilter')}}</button>
     </div>
   </div>
 </template>
