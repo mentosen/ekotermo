@@ -65,7 +65,7 @@ export default {
   background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 90px;
   left: 30px;
   outline: none;

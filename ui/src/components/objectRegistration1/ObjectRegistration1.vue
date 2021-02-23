@@ -204,11 +204,11 @@
     </div>
 <!--    //-->
     <div class="btnPart">
-      <button class="yellowBtn" @click="save" v-bind:disabled="isSaved">Сохранить</button>
-      <button class="greyBtn"  @click="edit" v-bind:disabled="!isSaved">Редактировать</button>
-      <button class="redBtn" @click="removeBuilding" v-bind:disabled="isEdit">Удалить</button>
+      <button class="yellowBtn" @click="save" v-bind:disabled="isSaved">{{ $t('buttons.save')}}</button>
+      <button class="greyBtn"  @click="edit" v-bind:disabled="!isSaved">{{ $t('buttons.edit')}}</button>
+      <button class="redBtn" @click="removeBuilding" v-bind:disabled="isEdit">{{ $t('buttons.delete')}}</button>
       <router-link to="/objectRegistration2">
-        <button class="greenBtn" @click="toRegForm2" v-bind:disabled="!isSaved">ПЕРЕЙТИ К РАЗДЕЛУ №2</button>
+        <button class="greenBtn" @click="toRegForm2" v-bind:disabled="!isSaved">{{ $t('buttons.toSection2')}}</button>
       </router-link>
     </div>
     <delPopUp v-if="getIsDel"></delPopUp>
@@ -491,7 +491,7 @@ export default {
   background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 90px;
   left: 30px;
   outline: none;
