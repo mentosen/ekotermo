@@ -23,7 +23,8 @@ export default {
         objectStatus1:"В учете",
         objectStatus2:"На регистрации",
         objectStatus3:"Удален",
-        filterAll:"ВСЕ"
+        filterAll:"ВСЕ",
+        currentMeterReadings:"Текущие показания счетчика"
     },
     uk:{
         additionalFunctions:"Додаткові функції",
@@ -49,7 +50,8 @@ export default {
         objectStatus1:"Зареєстрований",
         objectStatus2:"На реєстрації",
         objectStatus3:"Видалений",
-        filterAll:"ВСІ"
+        filterAll:"ВСІ",
+        currentMeterReadings:"Теперішні показання лічильника"
     },
     en:{
         additionalFunctions:"Additional functions",
@@ -75,6 +77,7 @@ export default {
         objectStatus1:"Registered",
         objectStatus2:"On registration",
         objectStatus3:"Deleted",
-        filterAll:"ALL"
+        filterAll:"ALL",
+        currentMeterReadings:"Current meter readings"
     }
 }
