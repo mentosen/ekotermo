@@ -237,8 +237,9 @@
                             autocomplete='off'
                             v-validate="rules.serial_number"
                             id="input_serialNumber"
+                            @change="checkIsSerialNumberExists"
                     />
-                    <span v-if="!!errors.first('input_serialNumber')" class="font--error">
+                    <span v-if="!!errors.first('input_serialNumber') || !isSerialNumberExists" class="font--error">
                         {{form.serial_number === '' ? $t('errors.emptyField') : $t('errors.incorrectField')}}
                     </span>
                 </float-label>
@@ -252,7 +253,7 @@
 </template>
 
 <script>
-    import {signup} from '@/api/auth';
+    import {signup, isSerialNumberExists} from '@/api/auth';
     import {findDuplicate} from '@/api/user';
     import { setToken } from "@/utils/auth";
 
@@ -277,6 +278,7 @@
                 isLoginExists: false,
                 isEmailExists: false,
                 isPhoneExists: false,
+                isSerialNumberExists: true,
                 isPasswordsEquals: false,
 
                 rules: {
@@ -326,18 +328,14 @@
                     } else {
                         let form = {...that.form};
                         that.addPlus(form);
-                        debugger
                         signup(form).then(response => {
-                            debugger
                             setToken(response.data.access_token);
                             that.$store.commit("SET_TOKEN", response.data.access_token);
                             that.$store.dispatch("GetUserInfo").then(() => {
                                 that.currentUser = that.$store.getters.getUserInfo;
                                 this.$router.push('/')
                                     });
-                            debugger
                         }).catch((e) => {
-                            debugger
                             console.log(e.message);
                         });
                     }
@@ -345,7 +343,6 @@
             },
             testUser(){
                 let that = this;
-                debugger
                 that.form = {
                     login:'000',
                         password:'00000000',
@@ -390,6 +387,17 @@
                     that.isLoginExists = response.data.is_login_exists;
                     that.isEmailExists = response.data.is_email_exists;
                     that.isPhoneExists = response.data.is_phone_exists;
+                })
+            },
+            checkIsSerialNumberExists(){
+                let that = this;
+
+                let checkDto = {
+                    serial_number: that.form.serial_number,
+                }
+
+                isSerialNumberExists(checkDto).then(response => {
+                    that.isSerialNumberExists = response.data.is_counter_serial_number_correct;
                 })
             }
         }

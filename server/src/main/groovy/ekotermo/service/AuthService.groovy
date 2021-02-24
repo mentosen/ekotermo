@@ -9,6 +9,9 @@ import ekotermo.data.enums.Role
 import ekotermo.data.service.AccessCodeDataService
 import ekotermo.data.service.CounterSerialNumberDataService
 import ekotermo.data.service.UserDataService
+import ekotermo.dto.CheckDuplicateUserResponseDto
+import ekotermo.dto.CodeDto
+import ekotermo.dto.CodeResponseDto
 import ekotermo.dto.LoginRequestDto
 import ekotermo.dto.RegistrationRequestDto
 import ekotermo.model.CredentialViewModel
@@ -83,6 +86,24 @@ class AuthService {
         accessCodeDataService.makeDisabled(user, accessCode)
 
         return generateTokensAndBuildResponse(user)
+    }
+
+    CodeResponseDto isAccessCodeExists(CodeDto codeDto){
+
+        AccessCode accessCode = accessCodeDataService.findByCodeAndStatusWithoutCheck(codeDto.accessCode, AccessCodeStatus.FREE)
+
+        return new CodeResponseDto(
+                isAccessCodeCorrect: accessCode != null,
+        )
+    }
+
+    CodeResponseDto isSerialNumberExists(CodeDto codeDto){
+
+        CounterSerialNumber serialNumber = counterSerialNumberDataService.findByNumberAndStatusWithoutCheck(codeDto.serialNumber, CounterSerialNumberStatus.FREE)
+
+        return new CodeResponseDto(
+                isCounterSerialNumberCorrect: serialNumber != null,
+        )
     }
 
     /**

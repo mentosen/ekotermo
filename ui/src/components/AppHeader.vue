@@ -14,8 +14,19 @@
             </div>
             <div class="tile__row tile__row--flex-end">
                 <language-selector/>
-                <span v-if="isNameExists()" class="text-logo tile__row--margin-left">{{name}}</span>
-                <span v-if="isNameExists()" class="text-logo tile__row--margin-left">{{name}}</span>
+                <div v-if="isNameExists()"
+                     class="header__column  header__column--row tile__row--margin-right tile__row--align-center">
+                    <span class="text-logo tile__row--margin-left">{{name}}</span>
+                    <span class="text-logo tile__row--margin-left">{{name}}</span>
+
+                    <dropdown icon="arrow" class="">
+                        <dropdown-item
+                                :name="$t('common.logout')"
+                                @start-action="logout()"
+                        >
+                        </dropdown-item>
+                    </dropdown>
+                </div>
                 <button-component
                         v-if="name === ''"
                         :name="$t('common.login')"
@@ -34,10 +45,14 @@
 <script>
     import ButtonComponent from "@/components/common/ButtonComponent";
     import LanguageSelector from "./LanguageSelector";
+    import Dropdown from "@/components/common/Dropdown";
+    import DropdownItem from "@/components/common/DropDownItem";
+
+    import { removeToken } from "@/utils/auth";
 
     export default {
         name: "AppHeader",
-        components:{ButtonComponent, LanguageSelector},
+        components:{ButtonComponent, LanguageSelector, Dropdown, DropdownItem},
         props:{
         },
         data(){
@@ -49,16 +64,13 @@
             let that = this;
 
             that.$bus.$on("setUser", function() {
-                debugger
                 that.name = that.$store.getters.getUserInfo.name
             });
         },
         methods:{
             isNameExists(){
                 let that = this;
-                // debugger
                 that.$store.dispatch("GetUserInfo").then(() => {
-                    debugger
                     that.name = that.$store.getters.getUserInfo.name
                 });
 
@@ -69,6 +81,17 @@
             },
             register(){
                 this.$router.push('/register')
+            },
+            logout(){
+                let that = this;
+                removeToken();
+                that.$store.dispatch("FedLogOut").then(() => {
+                    if(this.$router.currentRoute.path === '/'){
+                        location.reload();
+                    } else {
+                        this.$router.push('/')
+                    }
+                });
             }
         }
     }

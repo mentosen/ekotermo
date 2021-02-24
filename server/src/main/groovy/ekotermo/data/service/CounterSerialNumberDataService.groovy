@@ -18,6 +18,15 @@ class CounterSerialNumberDataService {
 
     @Autowired private CounterSerialNumberRepository counterSerialNumberRepository
 
+    CounterSerialNumber findByNumberAndStatusWithoutCheck(String number, CounterSerialNumberStatus status){
+
+        log.debug("Find access code by code [${number}]")
+
+        CounterSerialNumber counterSerialNumber = counterSerialNumberRepository.findByNumberAndStatus(number, status)
+
+        return counterSerialNumber
+    }
+
     CounterSerialNumber findByNumberAndStatus(String number, CounterSerialNumberStatus status){
 
         log.debug("Find access code by code [${number}]")

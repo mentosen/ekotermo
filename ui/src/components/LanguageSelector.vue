@@ -1,5 +1,5 @@
 <template>
-    <div class="header__column  header__column--row tile__row--margin-right">
+    <div class="header__column--row tile__row--margin-right">
         <dropdown icon="arrow" class="dropdown--lang">
             <span class="header__text" slot="label" @click="labelClicked">{{currentLanguage.toUpperCase()}}</span>
             <dropdown-item
@@ -18,7 +18,6 @@
             >
             </dropdown-item>
         </dropdown>
-
     </div>
 </template>
 
@@ -49,12 +48,4 @@
 </script>
 
 <style scoped>
-    .header__column{
-        cursor: pointer;
-    }
-
-    .header-lang {
-        z-index: 10;
-        flex-shrink: 0;
-    }
 </style>

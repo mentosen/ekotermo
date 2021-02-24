@@ -66,7 +66,7 @@ service.interceptors.response.use(
         } else if(error.response.status === 403) {
             Message({
                 showClose: true,
-                message: error.response.data.message,
+                message: error.message,
                 type: 'error',
                 duration: 5 * 1000,
             });

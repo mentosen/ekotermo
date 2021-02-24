@@ -3,6 +3,7 @@ export default {
     ru:{
         onDevelopment:'Страница находится в разарботке',
         login:'Вход',
+        logout:'Выход',
         register:'Регистрация',
         back:'Назад',
         region:'Область',
@@ -28,6 +29,7 @@ export default {
     uk: {
         onDevelopment:'Сторінка знаходиться у розробці',
         login:'Вхід',
+        logout:'Вихід',
         register:'Реєстрація',
         back:'Назад',
         region:'Область',
@@ -53,6 +55,7 @@ export default {
     en: {
         onDevelopment:'Page is in development',
         login:'Login',
+        logout:'Logout',
         register:'Registration',
         back:'Back',
         region:'Region',

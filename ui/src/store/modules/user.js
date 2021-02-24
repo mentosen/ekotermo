@@ -132,9 +132,20 @@ const user = {
       });
     },
 
-    FedLogOut({ commit }) {
+    FedLogOut({ commit, state }) {
       return new Promise(resolve => {
         commit("SET_TOKEN", "");
+
+        state.userInfo = {
+          name:'',
+              id:'',
+              email:'',
+              phone:'',
+              time_zone:'',
+              avatar:'',
+              isAuth: false
+        }
+
         removeToken();
         resolve();
       });
@@ -158,11 +169,9 @@ const user = {
   },
   getters: {
     getUserInfo: state => {
-      debugger
       return state.userInfo;
     },
     getUserToken: state => {
-      debugger
       return state.token;
     },
   }

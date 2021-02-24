@@ -1,6 +1,8 @@
 package ekotermo.controller
 
 import ekotermo.data.service.AccessCodeDataService
+import ekotermo.dto.CodeDto
+import ekotermo.dto.CodeResponseDto
 import ekotermo.dto.LoginRequestDto
 import ekotermo.dto.RegistrationRequestDto
 import ekotermo.model.CredentialViewModel
@@ -40,5 +42,21 @@ class AuthController {
         CredentialViewModel credentialViewModel = authService.singUpCompany(registrationRequestDto)
 
         return credentialViewModel
+    }
+
+    @PostMapping("/accesscode")
+    CodeResponseDto isAccessCodeExists(@RequestBody CodeDto codeDto) {
+
+        CodeResponseDto codeResponseDto = authService.isAccessCodeExists(codeDto)
+
+        return codeResponseDto
+    }
+
+    @PostMapping("/serialnumber")
+    CodeResponseDto isSerialNumberExists(@RequestBody CodeDto codeDto) {
+
+        CodeResponseDto codeResponseDto = authService.isSerialNumberExists(codeDto)
+
+        return codeResponseDto
     }
 }

@@ -142,8 +142,11 @@
                             autocomplete='off'
                             v-validate="rules.accessCode"
                             id="input_accessCode"
+                            @change="checkIsAccessCodeExists"
                     />
-                    <span v-if="!!errors.first('input_accessCode')" class="form__error">{{form.accessCode === '' ? $t('errors.emptyField') : $t('errors.registration.accessCode')}}</span>
+                    <span v-if="!!errors.first('input_accessCode') || isAccessCodeExists" class="form__error">
+                        {{form.accessCode === '' ? $t('errors.emptyField') : $t('errors.registration.accessCode')}}
+                    </span>
                 </float-label>
             </div>
 
@@ -155,7 +158,7 @@
 </template>
 
 <script>
-    import {signup} from '@/api/auth';
+    import {signup, isAccessCodeExists} from '@/api/auth';
     import {findDuplicate} from '@/api/user';
     import { setToken } from "@/utils/auth";
 
@@ -174,6 +177,7 @@
                 isLoginExists: false,
                 isEmailExists: false,
                 isPhoneExists: false,
+                isAccessCodeExists: false,
                 isPasswordsEquals: false,
 
                 rules: {
@@ -218,16 +222,13 @@
                         let form = {...that.form};
                         that.addPlus(form);
                         signup(form).then(response => {
-                            debugger
                             setToken(response.data.access_token);
                             that.$store.commit("SET_TOKEN", response.data.access_token);
                             that.$store.dispatch("GetUserInfo").then(() => {
                                 that.currentUser = that.$store.getters.getUserInfo;
                                 this.$router.push('/billingMainPage')
                             });
-                            debugger
                         }).catch((e) => {
-                            debugger
                             console.log(e.message);
                         });
                     }
@@ -246,6 +247,17 @@
                     that.isLoginExists = response.data.is_login_exists;
                     that.isEmailExists = response.data.is_email_exists;
                     that.isPhoneExists = response.data.is_phone_exists;
+                })
+            },
+            checkIsAccessCodeExists(){
+                let that = this;
+
+                let checkDto = {
+                    access_code: that.form.accessCode,
+                }
+
+                isAccessCodeExists(checkDto).then(response => {
+                    that.isAccessCodeExists = response.data.access_code;
                 })
             }
         }

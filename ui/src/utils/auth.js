@@ -16,4 +16,5 @@ export function setToken(token) {
 
 export function removeToken() {
   Cookies.remove(TokenKey, {secure: true, domain: '.eventssion.com'});
-  Cookies.remove(TokenKey);}
+  Cookies.remove(TokenKey);
+}

@@ -15,6 +15,15 @@ class AccessCodeDataService {
 
     @Autowired private AccessCodeRepository accessCodeRepository
 
+    AccessCode findByCodeAndStatusWithoutCheck(String code, AccessCodeStatus status){
+
+        log.debug("Find access code by code [${code}]")
+
+        AccessCode accessCode = accessCodeRepository.findByCodeAndStatus(code, status)
+
+        return accessCode
+    }
+
     AccessCode findByCodeAndStatus(String code, AccessCodeStatus status){
 
         log.debug("Find access code by code [${code}]")

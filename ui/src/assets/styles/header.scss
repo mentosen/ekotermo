@@ -164,6 +164,7 @@
 }
 
 .header__column {
+  cursor: pointer;
   &--bordered {
     padding: 0 var(--indent);
     border-right: 1px solid #aaaaaa;
