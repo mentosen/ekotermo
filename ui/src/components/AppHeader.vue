@@ -84,6 +84,7 @@
             },
             logout(){
                 let that = this;
+                that.name = '';
                 removeToken();
                 that.$store.dispatch("FedLogOut").then(() => {
                     if(this.$router.currentRoute.path === '/'){

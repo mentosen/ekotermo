@@ -8,6 +8,14 @@ export function signup(data){
     })
 }
 
+export function signupcompany(data){
+    return request({
+        url: '/api/auth/signupcompany',
+        method: 'post',
+        data: data
+    })
+}
+
 export function signin(data){
     return request({
         url: '/api/auth/signin',

@@ -72,6 +72,7 @@
             return{
                 login:'',
                 password:'',
+                currentUser: {},
 
                 rules: {
                     login: 'required',
@@ -101,11 +102,17 @@
                             setToken(response.data.access_token);
                             that.$store.commit("SET_TOKEN", response.data.access_token);
                             that.$store.commit("SET_NAME", response.data.name);
-                            // this.$store.dispatch("GetUserInfo").then(() => {
-                            //     this.currentUser = this.$store.getters.getUserInfo;
-                            // });
-                            that.$emit('user-login')
-                            that.close();
+                            this.$store.dispatch("GetUserInfo").then(() => {
+                                that.currentUser = that.$store.getters.getUserInfo;
+
+                                if(that.currentUser.roles.includes('ROLE_COMPANY')){
+                                    this.$router.push('/billingMainPage')
+                                } else {
+                                    this.$router.push('/')
+                                }
+                            });
+                            // that.$emit('user-login')
+                            // that.close();
                         })
                     }
                 });

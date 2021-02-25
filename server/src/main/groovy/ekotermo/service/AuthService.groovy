@@ -77,7 +77,7 @@ class AuthService {
 
         log.info("Login user by name [$dto.login] and password [$dto.password]")
 
-        AccessCode accessCode = accessCodeDataService.findByCodeAndStatus(dto.serialNumber, AccessCodeStatus.FREE)
+        AccessCode accessCode = accessCodeDataService.findByCodeAndStatus(dto.accessCode, AccessCodeStatus.FREE)
 
         dto.roles = [Role.ROLE_COMPANY]
 

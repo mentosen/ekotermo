@@ -30,7 +30,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .anonymous()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/signup", "/api/auth/signin", "/api/auth/accesscode",
+                .antMatchers("/api/auth/signup", "/api/auth/signupcompany", "/api/auth/signin", "/api/auth/accesscode",
                         "/api/auth/serialnumber", "/api/user/duplicate", "/api/init/hello").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -41,7 +41,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/api/auth/signup", "/api/auth/signin", "/api/user/duplicate", "/api/init/hello",
-                        "/api/auth/accesscode", "/api/auth/serialnumber",);
+                .antMatchers("/api/auth/signup", "/api/auth/signupcompany", "/api/auth/signin",
+                        "/api/user/duplicate", "/api/init/hello", "/api/auth/accesscode", "/api/auth/serialnumber",);
     }
 }

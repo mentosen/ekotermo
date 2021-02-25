@@ -136,7 +136,7 @@
                 >
                     <input
                             :placeholder="$t('registration.accessCode')"
-                            v-model="form.accessCode"
+                            v-model="form.access_code"
                             ref="input_accessCode"
                             name="input_accessCode"
                             autocomplete='off'
@@ -158,7 +158,7 @@
 </template>
 
 <script>
-    import {signup, isAccessCodeExists} from '@/api/auth';
+    import {signupcompany, isAccessCodeExists} from '@/api/auth';
     import {findDuplicate} from '@/api/user';
     import { setToken } from "@/utils/auth";
 
@@ -172,7 +172,7 @@
                     repeat_password:'',
                     email:'',
                     phone:'',
-                    accessCode:'',
+                    access_code:'',
                 },
                 isLoginExists: false,
                 isEmailExists: false,
@@ -221,7 +221,7 @@
                     } else {
                         let form = {...that.form};
                         that.addPlus(form);
-                        signup(form).then(response => {
+                        signupcompany(form).then(response => {
                             setToken(response.data.access_token);
                             that.$store.commit("SET_TOKEN", response.data.access_token);
                             that.$store.dispatch("GetUserInfo").then(() => {

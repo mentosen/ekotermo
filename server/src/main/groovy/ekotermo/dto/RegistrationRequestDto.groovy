@@ -24,5 +24,7 @@ class RegistrationRequestDto {
 
     String serialNumber
 
+    String accessCode
+
     List<Role> roles
 }
