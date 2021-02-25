@@ -155,14 +155,17 @@ export default {
       }
     },
     validateStartCounterVal(e){
-      if(e.key == "Backspace" || e.key == ","){
+      if(e.key == "Backspace" || e.key == ","|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(isNaN(e.key) || e.key == " " || e.target.value.length > this.startCounterValLimit){
         e.preventDefault();
       }
     },
     validateStartCounterKeyUp(e){
-      if(e.target.value.length === 6 ) e.target.value+= ",";
+      if(e.target.value.length == 6){
+        if(e.key === "Backspace") return
+        e.target.value += ",";
+      }
     },
     saveValue(e){
       this.data[e.target.name] = e.target.value;

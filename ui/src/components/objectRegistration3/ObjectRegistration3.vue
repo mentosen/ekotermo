@@ -74,6 +74,7 @@ export default {
   background-image: url("../../assets/icons/home.png");
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
   position: absolute;

@@ -36,7 +36,7 @@ export default {
         area:'Район',
         surname:'Прізвище',
         name:"Ім'я",
-        patronymic:'Прізвище',
+        patronymic:'Побатькові',
         position:'Посада',
         from:'з',
         to:'по',

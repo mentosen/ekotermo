@@ -5,24 +5,24 @@
     <td>{{ data.city }}</td>
     <td>{{ data.street }}</td>
     <td>{{ data.buildingNumber }}</td>
-    <td></td>
-    <td v-if="data.status == 'onAccount'" class="green" title="В учете"></td>
-    <td v-if="data.status == 'onRegister'" class="yellow" title="На регистрации"></td>
-    <td v-if="data.status == 'onDeleted'" class="red" title="Удален"></td>
+    <td>{{data.category}}</td>
     <td>
-      <input type="text" class="counterVal" placeholder="000000,00">
+      <input type="text" class="counterVal" placeholder="000000,00"
+             @keydown="validateCounterValue" @keyup="validateCounterValueKeyUp"
+             v-if="data.isEdit" name="counterValue" v-bind:value="data.counterValue">
+      <div v-if="!data.isEdit">{{data.counterValue}}</div>
     </td>
     <td>
       <div class="btnPart">
-        <button class="yellowBtn" >Сохранить</button>
-        <button class="greyBtn" >Редактировать</button>
+        <button class="yellowBtn" @click="save" v-bind:disabled="data.isSaved">Сохранить</button>
+        <button class="greyBtn" @click="edit" v-bind:disabled="data.isEdit">Редактировать</button>
       </div>
     </td>
   </tr>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "enterCounterValueTr",
   props:["index"],
@@ -36,7 +36,51 @@ export default {
   },
   computed:mapGetters(["billingObjects"]),
   methods:{
+    ...mapActions(["saveCounterValue"]),
+    save(e){
+      var result = this.validate(e.target);
+      if(result){
+        this.data.isSaved = true;
+        this.data.isEdit = false;
+        this.saveCounterValue({data:this.data, index:this.index});
+      }
+    },
+    edit(){
+      this.data.isSaved = false;
+      this.data.isEdit = true;
+    },
+    validate(el){
+      var regEx = /^\d{6}\,\d{2}$/;
+      var input = el.closest("tr").querySelector("input[name=counterValue]");
 
+      if(input.value.match(regEx)){
+        this.data.counterValue = input.value;
+        return true
+      }else{
+        input.style.border = "1px solid red";
+        this.removeBorder(input);
+        return false
+      }
+    },
+    removeBorder(el){
+      setTimeout(function (){
+        el.style.border = "";
+      },1000)
+    },
+    validateCounterValue(e){
+      if(e.key == "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight"|| e.key == ","){
+        return
+      } else if(isNaN(e.key) || e.key == " " ||e.target.value.length === 9){
+        e.preventDefault();
+        return
+      }
+    },
+    validateCounterValueKeyUp(e){
+      if(e.target.value.length == 6){
+        if(e.key === "Backspace") return
+        e.target.value += ",";
+      }
+    }
   }
 }
 </script>

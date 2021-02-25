@@ -10,9 +10,8 @@
       <tr>
         <th rowspan="2" width="50px">№ п/п</th>
         <th colspan="4">Адрес</th>
-        <th width="70px" rowspan="2">Тип учета</th>
-        <th width="50px" rowspan="2">Статус</th>
-        <th rowspan="2" width="150px">Внести показания счетчика</th>
+        <th width="200px" rowspan="2">Категория дома</th>
+        <th rowspan="2" width="150px">Текущие показания счетчика</th>
         <th rowspan="2" width="100px">Действие</th>
       </tr>
       <tr>
@@ -31,10 +30,13 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 import counterValueTr from './enterCounterValueTr'
 export default {
   name: "enterCounterValue",
+  mounted() {
+    this.getBillingData();
+  },
   data(){
     return{
 
@@ -43,6 +45,7 @@ export default {
   computed:mapGetters(["billingObjects"]),
   components:{counterValueTr:counterValueTr},
   methods:{
+    ...mapActions(["getBillingData"]),
 
   }
 }
@@ -59,6 +62,7 @@ export default {
   background-image: url("../../assets/icons/home.png");
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
   position: absolute;

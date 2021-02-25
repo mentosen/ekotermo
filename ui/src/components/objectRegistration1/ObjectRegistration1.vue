@@ -4,36 +4,36 @@
       <button class="home"></button>
     </router-link>
 
-    <div class="headHeading">Регистрация объекта<br>раздел №1</div>
+    <div class="headHeading">{{ $t('objectRegistration.objectRegistration')}}<br>{{ $t('objectRegistration.section')}} №1</div>
     <div class="address">
-      <div class="addressTitle">Адрес объекта</div>
+      <div class="addressTitle">{{ $t('objectRegistration.objectAddress')}}</div>
       <div class="addressInfo">
         <div class="addressData">
-          <span>Область:</span>
+          <span>{{ $t('common.region')}}:</span>
           <select name="region" class="required" v-if="isEdit">
             <option v-bind:value="data.value" v-for="data in getRegions" v-bind:selected="getFlatInfo.region == data.value">{{data.title}}</option>
           </select>
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.region}}</div>
         </div>
         <div class="addressData">
-          <span>Район:</span>
+          <span>{{ $t('common.area')}}:</span>
           <input type="text" @keydown="textValidate" name="area"  v-if="isEdit" v-bind:value="getFlatInfo.area">
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.area}}</div>
         </div>
         <div class="addressData">
-          <span>Город:</span>
+          <span>{{ $t('registration.city')}}:</span>
           <select name="cities" class="required" v-if="isEdit">
             <option v-bind:value="data.value" v-for="data in getCities" v-bind:selected="getFlatInfo.cities == data.value">{{data.title}}</option>
           </select>
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.cities}}</div>
         </div>
         <div class="addressData">
-          <span>Улица:</span>
+          <span>{{ $t('registration.street')}}:</span>
           <input type="text" class="required" @keydown="textValidate" name="street"  v-if="isEdit" v-bind:value="getFlatInfo.street">
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.street}}</div>
         </div>
         <div class="addressData">
-          <span>№ дома:</span>
+          <span>{{ $t('registration.building')}}:</span>
           <input type="text" class="required" @keydown="validate" name="buildingNumber" v-if="isEdit" v-bind:value="getFlatInfo.buildingNumber">
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.buildingNumber}}</div>
         </div>
@@ -41,63 +41,57 @@
     </div>
 <!--    //-->
     <div class="parameters">
-      <div class="parametersTitle">Характеристика объекта</div>
+      <div class="parametersTitle">{{ $t('objectRegistration.objectInfo')}}</div>
       <div class="parametersInfo">
 
         <div class="leftSide">
-          <div class="categoryTitle">Категория дома:</div>
+          <div class="categoryTitle">{{ $t('objectRegistration.buildingCategory')}}:</div>
           <div class="category">
             <div>
               <div>
-                <div class="categoryItemTitle">Раздел II пункт 2</div>
-                <div>В здании помещения всех потребителей в здании оборудованы  узлами распределительного учета (счетчиками тепла)</div>
+                <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointTwoTitle')}}</div>
+                <div>{{ $t('objectRegistration.sectionPointTwo')}}</div>
               </div>
               <input type="checkbox" value="2" @change="changeChbChecked"  name="buildingCategory">
             </div>
             <div>
-              <div><div class="categoryItemTitle">Раздел II пункт 3</div>
-                <div>В здании помещения не оборудованы или частично оборудованы узлами раздельного учета тепловой энергии/ приборами
-                  распределителями тепловой энергии/ узлами распределительного учета расхода теплоносителя
-                  ( в случае учета тепловой энергии в гарячей воде)</div>
+              <div><div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeTitle')}}</div>
+                <div>{{ $t('objectRegistration.sectionPointThree')}}</div>
               </div>
               <input type="checkbox" value="3" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div>
               <div>
-                <div class="categoryItemTitle">Раздел II пункт 3 подпункт 1</div>
-                <div>Для дома в котором отсутствуют  помещения с индивидуальным отоплением и/или неотапливаемые помещения</div>
+                <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeSubOneTitle')}}</div>
+                <div>{{ $t('objectRegistration.sectionPointThreeSubOne')}}</div>
               </div>
               <input type="checkbox" value="3.1" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div>
               <div>
-                <div class="categoryItemTitle">Раздел II пункт 3 подпункт 2</div>
-                <div>Для дома в котором часть помещений с индивидуальным отоплением и/или неотапливаемые помещения</div>
+                <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeSubTwoTitle')}}</div>
+                <div>{{ $t('objectRegistration.sectionPointThreeSubTwo')}}</div>
               </div>
               <input type="checkbox" value="3.2" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div>
               <div>
-                <div class="categoryItemTitle">Раздел II пункт 4</div>
-                <div>В здании часть помещений   оборудованы узлами раздельного учета тепловой энергии,
-                  а остальные помещения не оборудованы узлами  раздельного учета тепловой энергии/приборами
-                  распределителями тепловой энергии/ узлами распределительного учета расхода теплоносителя
-                  ( в случае учета тепловой энергии в гарячей воде) и присутствуют помещения с индивидуальным отоплением и/или неотапливаемые помещения</div>
+                <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointFourTitle')}}</div>
+                <div>{{ $t('objectRegistration.sectionPointFour')}}</div>
               </div>
               <input type="checkbox" value="4" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div>
               <div>
-                <div class="categoryItemTitle">Раздел II пункт 5</div>
-                <div>В здании 100% самостоятельных объектов недвижемого имущества оборудованы узлами
-                  распределительного учета расхода теплоносителя (приборами учета гарячей воды)</div>
+                <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointFiveTitle')}}</div>
+                <div>{{ $t('objectRegistration.sectionPointFive')}}</div>
               </div>
               <input type="checkbox" value="5" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div>
               <div>
-                <div class="categoryItemTitle">Раздел II пункт 6</div>
-                <div> В здании отопительные приборы которого оборудованы приборами распределителями тепловой энергии</div>
+                <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointSixTitle')}}</div>
+                <div>{{ $t('objectRegistration.sectionPointSix')}}</div>
               </div>
               <input type="checkbox" value="6" @change="changeChbChecked" name="buildingCategory">
             </div>
@@ -105,46 +99,45 @@
         </div>
 
         <div class="rightSide">
-          <div class="buildingTitle">Информация о доме:</div>
+          <div class="buildingTitle">{{ $t('objectRegistration.buildingInfoTitle')}}:</div>
           <div class="buildingInfo">
             <div>
-              <span>Количество подъездов:</span>
+              <span>{{ $t('objectRegistration.porchNumber')}}:</span>
               <input type="text" class="required" @keydown="validateCount"
                      @keyup="validateCountKeyUp" name="entranceCount"
                      v-if="isEdit" v-bind:value="getFlatInfo.entranceCount">
               <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.entranceCount}}</div>
             </div>
             <div>
-              <span>Количество квартир:</span>
+              <span>{{ $t('objectRegistration.flatNumber')}}:</span>
               <input type="text" class="required" @keydown="validateCount"
                      @keyup="validateCountKeyUp" name="flatsCount"
                      v-if="isEdit" v-bind:value="getFlatInfo.flatsCount">
               <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.flatsCount}}</div>
             </div>
             <div>
-              <span>Количество этажей:</span>
+              <span>{{ $t('objectRegistration.floorNumber')}}:</span>
               <input type="text" class="required" @keydown="validateCount"
                      @keyup="validateCountKeyUp" name="floorsCount"
                      v-if="isEdit" v-bind:value="getFlatInfo.floorsCount">
               <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.floorsCount}}</div>
             </div>
             <div>
-              <div>Нумерация квартир:</div>
-              <span>с</span>
+              <div>{{ $t('objectRegistration.flatNumeration')}}</div>
+              <span>{{ $t('common.from')}}</span>
               <input type="text" class="required flatNum" @keydown="validate"
                      name="numerableFlatsFrom" v-if="isEdit" v-bind:value="getFlatInfo.numerableFlatsFrom">
               <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.numerableFlatsFrom}}</div>
-              <span>по</span>
+              <span>{{ $t('common.to')}}</span>
               <input type="text" class="required flatNum" @keydown="validate"
                      name="numerableFlatsTo" v-if="isEdit" v-bind:value="getFlatInfo.numerableFlatsTo">
               <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.numerableFlatsTo}}</div>
             </div>
             <div>
-              <span>Показания общедомового прибора учета тепла:</span>
+              <span>{{ $t('objectRegistration.buildingInfo')}}:</span>
               <input type="text" class="required"
                      @keydown="validateGeneralCounterValue"
                      @keyup="validateGeneralCounterValueKeyUp"
-                     @focus="counterFocus"
                      name="generalCounterValue"
                      value=","
                      placeholder="000000,00" v-if="isEdit"
@@ -154,34 +147,34 @@
           </div>
 
           <div class="person">
-            <div class="personTitle">Данные лица ответственного за регестрацию объекта:</div>
+            <div class="personTitle">{{ $t('objectRegistration.buildingOwnerInfo')}}:</div>
             <div class="personInfo">
               <div>
-                <span>Фамилия:</span>
+                <span>{{ $t('common.surname')}}:</span>
                 <input type="text" class="required" @keydown="textValidate" name="lastName"
                        v-if="isEdit" v-bind:value="getFlatInfo.lastName">
                 <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.lastName}}</div>
               </div>
               <div>
-                <span>Имя:</span>
+                <span>{{ $t('common.name')}}:</span>
                 <input type="text" class="required" @keydown="textValidate"
                        name="firstName" v-if="isEdit" v-bind:value="getFlatInfo.firstName">
                 <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.firstName}}</div>
               </div>
               <div>
-                <span>Отчество:</span>
+                <span>{{ $t('common.patronymic')}}:</span>
                 <input type="text" class="required" @keydown="textValidate"
                        name="thirdName" v-if="isEdit" v-bind:value="getFlatInfo.thirdName">
                 <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.thirdName}}</div>
               </div>
               <div>
-                <span>Должность:</span>
+                <span>{{ $t('common.position')}}:</span>
                 <input type="text" @keydown="textValidate"  name="personPosition"
                        v-if="isEdit" v-bind:value="getFlatInfo.personPosition">
                 <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPosition}}</div>
               </div>
               <div>
-                <span>Контактный № тел.:</span>
+                <span>{{ $t('common.phoneNumber')}}:</span>
                 <div class="phoneNum">
                   <input type="text"
                          value="+380"
@@ -385,7 +378,7 @@ export default {
       },1000)
     },
     validate(e){
-      if(e.key == "Backspace"){
+      if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(isNaN(e.key) || e.key == " " || e.target.value.length > 3){
         e.preventDefault();
@@ -400,7 +393,10 @@ export default {
       }
     },
     validateGeneralCounterValueKeyUp(e){
-      if(e.target.value.length == 6) e.target.value += ",";
+      if(e.target.value.length == 6){
+        if(e.key === "Backspace") return
+        e.target.value += ",";
+      }
     },
     counterFocus(e){
       e.target.selectionStart = 0;
@@ -412,7 +408,7 @@ export default {
       if(e.target.name == "flatsCount")limit = this.flatLimit;
       if(e.target.name == "floorsCount")limit = this.floorsLimit;
 
-      if(e.key == "Backspace"){
+      if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(isNaN(e.key) || e.key == " " || e.target.value.length > limit){
         e.preventDefault();
@@ -431,7 +427,7 @@ export default {
       }
     },
     validatePhoneNumber(e){
-      if(e.key == "Backspace" || e.key === "+"){
+      if(e.key == "Backspace" || e.key === "+"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(isNaN(e.key) || e.key == " "|| e.target.value.length > 12){
         e.preventDefault();
@@ -456,7 +452,7 @@ export default {
     textValidate(e){
       if(e.target.name === "personPosition" ||e.target.name == "street" && e.key === " ") return
       if(e.target.name === "firstName" && e.key == "-") return
-      if(e.key == "Backspace"){
+      if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(!isNaN(e.key) || e.key == " "||e.key =="+"||e.key =="-"||e.key =="?"||e.key =="."||e.key ==","||e.key =="_"
         ||e.key =="/"||e.key ==">"||e.key =="<"||e.key =="%"||e.key =="&"||e.key =="*"||e.key =="#"||e.key =="@"||e.key =="!"
@@ -491,6 +487,7 @@ export default {
   background-image: url("../../assets/icons/home.png");
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
   position: absolute;
@@ -570,7 +567,6 @@ export default {
 
 .addressData{
   width: 260px;
-  font-size: 18px;
   display: flex;
   align-items: center;
 }

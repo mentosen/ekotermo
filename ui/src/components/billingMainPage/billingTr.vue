@@ -5,7 +5,7 @@
     <td>{{ data.city }}</td>
     <td>{{ data.street }}</td>
     <td>{{ data.buildingNumber }}</td>
-    <td></td>
+    <td>{{data.category}}</td>
     <td v-if="data.status == 'onAccount'" class="green" title="В учете"></td>
     <td v-if="data.status == 'onRegister'" class="yellow" title="На регистрации"></td>
     <td v-if="data.status == 'onDeleted'" class="red" title="Удален"></td>
@@ -43,12 +43,11 @@ table,td,th{
   font-size: 15px;
 }
 td{
-  height: 24px;
+  height: 30px;
 }
 .green,.yellow,.red{
   background-repeat: no-repeat;
   background-position: center center;
-  background-color: white;
 }
 .green{
   background-image: url("../../assets/icons/saved.png");
