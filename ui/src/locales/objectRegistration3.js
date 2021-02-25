@@ -16,7 +16,13 @@ export default {
         meterPlaceholder: "12-значное число",
         photo:"Фото",
         of:"из",
-        popUpMessage:"После нажатия кнопки \"Подтвердить\" удаление учётной записи объекта возможно только через администрацию сайта."
+        popUpMessage:"После нажатия кнопки \"Подтвердить\" удаление учётной записи объекта возможно только через администрацию сайта.",
+        tableCaption: "Параметрирование квартир",
+        roomPurpose: "Назначение помещения",
+        kc:"Kc",
+        kq:"Kq",
+        serialNum: "Серийный номер распределителя тепла",
+        startMeterVal: "Начальные показания распределителя тепла"
     },
     uk:{
         ignore:"Не враховувати",
@@ -35,7 +41,13 @@ export default {
         meterPlaceholder: "12-значнe число",
         photo:"Фото",
         of:"із",
-        popUpMessage:"Після натискання кнопки \"Підтвердити\" видалення облікового запису об\'єкта можливе тільки через адміністрацію сайту."
+        popUpMessage:"Після натискання кнопки \"Підтвердити\" видалення облікового запису об\'єкта можливе тільки через адміністрацію сайту.",
+        tableCaption: "Параметрування квартир",
+        roomPurpose: "Призначення приміщення",
+        kc:"Kc",
+        kq:"Kq",
+        serialNum: "Серійний номер розподілювача тепла",
+        startMeterVal: "Початкові показники розподілювача тепла"
     },
     en:{
         ignore:"Ignore",
@@ -54,6 +66,12 @@ export default {
         meterPlaceholder: "12-digit number",
         photo:"Photo",
         of:"of",
-        popUpMessage:"After clicking the \"Confirm\" button, deleting the account of the object is possible only through the site administration."
+        popUpMessage:"After clicking the \"Confirm\" button, deleting the account of the object is possible only through the site administration.",
+        tableCaption:"Parameterizing apartments",
+        roomPurpose: "The purpose of the room",
+        kc:"Сc",
+        kq:"Сq",
+        serialNum: "Heat spreader serial number",
+        startMeterVal:"Heat spreader initial readings"
     }
 }

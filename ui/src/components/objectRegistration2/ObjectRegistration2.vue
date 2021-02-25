@@ -28,7 +28,7 @@
         <button class="yellowBtn" @click="toRegForm1">{{ $t('buttons.backToSection1')}}</button>
       </router-link>
 
-      <router-link to="/objectRegistration3">
+      <router-link to="/objectRegistration3P2">
         <button class="greenBtn" @click="toRegForm3" v-bind:disabled="!getIsSaved">{{ $t('buttons.toSection3')}}</button>
       </router-link>
     </div>
