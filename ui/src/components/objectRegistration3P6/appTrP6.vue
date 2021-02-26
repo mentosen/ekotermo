@@ -170,7 +170,18 @@ export default {
         var serialNum = e.target.closest("tr").querySelectorAll(".serialNum");
         var initVal = e.target.closest("tr").querySelectorAll(".initVal");
         var data = {};
+        var counter = 0;
 
+        for(var k = 0; k < this.getRoomPurpose.length; k ++){
+          if(purposeDiv[0].innerText != this.getRoomPurpose[k]){
+            counter ++;
+            if(counter == 15){
+              purposeDiv[0].style.color = "red";
+              this.removeRedBorder(purposeDiv[0]);
+              return
+            }
+          }
+        }
         for(var k = 0; k < this.roomPurpose.length; k ++){
           data = {
             room: purposeDiv[k].innerText,
@@ -201,6 +212,7 @@ export default {
     removeRedBorder(el){
       setTimeout(function (){
         el.style.border = "";
+        el.style.color = "";
       },1000)
     },
     addPhoto(e){
