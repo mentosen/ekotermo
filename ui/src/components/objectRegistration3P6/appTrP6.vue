@@ -43,14 +43,14 @@
           <input type="text" class="purposeInput" placeholder="00,00" pattern="^\d{2},\d{2}$" @keydown="cofKeyDown"
                  @keyup="cofKeyUp" v-bind:name="'kc'+ key" v-bind:value="item.kc">
         </div>
-        <div v-if="!data.isEdit" v-for="(item) in roomPurpose">{{item.kc}}</div>
+        <div v-if="!data.isEdit" v-for="(item) in roomPurpose" class="purposeInputDiv">{{item.kc}}</div>
       </td>
       <td v-bind:class="{purposeInp: data.isEdit}">
         <div class="purposeInputDiv kq" v-for="(item, key) in roomPurpose" :key="key" v-if="data.isEdit">
           <input type="text" class="purposeInput" placeholder="00,00" pattern="^\d{2},\d{2}$" @keydown="cofKeyDown"
                  @keyup="cofKeyUp" v-bind:name="'kq'+ key" v-bind:value="item.kq">
         </div>
-        <div v-if="!data.isEdit" v-for="(item) in roomPurpose">{{item.kq}}</div>
+        <div v-if="!data.isEdit" v-for="(item) in roomPurpose" class="purposeInputDiv">{{item.kq}}</div>
       </td>
 
       <td v-bind:class="{purposeInp: data.isEdit}">
@@ -58,7 +58,7 @@
           <input type="text" class="tableInpText" @keydown="validateCounter" v-bind:placeholder="$t('objectRegistration3.meterPlaceholder')"
                  v-bind:value="item.serialNumber"  pattern="^\d{12}$">
         </div>
-        <div v-if="!data.isEdit" v-for="(item) in roomPurpose">{{item.serialNumber}}</div>
+        <div v-if="!data.isEdit" v-for="(item) in roomPurpose" class="purposeInputDiv">{{item.serialNumber}}</div>
       </td>
       <td v-bind:class="{purposeInp: data.isEdit}">
         <div class="purposeInputDiv initVal" v-for="(item, key) in roomPurpose" :key="key" v-if="data.isEdit">
@@ -66,7 +66,7 @@
                  placeholder="123456,78" v-bind:value="item.startCounterValue"
                  pattern="^\d{6},\d{2}$">
         </div>
-        <div v-if="!data.isEdit" v-for="(item) in roomPurpose">{{item.startCounterValue}}</div>
+        <div v-if="!data.isEdit" v-for="(item) in roomPurpose" class="purposeInputDiv">{{item.startCounterValue}}</div>
       </td>
 
       <td>
@@ -96,6 +96,7 @@ export default {
   name: "appTrP6",
   computed: mapGetters(['getEntrance','getFlatType','getCof','getApartments', 'getFloors','getDataFlat', 'getRoomPurpose']),
   mounted() {
+    this.roomPurpose.push({room:this.$t('objectRegistration3.purposeRoomTitle')});
   },
   data(){
     return{
@@ -113,7 +114,8 @@ export default {
       floorLengthLimit: 1,
       counterLengthLimit: 11,
       startCounterValLimit: 8,
-      cofLengthLimit: 4
+      cofLengthLimit: 4,
+      isFirstRoom: true
     }
   },
   methods:{
@@ -136,9 +138,16 @@ export default {
         if(this.roomPurpose[k].room == e.target.value)
           return
       }
-      this.roomPurpose.push({room:e.target.value});
+      if(this.isFirstRoom){
+        this.roomPurpose.splice(0,1);
+        this.roomPurpose.push({room:e.target.value});
+        this.isFirstRoom = false;
+      }else{
+        this.roomPurpose.push({room:e.target.value});
+      }
     },
     removeFromRoomPurpose(e){
+      if(this.roomPurpose.length == 1) return
       this.roomPurpose.splice(e.target.value,1);
     },
     save(e){
@@ -172,7 +181,6 @@ export default {
           }
           this.roomPurpose[k] = data;
         }
-        console.log(this.roomPurpose);
 
         var obj = {
           flatNumber: parent.children[0].innerText,
@@ -186,7 +194,6 @@ export default {
 
         this.data = Object.assign(this.data, obj);
         this.saveFlatData(this.data);
-        console.log(this.data);
         this.isEdit = false;
         if(this.getApartments.length === this.getDataFlat.length) this.changeIsAllFilled1(true);
       }

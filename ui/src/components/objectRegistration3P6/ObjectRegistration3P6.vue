@@ -14,7 +14,7 @@
       <th width="110">{{ $t('objectRegistration3.floorNumber')}}</th>
       <th>{{ $t('objectRegistration3.flatType')}}</th>
       <th width="180">{{ $t('objectRegistration3.tableCorrectionFactor')}}</th>
-      <th >{{ $t('objectRegistration3.roomPurpose')}}</th>
+      <th width="200">{{ $t('objectRegistration3.roomPurpose')}}</th>
       <th width="60">{{ $t('objectRegistration3.kc')}}</th>
       <th width="60">{{ $t('objectRegistration3.kq')}}</th>
       <th width="140">{{ $t('objectRegistration3.serialNum')}}</th>
