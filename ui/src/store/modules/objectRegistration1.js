@@ -1,7 +1,10 @@
+import { createBuilding } from "@/api/building";
+
 export default {
   actions:{
     saveData(ctx, data){
       //send data
+      createBuilding(data);
       //update state
       ctx.commit("saveData", data);
     },

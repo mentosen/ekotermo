@@ -9,46 +9,55 @@ class BuildingDto extends BaseDto{
 
     String region
     String area
-    String city
+    String cities
     String street
     int buildingNumber
 
-    BuildingCategory category
+    BuildingCategory buildingCategory
 
     int entranceCount
-    int flatCount
-    int floorCount
-    int flatMin
-    int flatMax
+    int flatsCount
+    int floorsCount
+    int numerableFlatsFrom
+    int numerableFlatsTo
 
-    double meterings
+    Boolean isEdit
+    Boolean isSaved
 
-    String ownerName
-    String position
-    String phone
+    String generalCounterValue
+
+    String firstName
+    String lastName
+    String thirdName
+    String personPosition
+    String personPhoneNumFirst
+    String personPhoneNumSecond
 
     static buildFromDomain(Building building){
 
         return new BuildingDto(
                 region: building.region,
                 area: building.area,
-                city: building.city,
+                cities: building.city,
                 street: building.street,
                 buildingNumber: building.buildingNumber,
 
-                category: building.category,
+                buildingCategory: building.buildingCategory,
 
                 entranceCount: building.entranceCount,
-                flatCount: building.flatCount,
-                floorCount: building.floorCount,
-                flatMax: building.flatMax,
-                flatMin: building.flatMin,
+                flatsCount: building.flatsCount,
+                floorsCount: building.floorsCount,
+                numerableFlatsFrom: building.numerableFlatsFrom,
+                numerableFlatsTo: building.numerableFlatsTo,
 
-                meterings: building.metterings,
+                generalCounterValue: building.generalCounterValue.toString(),
 
-                ownerName: building.ownerName,
-                position: building.position,
-                phone: building.phone
+                firstName: building.firstName,
+                lastName: building.lastName,
+                thirdName: building.thirdName,
+                personPosition: building.personPosition,
+                personPhoneNumFirst: building.personPhoneNumFirst,
+                personPhoneNumSecond: building.personPhoneNumSecond
         )
     }
 }

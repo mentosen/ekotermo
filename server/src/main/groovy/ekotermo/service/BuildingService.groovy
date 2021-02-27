@@ -16,28 +16,31 @@ class BuildingService {
 
     void create(String userId, BuildingDto buildingDto){
 
-        log.info("Saving building ${buildingDto.region}, ${buildingDto.area}, ${buildingDto.city}, ${buildingDto.street}, ${buildingDto.buildingNumber}")
+        log.info("Saving building ${buildingDto.region}, ${buildingDto.area}, ${buildingDto.cities}, ${buildingDto.street}, ${buildingDto.buildingNumber}")
 
         Building building = new Building(
                 region: buildingDto.region,
                 area: buildingDto.area,
-                city: buildingDto.city,
+                city: buildingDto.cities,
                 street: buildingDto.street,
                 buildingNumber: buildingDto.buildingNumber,
 
-                category: buildingDto.category,
+                buildingCategory: buildingDto.buildingCategory,
 
                 entranceCount: buildingDto.entranceCount,
-                flatCount: buildingDto.flatCount,
-                floorCount: buildingDto.floorCount,
-                flatMax: buildingDto.flatMax,
-                flatMin: buildingDto.flatMin,
+                flatsCount: buildingDto.flatsCount,
+                floorsCount: buildingDto.floorsCount,
+                numerableFlatsFrom: buildingDto.numerableFlatsFrom,
+                numerableFlatsTo: buildingDto.numerableFlatsTo,
 
-                meterings: buildingDto.meterings,
+                generalCounterValue: buildingDto.generalCounterValue.toDouble(),
 
-                ownerName: buildingDto.ownerName,
-                position: buildingDto.position,
-                phone: buildingDto.phone,
+                firstName: buildingDto.firstName,
+                lastName: buildingDto.lastName,
+                thirdName: buildingDto.thirdName,
+                personPosition: buildingDto.personPosition,
+                personPhoneNumFirst: buildingDto.personPhoneNumFirst,
+                personPhoneNumSecond: buildingDto.personPhoneNumSecond,
 
                 userId: userId
         )
@@ -51,25 +54,28 @@ class BuildingService {
 
         Building building = buildingDataService.findByIdAndUserId(buildingDto.id, userId)
 
-        buildingDto.region = building.region
-        buildingDto.area = building.area
-        buildingDto.city = building.city
-        buildingDto.street = building.street
-        buildingDto.buildingNumber = building.buildingNumber
+        building.region = buildingDto.region
+        building.area = buildingDto.area
+        building.city = buildingDto.cities
+        building.street = buildingDto.street
+        building.buildingNumber = buildingDto.buildingNumber
 
-        buildingDto.category = building.category
+        building.buildingCategory = buildingDto.buildingCategory
 
-        buildingDto.entranceCount = building.entranceCount
-        buildingDto.flatCount = building.flatCount
-        buildingDto.floorCount = building.floorCount
-        buildingDto.flatMax = building.flatMax
-        buildingDto.flatMin = building.flatMin
+        building.entranceCount = buildingDto.entranceCount
+        building.flatsCount = buildingDto.flatsCount
+        building.floorsCount = buildingDto.floorsCount
+        building.numerableFlatsFrom = buildingDto.numerableFlatsFrom
+        building.numerableFlatsTo = buildingDto.numerableFlatsTo
 
-        buildingDto.meterings = building.meterings
+        building.generalCounterValue = buildingDto.generalCounterValue.toDouble()
 
-        buildingDto.ownerName = building.ownerName
-        buildingDto.position = building.position
-        buildingDto.phone = building.phone
+        building.firstName = buildingDto.firstName
+        building.lastName = buildingDto.lastName
+        building.thirdName = buildingDto.thirdName
+        building.personPosition = buildingDto.personPosition
+        building.personPhoneNumFirst = buildingDto.personPhoneNumFirst
+        building.personPhoneNumSecond = buildingDto.personPhoneNumSecond
 
         buildingDataService.save(building)
     }

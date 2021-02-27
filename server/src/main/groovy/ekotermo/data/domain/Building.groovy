@@ -12,24 +12,27 @@ class Building extends BaseDomain{
     String area
     String city
     String street
-
     int buildingNumber
 
-    BuildingCategory category
+    BuildingCategory buildingCategory
 
     int entranceCount
-    int flatCount
-    int floorCount
-    int flatMin
-    int flatMax
+    int flatsCount
+    int floorsCount
+    int numerableFlatsFrom
+    int numerableFlatsTo
 
-    double meterings
+    Boolean isEdit
+    Boolean isSaved
 
-    String ownerName
+    double generalCounterValue
 
-    String position
-
-    String phone
+    String firstName
+    String lastName
+    String thirdName
+    String personPosition
+    String personPhoneNumFirst
+    String personPhoneNumSecond
 
     String userId
 }
