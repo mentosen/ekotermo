@@ -102,6 +102,11 @@ export default new Router({
                     path: '/objectRegistration3P6',
                     name: 'object Registration 3P6',
                     component: () => import('@/components/objectRegistration3P6/ObjectRegistration3P6'),
+                },
+                {
+                    path: '/organizationQuestionnaire',
+                    name: 'organization Questionnaire',
+                    component: () => import('@/components/organizationQuestionnaire/OrganizationQuestionnaire.vue'),
                 }
             ],
         },

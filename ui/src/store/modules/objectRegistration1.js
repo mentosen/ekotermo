@@ -9,9 +9,13 @@ export default {
       //
       ctx.commit("addRegions", 1);
       ctx.commit("addCities", 2);
+      ctx.commit("saveData", {personPhoneNum1:"+380",personPhoneNum2:"+380"})
     }
   },
   mutations:{
+    changeSection3Url(state, url){
+      state.section3Url = url;
+    },
     saveData(state, data){
       state.flatInfo = data;
     },
@@ -42,7 +46,8 @@ export default {
     cities:[{title: null, value:null }],
     flatInfo:{},
     accountState: false,
-    isDel: false
+    isDel: false,
+    section3Url: '/objectRegistration3P2'
   },
   getters:{
     getRegions(state){
@@ -59,6 +64,9 @@ export default {
     },
     getFlatInfo(state){
       return state.flatInfo;
+    },
+    section3Url(state){
+      return state.section3Url;
     }
   }
 }

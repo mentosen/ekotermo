@@ -15,6 +15,7 @@ import objectRegistration2 from './objectRegistration2';
 import objectRegistration3 from './objectRegistration3';
 import billingMainPage from './billingMainPage';
 import buttons from './buttons'
+import organizationQuestionnaire from './organizationQuestionnaire'
 
 const locales = {
         common,
@@ -33,7 +34,8 @@ const locales = {
         objectRegistration2,
         buttons,
         objectRegistration3,
-        billingMainPage
+        billingMainPage,
+        organizationQuestionnaire
     },
     messages = {};
 

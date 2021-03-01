@@ -8,8 +8,9 @@
         <router-link to="/enterCounterValue" class="dropMenuItemRouter">
           <button class="dropMenuItem">{{$t('billingMainPage.enterMeterReadings')}}</button>
         </router-link>
-
-        <button class="dropMenuItem">{{$t('billingMainPage.objectQuestionnaireForm')}}</button>
+        <router-link to="/organizationQuestionnaire">
+          <button class="dropMenuItem">{{$t('billingMainPage.objectQuestionnaireForm')}}</button>
+        </router-link>
         <button class="dropMenuItem">{{$t('billingMainPage.invoiceForPayment')}}</button>
         <button class="dropMenuItem">{{$t('billingMainPage.statistics')}}</button>
         <button class="dropMenuItem">{{$t('billingMainPage.normativeDocuments')}}</button>

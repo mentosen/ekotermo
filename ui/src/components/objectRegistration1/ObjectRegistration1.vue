@@ -258,7 +258,7 @@ export default {
   components:{delPopUp: delPopUp},
   methods:{
     ...mapActions(["saveData"]),
-    ...mapMutations(["changeIsDel"]),
+    ...mapMutations(["changeIsDel","changeSection3Url"]),
     ...mapActions(["getAllRegions"]),
     save(){
     var inputs = document.querySelectorAll("input[type=text],input[type=checkbox],select");
@@ -465,7 +465,14 @@ export default {
     changeChbChecked(e){
       var chbs = e.target.closest(".category").querySelectorAll("input[type=checkbox]");
       for(var k = 0; k < chbs.length;k++){
-        if(chbs[k] === e.target) continue;
+        if(chbs[k] === e.target){
+          if(e.target.value == 6){
+            this.changeSection3Url('/objectRegistration3P6');
+          }else if(e.target.value == 2){
+            this.changeSection3Url('/objectRegistration3P2');
+          }
+          continue;
+        }
         chbs[k].checked = false;
       }
     },
