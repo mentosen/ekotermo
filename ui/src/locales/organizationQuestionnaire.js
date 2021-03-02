@@ -22,7 +22,7 @@ export default {
         iban:"IBAN:"
     },
     uk:{
-        mainTitle:"АНКЕТА ОРГАНИЗАЦІЇ",
+        mainTitle:"АНКЕТА ОРГАНІЗАЦІЇ",
         companyTitle:"Повна назва:",
         companyCode:"ЄДРПОУ/ІПН:",
         legalAddress:"Юридична адреса:",
