@@ -107,6 +107,11 @@ export default new Router({
                     path: '/organizationQuestionnaire',
                     name: 'organization Questionnaire',
                     component: () => import('@/components/organizationQuestionnaire/OrganizationQuestionnaire.vue'),
+                },
+                {
+                    path: '/workingWithObject',
+                    name: 'working With Object',
+                    component: () => import('@/components/WorkingWithObject/WorkingWithObject.vue'),
                 }
             ],
         },
