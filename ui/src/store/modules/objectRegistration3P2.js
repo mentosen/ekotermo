@@ -5,7 +5,7 @@ export default {
       ctx.commit("addFlatsObj", 2);
       ctx.commit("addEntranceObj", 3);
       ctx.commit("addFlatTypeObj", 4);
-      ctx.commit("addCofObj", 5);
+      ctx.commit("addCofObj");
       ctx.commit("addFloors", 6);
       ctx.commit("addRoomPurpose");
     },
@@ -65,12 +65,7 @@ export default {
       state.flatType = data;
     },
     addCofObj(state, num){
-     var data = [];
-
-      for(var k = 0; k < num; k++){
-        var obj = {num: k+1};
-        data.push(obj);
-      }
+     var data = [{value:1,title:"1"},{value:0.9,title:"0.9"},{value:0.8,title:"0.8"}];
       state.cof = data;
     },
     changeShowPopUp(state, value){

@@ -8,7 +8,7 @@
     <div class="head">
       <div>
         <div>{{$t('organizationQuestionnaire.companyTitle')}}</div>
-        <input type="text" name="companyTitle" pattern="\w" v-if="data.isEdit" v-bind:value="data.companyTitle"
+        <input type="text" name="companyTitle" v-if="data.isEdit" v-bind:value="data.companyTitle"
         @keydown="textValidate" @input="onInput">
         <div v-if="!data.isEdit">{{data.companyTitle}}</div>
       </div>
@@ -161,7 +161,7 @@
       <div class="bankRight">
         <div>
           <span>{{$t('organizationQuestionnaire.bankTitle')}}</span>
-          <input type="text" name="bankTitle" pattern="\w" v-if="data.isEdit" v-bind:value="data.bankTitle" @keydown="textValidate" @input="onInput">
+          <input type="text" name="bankTitle" v-if="data.isEdit" v-bind:value="data.bankTitle" @keydown="textValidate" @input="onInput">
           <span v-if="!data.isEdit">{{data.bankTitle}}</span>
         </div>
         <div>
@@ -221,7 +221,7 @@ export default {
 
       for(var k = 0; k < inputs.length; k ++){
         this.data[inputs[k].name] = inputs[k].value;
-        if(inputs[k].pattern && !inputs[k].value.match(inputs[k].pattern)){
+        if(inputs[k].pattern && !inputs[k].value.match(inputs[k].pattern)|| !inputs[k].value){
           inputs[k].style.border = "1px solid red";
           if(!yPos) yPos = inputs[k].offsetTop;
           this.removeRedBorder(inputs[k]);
@@ -410,6 +410,9 @@ export default {
 }
 .noBorder{
   border-bottom: none;
+}
+input[name=iban],input[name=bankTitle]{
+  width: 280px;
 }
 
 /*///*/

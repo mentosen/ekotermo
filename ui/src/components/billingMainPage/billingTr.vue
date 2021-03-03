@@ -61,7 +61,7 @@ td{
 .arrowRight{
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url("../../assets/icons/whiteArrowRight24.png");
+  background-image: url("../../assets/icons/whiteArrowRight24,2.png");
   opacity: 0.85;
   cursor: pointer;
 }

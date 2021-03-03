@@ -2,7 +2,7 @@ export default {
     ru:{
         additionalFunctions:"Дополнительные функции",
         enterMeterReadings:"Внести показания счетчика",
-        objectQuestionnaireForm:"Бланк анкеты объекта",
+        objectQuestionnaireForm:"Анкета объекта",
         invoiceForPayment:"Счет на оплату",
         statistics:"Статистика",
         normativeDocuments:"Нормативная документация",
@@ -29,7 +29,7 @@ export default {
     uk:{
         additionalFunctions:"Додаткові функції",
         enterMeterReadings:"Внести показання лічильника",
-        objectQuestionnaireForm:"Бланк анкети об\'єкта",
+        objectQuestionnaireForm:"Анкета об\'єкту",
         invoiceForPayment:"Рахунок до сплати",
         statistics:"Статистика",
         normativeDocuments:"Нормативна документація",
@@ -56,7 +56,7 @@ export default {
     en:{
         additionalFunctions:"Additional functions",
         enterMeterReadings:"Enter meter readings",
-        objectQuestionnaireForm:"Object questionnaire form",
+        objectQuestionnaireForm:"Object questionnaire",
         invoiceForPayment:"Invoice for payment",
         statistics:"Statistics",
         normativeDocuments:"Normative documents",

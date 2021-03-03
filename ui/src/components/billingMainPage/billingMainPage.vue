@@ -117,9 +117,13 @@ th{
 
 .filter{
   cursor: pointer;
+  background-image: url("../../assets/icons/filter.png");
+  background-repeat: no-repeat;
+  background-position: center right;
 }
 .filter:hover{
   background-color: rgb(243 243 243);
+  background-image: url("../../assets/icons/filterHover.png");
 }
 
 </style>
