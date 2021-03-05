@@ -16,6 +16,8 @@ import objectRegistration3 from './objectRegistration3';
 import billingMainPage from './billingMainPage';
 import buttons from './buttons'
 import organizationQuestionnaire from './organizationQuestionnaire'
+import workingWithObjectP2 from './workingWithObjectP2'
+import measurement from './measurement'
 
 const locales = {
         common,
@@ -35,7 +37,9 @@ const locales = {
         buttons,
         objectRegistration3,
         billingMainPage,
-        organizationQuestionnaire
+        organizationQuestionnaire,
+        workingWithObjectP2,
+        measurement
     },
     messages = {};
 

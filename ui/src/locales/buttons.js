@@ -16,6 +16,15 @@ export default {
         confirmFilter:"Применить",
         discardFilter:"Отмена",
         confirmDeleted:"Подтвердить",
+        loadData:"Загрузить данные",
+        loadedData:"Загруженные данные",
+        clearLoadedData:"Очистить загруженные/ введенные данные",
+        manualInput:"Ручной ввод",
+        objectDistributionarchive:"Архив распределения по объекту",
+        feedback:"Обратная связь",
+        saveDistribution:"СОХРАНИТЬ РАСПРЕДЕЛЕНИЕ",
+        detailedCalculation:"Детальный расчет",
+        downloadCalculation:"Скачать расчет"
     },
     uk:{
         save:"Зберегти",
@@ -34,6 +43,15 @@ export default {
         confirmFilter:"Застосувати",
         discardFilter:"Відмінити",
         confirmDeleted:"Підтвердити",
+        loadData:"Завантажити дані",
+        loadedData:"Завантажені дані",
+        clearLoadedData:"Очистити завантажені / введені дані",
+        manualInput:"Ручне введення",
+        objectDistributionarchive:"Архів розподілу по об\'єкту",
+        feedback:"Зворотній зв\'язок",
+        saveDistribution:"ЗБЕРЕГТИ РОЗПОДІЛЕННЯ",
+        detailedCalculation:"Детальний розрахунок",
+        downloadCalculation:"Завантажити розрахунок"
     },
     en:{
         save:"Save",
@@ -52,5 +70,14 @@ export default {
         confirmFilter:"Apply",
         discardFilter:"Cancel",
         confirmDeleted:"Confirm",
+        loadData:"Load data",
+        loadedData:"Loaded data",
+        clearLoadedData:"Clear uploaded / entered data",
+        manualInput:"Manual input",
+        objectDistributionarchive:"Object distribution archive",
+        feedback:"Feedback",
+        saveDistribution:"SAVE DISTRIBUTION",
+        detailedCalculation:"Detailed calculation",
+        downloadCalculation:"Download calculation"
     }
 }
