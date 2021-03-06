@@ -106,7 +106,8 @@
                                 that.currentUser = that.$store.getters.getUserInfo;
 
                                 if(that.currentUser.roles.includes('ROLE_COMPANY')){
-                                    this.$router.push('/billingMainPage')
+                                    // this.$router.push('/billingMainPage')
+                                    this.$router.push('/organizationQuestionnaire')
                                 } else {
                                     this.$router.push('/')
                                 }

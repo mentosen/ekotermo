@@ -226,7 +226,7 @@
                             that.$store.commit("SET_TOKEN", response.data.access_token);
                             that.$store.dispatch("GetUserInfo").then(() => {
                                 that.currentUser = that.$store.getters.getUserInfo;
-                                this.$router.push('/billingMainPage')
+                                this.$router.push('/organizationQuestionnaire')
                             });
                         }).catch((e) => {
                             console.log(e.message);

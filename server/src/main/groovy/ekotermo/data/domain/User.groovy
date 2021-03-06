@@ -2,6 +2,7 @@ package ekotermo.data.domain
 
 import ekotermo.data.enums.Role
 import groovy.transform.ToString
+import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = 'users')
@@ -19,4 +20,7 @@ class User extends BaseDomain{
     String serialNumber
 
     List<Role> roles = []
+
+    @DBRef(lazy = true)
+    Company company
 }
