@@ -1,11 +1,11 @@
 <template>
   <div class="overlay">
     <div class="popUp">
-      <div class="message" v-if="!getAccountState">После нажатия кнопки "Подтвердить", объект будет удален.</div>
-      <div class="message" v-if="getAccountState">Ваш запрос на удаление объекта будет отправлен администратору и обработан в течении друх рабочих дней.</div>
+      <div class="message" v-if="!getAccountState">{{$t('objectRegistration.popUpMessage1')}}</div>
+      <div class="message" v-if="getAccountState">{{$t('objectRegistration.popUpMessage2')}}</div>
       <div class="buttons">
-        <button @click="cancel" class="redBtn">Отмена</button>
-        <button @click="accept" class="greenBtn">Подтвердить</button>
+        <button @click="cancel" class="redBtn">{{$t('buttons.discardFilter')}}</button>
+        <button @click="accept" class="greenBtn">{{$t('buttons.confirmDeleted')}}</button>
       </div>
     </div>
   </div>

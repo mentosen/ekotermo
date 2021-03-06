@@ -1,8 +1,9 @@
 export default {
   actions:{
-    saveData(ctx){
+    saveFlatData(ctx, data){
       //send state.flatsData
       //update state
+      ctx.commit("addFlatData", data);
     }
   },
   mutations:{

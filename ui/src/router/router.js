@@ -84,9 +84,9 @@ export default new Router({
                     component: () => import('@/components/objectRegistration2/ObjectRegistration2.vue'),
                 },
                 {
-                    path: '/objectRegistration3',
-                    name: 'Object registration3',
-                    component: () => import('@/components/objectRegistration3/ObjectRegistration3.vue'),
+                    path: '/objectRegistration3P2',
+                    name: 'Object registration3P2',
+                    component: () => import('@/components/objectRegistration3P2/ObjectRegistration3P2.vue'),
                 },
                 {
                     path: '/billingMainPage',
@@ -97,6 +97,21 @@ export default new Router({
                     path: '/enterCounterValue',
                     name: 'Enter Counter Value',
                     component: () => import('@/components/enterCounterValue/enterCounterValue'),
+                },
+                {
+                    path: '/objectRegistration3P6',
+                    name: 'object Registration 3P6',
+                    component: () => import('@/components/objectRegistration3P6/ObjectRegistration3P6'),
+                },
+                {
+                    path: '/organizationQuestionnaire',
+                    name: 'organization Questionnaire',
+                    component: () => import('@/components/organizationQuestionnaire/OrganizationQuestionnaire.vue'),
+                },
+                {
+                    path: '/workingWithObjectP2',
+                    name: 'working With ObjectP2',
+                    component: () => import('@/components/WorkingWithObjectP2/WorkingWithObjectP2.vue'),
                 }
             ],
         },

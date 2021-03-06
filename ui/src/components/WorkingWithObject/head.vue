@@ -1,6 +1,6 @@
 <template>
     <div class="head">
-      <div class="headHeading">{{ $t('objectRegistrationHead.objectRegistration')}}<br>{{ $t('objectRegistrationHead.section')}} №2</div>
+      <div class="headHeading">Работа с обьектом</div>
       <div class="headInfo">
         <div class="headAddress">
           <div>{{ $t('objectRegistrationHead.objectAddress')}}</div>

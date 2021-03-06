@@ -7,6 +7,7 @@
     <Head></Head>
     <afterHead></afterHead>
     <table>
+      <caption class="tableCaption">{{ $t('objectRegistration3.tableCaption')}}</caption>
       <thead>
       <th width="75">{{ $t('objectRegistration3.flatNumber')}}</th>
       <th>{{ $t('objectRegistration3.porchNumber') }}</th>
@@ -37,10 +38,10 @@ import {mapGetters, mapActions, mapMutations} from 'vuex'
 import appTr from './appTr'
 import Head from './head'
 import confirmPopUp from './confirmPopUp.vue'
-import afterHead from "@/components/objectRegistration3/afterHead";
+import afterHead from "@/components/objectRegistration3P2/afterHead";
 
 export default {
-  name: 'registrationForm3',
+  name: 'registrationForm3P2',
   mounted() {
     this.getData();
   },
@@ -50,7 +51,7 @@ export default {
   },
   computed: mapGetters(["getApartments", "getIsAllFilled1","getIsAllFilled2","getShowPopUp"]),
   methods:{
-    ...mapActions(["getData"]),
+    ...mapActions(["getData",'saveAllFlatDataP2']),
     ...mapMutations(["changeShowPopUp"]),
     toRegForm2(){
 
@@ -106,6 +107,9 @@ export default {
  }
  th{
    font-weight: 400;
+ }
+ .tableCaption{
+   margin-bottom: 5px;
  }
 
  .btnPart{

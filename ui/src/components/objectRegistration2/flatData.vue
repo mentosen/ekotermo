@@ -11,7 +11,7 @@
       <div class="leftPart">
         <div class="flatType leftPartData">Тип № <span class="typeCount">{{typeCount}}</span></div>
         <div class="flex leftPartData">
-          <div>Общая площадь</div>
+          <div>{{ $t('objectRegistration2.totalArea')}}</div>
           <div>
             <input type="text" v-model="totalArea" @keydown="validate($event)"
                    @keyup="validateKeyUp" class="totalArea"
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="flex leftPartData">
-          <div>Отапливаемая площадь</div>
+          <div>{{ $t('objectRegistration2.heatedArea')}}</div>
           <div>
             <input type="text" v-model="heatingArea" @keydown="validate($event)" @keyup="validateKeyUp"
                    class="heatingArea"
@@ -29,16 +29,16 @@
           </div>
         </div>
         <div class="flex leftPartData">
-          <div>Скан-копия планировки помещения</div>
+          <div>{{ $t('objectRegistration2.scanCopy')}}</div>
           <div class="inputFile">
             <input type="file" accept="application/pdf,image/*" v-bind:id="flatType+'Scan'">
           </div>
         </div>
         <div class="buttonPart">
-          <button class="yellowBtn" @click="saveType">Сохранить тип</button>
-          <button class="greenBtn" @click="changeType">Добавить тип</button>
-          <button class="greyBtn" @click="edit" v-show="!isEdit">Редактировать</button>
-          <button class="blueBtn" @click="saveChanges" v-show="isEdit">Сохранить изменения</button>
+          <button class="yellowBtn" @click="saveType">{{ $t('buttons.saveType')}}</button>
+          <button class="greenBtn" @click="changeType">{{ $t('buttons.addType')}}</button>
+          <button class="greyBtn" @click="edit" v-show="!isEdit">{{ $t('buttons.edit')}}</button>
+          <button class="blueBtn" @click="saveChanges" v-show="isEdit">{{ $t('buttons.saveChanges')}}</button>
         </div>
       </div>
 
@@ -48,17 +48,17 @@
           <thead>
           <tr>
             <th>№ п/п</th>
-            <th>Общая площадь м2</th>
-            <th>Отпапливаемая площадь м2</th>
-            <th class="editInputTd">Документ</th>
+            <th>{{ $t('objectRegistration2.totalArea')}} {{ $t('objectRegistration2.m2')}}</th>
+            <th>{{ $t('objectRegistration2.heatedArea')}} {{ $t('objectRegistration2.m2')}}</th>
+            <th class="editInputTd">{{ $t('objectRegistration2.document')}}</th>
             <th class="deleteTh" v-if="isEdit">
-              <button class="redBtn" @click="deleteScan">Удалить</button>
+              <button class="redBtn" @click="deleteScan">{{ $t('buttons.delete')}}</button>
             </th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="value in data">
-            <td>Тип №{{value.typeShort}}</td>
+            <td>{{ $t('objectRegistration2.type')}} {{value.typeShort}}</td>
             <td class="editInputTd">
 
               <input type="text" v-if="isEdit"
@@ -123,7 +123,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
 
     methods:{
       ...mapMutations(["addFlatData", "editFlatData","changeIsSaved"]),
-      ...mapActions(["saveData"]),
+      ...mapActions(["saveFlatData"]),
 
       changeType(){
         this.typeCount++;
@@ -169,13 +169,14 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
               scan: this.scan
             };
 
-            this.addFlatData(data);
+
             this.totalArea = this.heatingArea = "";
             inpFile.value = "";
             this.changeType();
             this.data = this.getFlatsData[this.flatData.dataTitle];
             this.changeIsSaved(true);
-            this.saveData();
+            this.saveFlatData(data);
+
           }
         }
       },

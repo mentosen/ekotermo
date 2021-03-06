@@ -24,8 +24,9 @@
       }
     },
     methods:{
-      ...mapActions([]),
+      ...mapActions(['saveAllFlatDataP2']),
       ...mapMutations(["changeShowPopUp"]),
+      ...mapGetters(["getDataFlat"]),
       cancel(){
         this.changeShowPopUp(false);
         document.querySelector("body").style.overflow = "";
@@ -34,9 +35,9 @@
         ///
         this.changeShowPopUp(false);
         document.querySelector("body").style.overflow = "";
+        this.saveAllFlatDataP2(this.getDataFlat());
       }
-    },
-    computed: mapGetters([]),
+    }
   }
 </script>
 

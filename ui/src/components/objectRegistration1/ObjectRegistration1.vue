@@ -34,8 +34,8 @@
         </div>
         <div class="addressData">
           <span>{{ $t('registration.building')}}:</span>
-          <input type="text" class="required" @keydown="validate" name="building_number" v-if="isEdit" v-bind:value="getFlatInfo.building_number">
-          <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.building_number}}</div>
+          <input type="text" class="required" @keydown="validate" name="buildingNumber" v-if="isEdit" v-bind:value="getFlatInfo.buildingNumber">
+          <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.buildingNumber}}</div>
         </div>
       </div>
     </div>
@@ -104,45 +104,45 @@
             <div>
               <span>{{ $t('objectRegistration.porchNumber')}}:</span>
               <input type="text" class="required" @keydown="validateCount"
-                     @keyup="validateCountKeyUp" name="entrance_count"
-                     v-if="isEdit" v-bind:value="getFlatInfo.entrance_count">
-              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.entrance_count}}</div>
+                     @keyup="validateCountKeyUp" name="entranceCount"
+                     v-if="isEdit" v-bind:value="getFlatInfo.entranceCount">
+              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.entranceCount}}</div>
             </div>
             <div>
               <span>{{ $t('objectRegistration.flatNumber')}}:</span>
               <input type="text" class="required" @keydown="validateCount"
-                     @keyup="validateCountKeyUp" name="flats_count"
-                     v-if="isEdit" v-bind:value="getFlatInfo.flats_count">
-              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.flats_count}}</div>
+                     @keyup="validateCountKeyUp" name="flatsCount"
+                     v-if="isEdit" v-bind:value="getFlatInfo.flatsCount">
+              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.flatsCount}}</div>
             </div>
             <div>
               <span>{{ $t('objectRegistration.floorNumber')}}:</span>
               <input type="text" class="required" @keydown="validateCount"
-                     @keyup="validateCountKeyUp" name="floors_count"
-                     v-if="isEdit" v-bind:value="getFlatInfo.floors_count">
-              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.floors_count}}</div>
+                     @keyup="validateCountKeyUp" name="floorsCount"
+                     v-if="isEdit" v-bind:value="getFlatInfo.floorsCount">
+              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.floorsCount}}</div>
             </div>
             <div>
               <div>{{ $t('objectRegistration.flatNumeration')}}</div>
               <span>{{ $t('common.from')}}</span>
               <input type="text" class="required flatNum" @keydown="validate"
-                     name="numerable_flats_from" v-if="isEdit" v-bind:value="getFlatInfo.numerable_flats_from">
-              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.numerable_flats_from}}</div>
+                     name="numerableFlatsFrom" v-if="isEdit" v-bind:value="getFlatInfo.numerableFlatsFrom">
+              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.numerableFlatsFrom}}</div>
               <span>{{ $t('common.to')}}</span>
               <input type="text" class="required flatNum" @keydown="validate"
-                     name="numerable_flats_to" v-if="isEdit" v-bind:value="getFlatInfo.numerable_flats_to">
-              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.numerable_flats_to}}</div>
+                     name="numerableFlatsTo" v-if="isEdit" v-bind:value="getFlatInfo.numerableFlatsTo">
+              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.numerableFlatsTo}}</div>
             </div>
             <div>
               <span>{{ $t('objectRegistration.buildingInfo')}}:</span>
               <input type="text" class="required"
-                     @keydown="validategeneral_counter_value"
-                     @keyup="validategeneral_counter_valueKeyUp"
-                     name="general_counter_value"
+                     @keydown="validateGeneralCounterValue"
+                     @keyup="validateGeneralCounterValueKeyUp"
+                     name="generalCounterValue"
                      value=","
                      placeholder="000000,00" v-if="isEdit"
-                     v-bind:value="getFlatInfo.general_counter_value">
-              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.general_counter_value}}</div>
+                     v-bind:value="getFlatInfo.generalCounterValue">
+              <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.generalCounterValue}}</div>
             </div>
           </div>
 
@@ -151,27 +151,27 @@
             <div class="personInfo">
               <div>
                 <span>{{ $t('common.surname')}}:</span>
-                <input type="text" class="required" @keydown="textValidate" name="last_name"
-                       v-if="isEdit" v-bind:value="getFlatInfo.last_name">
-                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.last_name}}</div>
+                <input type="text" class="required" @keydown="textValidate" name="lastName"
+                       v-if="isEdit" v-bind:value="getFlatInfo.lastName">
+                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.lastName}}</div>
               </div>
               <div>
                 <span>{{ $t('common.name')}}:</span>
                 <input type="text" class="required" @keydown="textValidate"
-                       name="first_name" v-if="isEdit" v-bind:value="getFlatInfo.first_name">
-                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.first_name}}</div>
+                       name="firstName" v-if="isEdit" v-bind:value="getFlatInfo.firstName">
+                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.firstName}}</div>
               </div>
               <div>
                 <span>{{ $t('common.patronymic')}}:</span>
                 <input type="text" class="required" @keydown="textValidate"
-                       name="third_name" v-if="isEdit" v-bind:value="getFlatInfo.third_name">
-                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.third_name}}</div>
+                       name="thirdName" v-if="isEdit" v-bind:value="getFlatInfo.thirdName">
+                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.thirdName}}</div>
               </div>
               <div>
                 <span>{{ $t('common.position')}}:</span>
-                <input type="text" @keydown="textValidate"  name="person_position"
-                       v-if="isEdit" v-bind:value="getFlatInfo.person_position">
-                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.person_position}}</div>
+                <input type="text" @keydown="textValidate"  name="personPosition"
+                       v-if="isEdit" v-bind:value="getFlatInfo.personPosition">
+                <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPosition}}</div>
               </div>
               <div>
                 <span>{{ $t('common.phoneNumber')}}:</span>
@@ -182,18 +182,18 @@
                          placeholder="+380456789123"
                          @keyup="validatePhoneNumberKeyUp"
                          @keydown="validatePhoneNumber"
-                         name="person_phone_num_first" v-if="isEdit"
-                         v-bind:value="getFlatInfo.person_phone_num_first">
-                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.person_phone_num_first}}</div>
+                         name="personPhoneNum1" v-if="isEdit"
+                         v-bind:value="getFlatInfo.personPhoneNum1">
+                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNum1}}</div>
                   <input type="text"
                          value="+380"
                          class="phoneNumber phone2"
                          placeholder="+380456789123"
                          @keyup="validatePhoneNumberKeyUp"
                          @keydown="validatePhoneNumber"
-                         name="person_phone_num_second" v-if="isEdit"
-                         v-bind:value="getFlatInfo.person_phone_num_second">
-                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.person_phone_num_second}}</div>
+                         name="personPhoneNum2" v-if="isEdit"
+                         v-bind:value="getFlatInfo.personPhoneNum2">
+                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNum2}}</div>
                 </div>
               </div>
             </div>
@@ -204,11 +204,11 @@
     </div>
 <!--    //-->
     <div class="btnPart">
-      <button class="yellowBtn" @click="save" v-bind:disabled="isSaved">Сохранить</button>
-      <button class="greyBtn"  @click="edit" v-bind:disabled="!isSaved">Редактировать</button>
-      <button class="redBtn" @click="removeBuilding" v-bind:disabled="isEdit">Удалить</button>
+      <button class="yellowBtn" @click="save" v-bind:disabled="isSaved">{{ $t('buttons.save')}}</button>
+      <button class="greyBtn"  @click="edit" v-bind:disabled="!isSaved">{{ $t('buttons.edit')}}</button>
+      <button class="redBtn" @click="removeBuilding" v-bind:disabled="isEdit">{{ $t('buttons.delete')}}</button>
       <router-link to="/objectRegistration2">
-        <button class="greenBtn" @click="toRegForm2" v-bind:disabled="!isSaved">ПЕРЕЙТИ К РАЗДЕЛУ №2</button>
+        <button class="greenBtn" @click="toRegForm2" v-bind:disabled="!isSaved">{{ $t('buttons.toSection2')}}</button>
       </router-link>
     </div>
     <delPopUp v-if="getIsDel"></delPopUp>
@@ -216,17 +216,17 @@
 </template>
 
 <script>
-import {mapGetters, mapActions, mapMutations} from 'vuex'
+import {mapGetters, mapActions,mapMutations} from 'vuex'
 import delPopUp from './deletePopUp.vue'
-
 export default {
   name: 'objectRegistration1',
   mounted() {
     this.getAllRegions();
     this.data = this.getFlatInfo;
-    if(this.data.person_phone_num_first || this.data.person_phone_num_second){
-      if(this.data.person_phone_num_first) this.phoneNumbers.phone1 = this.data.person_phone_num_first;
-      if(this.data.person_phone_num_second) this.phoneNumbers.phone2 = this.data.person_phone_num_second;
+
+    if(this.data.personPhoneNum1 || this.data.personPhoneNum2){
+      if(this.data.personPhoneNum1) this.phoneNumbers.phone1 = this.data.personPhoneNum1;
+      if(this.data.personPhoneNum2) this.phoneNumbers.phone2 = this.data.personPhoneNum2;
     }
     if(this.getFlatInfo.isEdit === false){
       this.isEdit = this.getFlatInfo.isEdit;
@@ -246,11 +246,11 @@ export default {
         phone2: null
       },
       chbs:[],
-      entrance_count:20,
+      entranceCount:20,
       entranceLimit:1,
       flatCount:4000,
       flatLimit:3,
-      floors_count:50,
+      floorsCount:50,
       floorsLimit:1
     }
   },
@@ -258,9 +258,8 @@ export default {
   components:{delPopUp: delPopUp},
   methods:{
     ...mapActions(["saveData"]),
-    ...mapMutations(["changeIsDel"]),
+    ...mapMutations(["changeIsDel","changeSection3Url"]),
     ...mapActions(["getAllRegions"]),
-
     save(){
     var inputs = document.querySelectorAll("input[type=text],input[type=checkbox],select");
     var result1 = this.checkValue(inputs);
@@ -276,22 +275,18 @@ export default {
               inputs[k].closest("div").style.display= "none";
             }
          }else{
-           debugger
            this.data[inputs[k].name] = inputs[k].value;
            if(inputs[k].value === "+380")this.data[inputs[k].name] = null;
          }
        }
        this.data.isEdit = false;
        this.data.isSaved = true;
-      debugger
        this.saveData(this.data);
-
        this.isSaved = true;
        this.isEdit = false;
        window.scrollTo(0,0);
      }
     },
-
     edit(){
       this.isSaved = false;
       this.isEdit = true;
@@ -309,7 +304,7 @@ export default {
       var countChb = 0;
 
       for(var k = 0; k < arr.length;k++){
-        if(arr[k].name === "general_counter_value"){
+        if(arr[k].name === "generalCounterValue"){
           var regEx = /^\d{6},\d{2}$/;
           if(!arr[k].value.match(regEx)){
             result = false;
@@ -390,7 +385,7 @@ export default {
         e.preventDefault();
       }
     },
-    validategeneral_counter_value(e){
+    validateGeneralCounterValue(e){
       if(e.key == "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight"|| e.key == ","){
         return
       } else if(isNaN(e.key) || e.key == " " ||e.target.value.length === 9){
@@ -398,7 +393,7 @@ export default {
         return
       }
     },
-    validategeneral_counter_valueKeyUp(e){
+    validateGeneralCounterValueKeyUp(e){
       if(e.target.value.length == 6){
         if(e.key === "Backspace") return
         e.target.value += ",";
@@ -410,9 +405,9 @@ export default {
     },
     validateCount(e){
       var limit;
-      if(e.target.name == "entrance_count")limit = this.entranceLimit;
-      if(e.target.name == "flats_count")limit = this.flatLimit;
-      if(e.target.name == "floors_count")limit = this.floorsLimit;
+      if(e.target.name == "entranceCount")limit = this.entranceLimit;
+      if(e.target.name == "flatsCount")limit = this.flatLimit;
+      if(e.target.name == "floorsCount")limit = this.floorsLimit;
 
       if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
@@ -422,9 +417,9 @@ export default {
     },
     validateCountKeyUp(e){
       var maxCount;
-      if(e.target.name == "entrance_count")maxCount = this.entrance_count;
-      if(e.target.name == "flats_count")maxCount = this.flatCount;
-      if(e.target.name == "floors_count")maxCount = this.floors_count;
+      if(e.target.name == "entranceCount")maxCount = this.entranceCount;
+      if(e.target.name == "flatsCount")maxCount = this.flatCount;
+      if(e.target.name == "floorsCount")maxCount = this.floorsCount;
 
       if(parseInt(e.target.value) > maxCount){
         var val = e.target.value.split("");
@@ -456,8 +451,8 @@ export default {
       }
     },
     textValidate(e){
-      if(e.target.name === "person_position" ||e.target.name == "street" && e.key === " ") return
-      if(e.target.name === "first_name" && e.key == "-") return
+      if(e.target.name === "personPosition" ||e.target.name == "street" && e.key === " ") return
+      if(e.target.name === "firstName" && e.key == "-") return
       if(e.key == "Backspace"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
       } else if(!isNaN(e.key) || e.key == " "||e.key =="+"||e.key =="-"||e.key =="?"||e.key =="."||e.key ==","||e.key =="_"
@@ -470,7 +465,14 @@ export default {
     changeChbChecked(e){
       var chbs = e.target.closest(".category").querySelectorAll("input[type=checkbox]");
       for(var k = 0; k < chbs.length;k++){
-        if(chbs[k] === e.target) continue;
+        if(chbs[k] === e.target){
+          if(e.target.value == 6){
+            this.changeSection3Url('/objectRegistration3P6');
+          }else if(e.target.value == 2){
+            this.changeSection3Url('/objectRegistration3P2');
+          }
+          continue;
+        }
         chbs[k].checked = false;
       }
     },
@@ -496,7 +498,7 @@ export default {
   background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 90px;
   left: 30px;
   outline: none;

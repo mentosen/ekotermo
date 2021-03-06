@@ -21,7 +21,7 @@
     </td>
     <td class="selectTd">
       <select class="tableSelect" v-if="isEdit">
-        <option v-for="(num, key) in getCof" v-bind:value="num.num" v-bind:selected="data.cof == num.num">{{key+1}}</option>
+        <option v-for="item in getCof" v-bind:value="item.value" v-bind:selected="data.cof == item.value">{{item.title}}</option>
       </select>
       <div v-if="!isEdit">{{data.cof}}</div>
     </td>

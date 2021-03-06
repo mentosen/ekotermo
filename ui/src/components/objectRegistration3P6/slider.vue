@@ -64,7 +64,6 @@ export default {
 
       this.count == 1?this.isFirst = true:this.isFirst = false;
       this.count == this.photos.length?this.isLast = true:this.isLast = false;
-
     },
     remove(e){
       var previous = document.querySelector("button[name=previous]");
@@ -82,6 +81,8 @@ export default {
         this.close();
         this.changeIsPhoto();
       }
+      this.count == 1?this.isFirst = true:this.isFirst = false;
+      this.count == this.photos.length?this.isLast = true:this.isLast = false;
     }
   }
 }

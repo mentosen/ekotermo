@@ -10,6 +10,14 @@ import designAndInstall from "@/locales/designAndInstall";
 import objectRegistration from "./objectRegistration";
 import objectRegistrationSecondPoint from "./objectRegistrationSecondPoint";
 import errors from "./errors";
+import objectRegistrationHead from './objectRegistrationHead';
+import objectRegistration2 from './objectRegistration2';
+import objectRegistration3 from './objectRegistration3';
+import billingMainPage from './billingMainPage';
+import buttons from './buttons'
+import organizationQuestionnaire from './organizationQuestionnaire'
+import workingWithObjectP2 from './workingWithObjectP2'
+import measurement from './measurement'
 
 const locales = {
         common,
@@ -23,7 +31,15 @@ const locales = {
         designAndInstall,
         objectRegistration,
         objectRegistrationSecondPoint,
-        errors
+        errors,
+        objectRegistrationHead,
+        objectRegistration2,
+        buttons,
+        objectRegistration3,
+        billingMainPage,
+        organizationQuestionnaire,
+        workingWithObjectP2,
+        measurement
     },
     messages = {};
 

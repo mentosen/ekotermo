@@ -1,6 +1,6 @@
 <template>
-    <div class="head">
-      <div class="headHeading">{{ $t('objectRegistrationHead.objectRegistration')}}<br>{{ $t('objectRegistrationHead.section')}} №2</div>
+    <div class="appHeadWWOP2">
+      <div class="headHeading">{{ $t('workingWithObjectP2.WWO')}}</div>
       <div class="headInfo">
         <div class="headAddress">
           <div>{{ $t('objectRegistrationHead.objectAddress')}}</div>
@@ -49,7 +49,7 @@ export default {
   *{
     font-size: 18px;
   }
-  .head{
+  .appHeadWWOP2{
     display: flex;
     flex-direction: column;
     justify-content: center;

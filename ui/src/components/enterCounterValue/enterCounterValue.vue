@@ -4,21 +4,21 @@
       <button class="home"></button>
     </router-link>
 
-    <div class="enterCounterValueTitle">Внести показания счетчика</div>
+    <div class="enterCounterValueTitle">{{$t('billingMainPage.enterMeterReadings')}}</div>
     <table>
       <thead>
       <tr>
-        <th rowspan="2" width="50px">№ п/п</th>
-        <th colspan="4">Адрес</th>
-        <th width="200px" rowspan="2">Категория дома</th>
-        <th rowspan="2" width="150px">Текущие показания счетчика</th>
-        <th rowspan="2" width="100px">Действие</th>
+        <th rowspan="2" width="50px">{{$t('billingMainPage.serialNumber')}}</th>
+        <th colspan="4">{{$t('billingMainPage.address')}}</th>
+        <th width="200px" rowspan="2">{{$t('billingMainPage.buildingCategory')}}</th>
+        <th rowspan="2" width="150px">{{$t('billingMainPage.currentMeterReadings')}}</th>
+        <th rowspan="2" width="100px">{{$t('objectRegistration3.action')}}</th>
       </tr>
       <tr>
-        <th width="150px">Область</th>
-        <th width="150px">Город</th>
-        <th width="200px">Улица</th>
-        <th width="70px">№ дома</th>
+        <th width="170px">{{$t('billingMainPage.region')}}</th>
+        <th width="150px">{{$t('billingMainPage.city')}}</th>
+        <th width="200px">{{$t('billingMainPage.street')}}</th>
+        <th width="70px">{{$t('billingMainPage.buildingNumber')}}</th>
       </tr>
 
       </thead>
@@ -65,7 +65,7 @@ export default {
   background-size: 100% 100%;
   border-radius: 4px;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 90px;
   left: 30px;
   outline: none;

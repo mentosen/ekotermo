@@ -82,6 +82,8 @@ export default {
         this.close();
         this.changeIsPhoto();
       }
+      this.count == 1?this.isFirst = true:this.isFirst = false;
+      this.count == this.photos.length?this.isLast = true:this.isLast = false;
     }
   }
 }

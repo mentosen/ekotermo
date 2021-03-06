@@ -14,8 +14,8 @@
     </td>
     <td>
       <div class="btnPart">
-        <button class="yellowBtn" @click="save" v-bind:disabled="data.isSaved">Сохранить</button>
-        <button class="greyBtn" @click="edit" v-bind:disabled="data.isEdit">Редактировать</button>
+        <button class="yellowBtn" @click="save" v-bind:disabled="data.isSaved">{{$t('buttons.save')}}</button>
+        <button class="greyBtn" @click="edit" v-bind:disabled="data.isEdit">{{$t('buttons.edit')}}</button>
       </div>
     </td>
   </tr>

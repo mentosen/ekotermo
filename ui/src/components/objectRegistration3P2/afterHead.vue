@@ -2,7 +2,7 @@
   <div class="content">
     <div>
       <span>{{ $t('objectRegistration3.ignore')}}</span>
-      <button  @click="accountedBtnClick" v-bind:class="{redBtn: !isAccounted, greenBtn:isAccounted}" class="switch">OFF</button>
+      <button  @click="accountedBtnClick" v-bind:class="{redBtn: isAccounted, greenBtn:!isAccounted}" class="switch">OFF</button>
     </div>
     <div class="content-div">
       <div>{{ $t('objectRegistration3.ancillaryPremises')}}:</div>
@@ -93,14 +93,14 @@ export default {
         this.isSavedCof2 = false;
         this.isEditCof2 = true;
         this.changeIsAllFilled2(false);
-        e.target.innerText = "ON";
+        e.target.innerText = "OFF";
       }else{
         this.isSavedCof1 = true;
         this.isEditCof1 = false;
         this.isSavedCof2 = true;
         this.isEditCof2 = false;
         this.changeIsAllFilled2(true);
-        e.target.innerText = "OFF";
+        e.target.innerText = "ON";
       }
     },
     saveCof1(e){

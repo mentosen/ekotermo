@@ -3,32 +3,33 @@
     <div class="headDivsTop">
       <div class="title">Название билинговой компании</div>
       <div class="dropMenu" @mouseover="onMenuOver" @mouseout="onMenuOut">
-        <button class="dropMenuItem">Дополнительные функции</button>
+        <button class="dropMenuItem">{{$t('billingMainPage.additionalFunctions')}}</button>
 
         <router-link to="/enterCounterValue" class="dropMenuItemRouter">
-          <button class="dropMenuItem">Внести показания счетчика</button>
+          <button class="dropMenuItem">{{$t('billingMainPage.enterMeterReadings')}}</button>
         </router-link>
-
-        <button class="dropMenuItem">Бланк анкеты объекта</button>
-        <button class="dropMenuItem">Счет на оплату</button>
-        <button class="dropMenuItem">Статистика</button>
-        <button class="dropMenuItem">Нормативная документация</button>
-        <button class="dropMenuItem">Обратная связь</button>
+        <router-link to="/organizationQuestionnaire">
+          <button class="dropMenuItem">{{$t('billingMainPage.objectQuestionnaireForm')}}</button>
+        </router-link>
+        <button class="dropMenuItem">{{$t('billingMainPage.invoiceForPayment')}}</button>
+        <button class="dropMenuItem">{{$t('billingMainPage.statistics')}}</button>
+        <button class="dropMenuItem">{{$t('billingMainPage.normativeDocuments')}}</button>
+        <button class="dropMenuItem">{{$t('billingMainPage.feedback')}}</button>
       </div>
     </div>
 
     <div class="headDivs">
       <div>
-        <span>Количество объектов:</span>
+        <span>{{$t('billingMainPage.numberOfObjects')}}</span>
         <span class="countSpan"></span>
       </div>
       <div>
-        <span>Количество зарегистрированых распределителей:</span>
+        <span>{{$t('billingMainPage.registeredDistributors')}}</span>
         <span class="countSpan"></span>
       </div>
       <div>
         <router-link to="/objectRegistration1">
-          <button class="yellowBtn">Регистрация нового объекта</button>
+          <button class="yellowBtn">{{$t('billingMainPage.registerNewObject')}}</button>
         </router-link>
       </div>
     </div>
