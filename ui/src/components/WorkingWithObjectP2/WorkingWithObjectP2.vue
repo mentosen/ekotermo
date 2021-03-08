@@ -5,8 +5,8 @@
     </router-link>
 
     <div class="headBtnPart">
-      <button class="greenBtn">{{ $t('buttons.objectDistributionarchive')}}</button>
-      <button class="yellowBtn">{{ $t('buttons.feedback')}}</button>
+      <button class="greenBtn headBtns">{{ $t('buttons.objectDistributionarchive')}}</button>
+      <button class="yellowBtn headBtns" @click="showFeedback">{{ $t('buttons.feedback')}}</button>
     </div>
 
     <AppHead></AppHead>
@@ -83,9 +83,10 @@ import {mapGetters,mapMutations,mapActions} from 'vuex'
 import AppHead from './head';
 import generalMeterReadings from './generalMeterReadings';
 import appTrWWOP2 from './appTrWWOP2'
+import feedback from "@/components/feedback/feedback";
 export default {
   name: "WorkingWithObjectP2",
-  computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2"]),
+  computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback"]),
   mounted() {
     this.setHeadBtnPos();
   },
@@ -136,10 +137,10 @@ export default {
         }]
     }
   },
-  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP2:appTrWWOP2},
+  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP2:appTrWWOP2,feedback:feedback},
   methods:{
     ...mapActions(["sendFileWWOP2","saveAllFlatDataWWOP2"]),
-    ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2"]),
+    ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback"]),
     save(){
       var inputs1 = document.querySelector(".generalMeterReadings").querySelectorAll(".tableInput");
       var inputs2 = document.querySelector(".distributedTable").querySelectorAll("input[type=text]");
@@ -207,6 +208,9 @@ export default {
       btn.style.position = "absolute";
       btn.style.left = (this.inpX+75)  + "px";
       btn.style.top = (this.inpY-140) + "px";
+    },
+    showFeedback(){
+      this.changeIsShowFeedback(true);
     }
   }
 }
@@ -266,6 +270,7 @@ table caption{
   align-items: center;
   justify-content: center;
 }
+
 .generalPart{
   margin-top: 20px;
   margin-bottom: 10px;
@@ -372,5 +377,8 @@ table.distributedTable th{
 }
 .blueBtn:hover{
   background-color: #83c4f7;
+}
+.headBtns{
+  width: 245px;
 }
 </style>

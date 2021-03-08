@@ -15,8 +15,7 @@
   export default{
     name:"confirmPopUp",
     mounted() {
-      window.scrollTo(0,0);
-      document.querySelector("body").style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     },
     data(){
       return{
@@ -43,7 +42,7 @@
 
 <style scoped>
 .overlay{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;

@@ -24,8 +24,8 @@ export default {
   name:"slider",
   props:["photos"],
   mounted() {
-    window.scrollTo(0,0);
-    document.querySelector("body").style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
     this.images = document.querySelector(".photoDiv").querySelectorAll("img");
     this.removeBtn = document.querySelector(".controls").querySelector(".remove");
     this.removeBtn.value = this.count-1;
@@ -91,7 +91,7 @@ export default {
 
 <style scoped>
 .overlay{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
