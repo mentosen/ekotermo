@@ -47,48 +47,47 @@
         <div class="leftSide">
           <div class="categoryTitle">{{ $t('objectRegistration.buildingCategory')}}:</div>
           <div class="category">
-            <div>
+            <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointTwoTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointTwo')}}</div>
               </div>
               <input type="checkbox" value="2" @change="changeChbChecked"  name="buildingCategory">
             </div>
-            <div>
+            <div class="chbsWrapper">
               <div><div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointThree')}}</div>
               </div>
-              <input type="checkbox" value="3" @change="changeChbChecked" name="buildingCategory">
             </div>
-            <div>
+            <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeSubOneTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointThreeSubOne')}}</div>
               </div>
               <input type="checkbox" value="3.1" @change="changeChbChecked" name="buildingCategory">
             </div>
-            <div>
+            <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeSubTwoTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointThreeSubTwo')}}</div>
               </div>
               <input type="checkbox" value="3.2" @change="changeChbChecked" name="buildingCategory">
             </div>
-            <div>
+            <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointFourTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointFour')}}</div>
               </div>
               <input type="checkbox" value="4" @change="changeChbChecked" name="buildingCategory">
             </div>
-            <div>
+            <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointFiveTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointFive')}}</div>
               </div>
               <input type="checkbox" value="5" @change="changeChbChecked" name="buildingCategory">
             </div>
-            <div>
+            <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointSixTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointSix')}}</div>
@@ -262,39 +261,52 @@ export default {
     ...mapActions(["getAllRegions"]),
     save(){
     var inputs = document.querySelectorAll("input[type=text],input[type=checkbox],select");
+    var chbsWrap = document.querySelectorAll(".chbsWrapper");
+    var chb;
     var result1 = this.checkValue(inputs);
     var result2 = this.checkPhoneNumbers();
 
      if(result1 && result2){
-       for(var k = 0; k < inputs.length;k++){
-         if(inputs[k].type === "checkbox"){
-            if(inputs[k].checked){
-              this.data[inputs[k].name] = inputs[k].value;
-              inputs[k].style.display = "none";
-            }else{
-              inputs[k].closest("div").style.display= "none";
-            }
+       for(var j = 0; j < chbsWrap.length; j++){
+         chb = chbsWrap[j].querySelector("input[type=checkbox]");
+
+         if(chb){
+           if(chb.checked){
+             this.data[chb.name] = chb.value;
+             chb.style.display = "none";
+           }else{
+             chbsWrap[j].style.display= "none";
+           }
          }else{
-           this.data[inputs[k].name] = inputs[k].value;
-           if(inputs[k].value === "+380")this.data[inputs[k].name] = null;
+           chbsWrap[j].style.display= "none";
          }
+       }
+
+       for(var k = 0; k < inputs.length;k++){
+         if(inputs[k].type == "checkbox"){
+           continue;
+         }
+         this.data[inputs[k].name] = inputs[k].value;
+         if(inputs[k].value === "+380")this.data[inputs[k].name] = null;
        }
        this.data.isEdit = false;
        this.data.isSaved = true;
-       this.saveData(this.data);
+       this.saveData(Object.assign({},this.data));
        this.isSaved = true;
        this.isEdit = false;
-       window.scrollTo(0,0);
+       console.log(this.data);
      }
     },
     edit(){
       this.isSaved = false;
       this.isEdit = true;
-      var chbs = document.querySelectorAll("input[type=checkbox]");
+      var chbsWrap = document.querySelectorAll(".chbsWrapper");
 
-      for(var k = 0; k < chbs.length;k++){
-          chbs[k].closest("div").style.display= "";
-          chbs[k].style.display= "";
+      for(var k = 0; k < chbsWrap.length;k++){
+        if(chbsWrap[k].querySelector("input[type=checkbox]")){
+          chbsWrap[k].querySelector("input[type=checkbox]").style.display= "";
+        }
+        chbsWrap[k].style.display= "";
       }
     },
     checkValue(arr){
@@ -324,7 +336,7 @@ export default {
           }else{
             countChb++;
           }
-          if(countChb === 7&&!checked){
+          if(countChb === 6&&!checked){
             this.addBorderChb(chb);
             window.scrollTo(0,100);
             result = false;
@@ -341,15 +353,19 @@ export default {
     },
     checkChbs(){
       if(this.data.buildingCategory){
-        var chbs = document.querySelectorAll("input[type=checkbox]");
-        for(var k = 0; k < chbs.length; k++){
-          if(this.data.buildingCategory == chbs[k].value){
-            chbs[k].checked = true;
-          }
-          if(chbs[k].checked){
-            chbs[k].style.display = "none";
+        var chbsWrap = document.querySelectorAll(".chbsWrapper");
+        var chb;
+        for(var k = 0; k < chbsWrap.length; k++){
+          chb = chbsWrap[k].querySelector("input[type=checkbox]");
+          if(chb){
+            if(this.data.buildingCategory == chb.value){
+              chb.checked = true;
+              chb.style.display = "none";
+            }else{
+              chbsWrap[k].style.display= "none";
+            }
           }else{
-            chbs[k].closest("div").style.display= "none";
+            chbsWrap[k].style.display= "none";
           }
         }
       }
@@ -369,8 +385,8 @@ export default {
     },
     addBorderChb(arr){
       for(var k = 0; k < arr.length;k++){
-        arr[k].closest("div").style.border = "1px solid red";
-        this.removeBorder(arr[k].closest("div"));
+        arr[k].closest(".chbsWrapper").style.border = "1px solid red";
+        this.removeBorder(arr[k].closest(".chbsWrapper"));
       }
     },
     removeBorder(el){
@@ -470,6 +486,8 @@ export default {
             this.changeSection3Url('/objectRegistration3P6');
           }else if(e.target.value == 2){
             this.changeSection3Url('/objectRegistration3P2');
+          }else if(e.target.value == 3.1||e.target.value == 3.2){
+            this.changeSection3Url('/objectRegistration3P3');
           }
           continue;
         }

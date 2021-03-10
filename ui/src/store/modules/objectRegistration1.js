@@ -9,7 +9,6 @@ export default {
       //
       ctx.commit("addRegions", 1);
       ctx.commit("addCities", 2);
-      ctx.commit("saveData", {personPhoneNum1:"+380",personPhoneNum2:"+380"})
     }
   },
   mutations:{
