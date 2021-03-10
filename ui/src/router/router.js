@@ -117,6 +117,11 @@ export default new Router({
                     path: '/objectRegistration3P3',
                     name: 'object Registration3P3',
                     component: () => import('@/components/objectRegistration3P3/objectRegistration3P3.vue'),
+                },
+                {
+                    path: '/workingWithObjectP3',
+                    name: 'working With ObjectP3',
+                    component: () => import('@/components/workingWithObjectP3/WorkingWithObjectP3.vue'),
                 }
             ],
         },
