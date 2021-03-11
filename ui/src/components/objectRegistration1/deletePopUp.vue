@@ -21,8 +21,7 @@
       }
     },
     mounted() {
-      window.scrollTo(0,0);
-      document.querySelector("body").style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     },
     methods:{
       ...mapActions([]),
@@ -43,7 +42,7 @@
 
 <style>
 .overlay{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;

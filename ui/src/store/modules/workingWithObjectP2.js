@@ -20,16 +20,11 @@ export default {
             state.isManualInputWWOP2 = value;
         },
         addDataWWOP2(state,data){
-            var result = false;
             for(var k = 0; k < state.dataWWOP2.flatsData.length;k++){
                 if(data.apartmentNumber == state.dataWWOP2.flatsData[k].apartmentNumber){
                     state.dataWWOP2.flatsData[k] = data;
-                    result = true;
                     break
                 }
-            }
-            if(!result || state.dataWWOP2.flatsData.length == 0){
-                state.dataWWOP2.flatsData.push(data);
             }
         },
         addMeterReadingsWWOP2(state,data){
@@ -37,11 +32,49 @@ export default {
         },
         changeIsAllFilledWWOP2(state, value){
             state.isAllFilledWWOP2 = value;
+        },
+        addFlatsDataWWOP3(state,data){
+            state.flatsData = data;
         }
     },
     state:{
         dataWWOP2:{
-            flatsData:[],
+            flatsData:[{
+                apartmentNumber:1,
+                generalArea:100,
+                heatedArea:90,
+                previousReading:123456.78,
+                currentReading:"123456,78",
+                currentConsumption:123456.78,
+                premisesConsumption:123456.78,
+                sumConsumption:123456789,
+                sumMoney: 1000,
+                errors:["someError1", "someError2"]
+            },
+                {
+                    apartmentNumber:2,
+                    generalArea:100,
+                    heatedArea:90,
+                    previousReading:123456.78,
+                    currentReading:"123456,78",
+                    currentConsumption:123456.78,
+                    premisesConsumption:123456.78,
+                    sumConsumption:123456789,
+                    sumMoney: 1000,
+                    errors:["someError1"]
+                },
+                {
+                    apartmentNumber:3,
+                    generalArea:100,
+                    heatedArea:90,
+                    previousReading:123456.78,
+                    currentReading:"123456,78",
+                    currentConsumption:123456.78,
+                    premisesConsumption:123456.78,
+                    sumConsumption:123456789,
+                    sumMoney: 1000,
+                    errors:["someError1"]
+                }],
             generalMeterReadings:{}
         },
         isManualInputWWOP2:false,
@@ -60,6 +93,9 @@ export default {
         },
         dataWWOP2(state){
             return state.dataWWOP2;
+        },
+        flatsDataWWOP2(state){
+            return state.dataWWOP2.flatsData;
         }
     }
 }

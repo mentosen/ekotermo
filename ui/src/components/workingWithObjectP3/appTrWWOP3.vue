@@ -1,19 +1,19 @@
 <template>
   <tr>
-    <td>{{data.apartmentNumber}}</td>
-    <td>{{data.generalArea}}</td>
-    <td>{{data.heatedArea}}</td>
-    <td>{{data.previousReading}}</td>
-    <td>
-      <div v-if="!isManualInputWWOP2 || !data.isEdit">{{data.currentReading}}</div>
-      <input type="text" v-bind:value="data.currentReading" v-if="isManualInputWWOP2&&data.isEdit"
-      @keydown="inputValidate" @keyup="inputValidateKeyUp" pattern="^\d{6},\d{2}$" name="currentReading">
-    </td>
-    <td>{{data.currentConsumption}}</td>
-    <td>{{data.premisesConsumption}}</td>
-    <td>{{data.sumConsumption}}</td>
-    <td>{{data.sumMoney}}</td>
-    <td>
+    <td class="apartmentNumber">{{data.apartmentNumber}}</td>
+    <td class="generalArea">{{data.generalArea}}</td>
+    <td class="heatedArea">{{data.heatedArea}}</td>
+<!--    <td>{{data.previousReading}}</td>-->
+<!--    <td>-->
+<!--      <div v-if="!isManualInputWWOP2 || !data.isEdit">{{data.currentReading}}</div>-->
+<!--      <input type="text" v-bind:value="data.currentReading" v-if="isManualInputWWOP2&&data.isEdit"-->
+<!--      @keydown="inputValidate" pattern="^\d{6},\d{2}$" name="currentReading">-->
+<!--    </td>-->
+    <td class="currentConsumption">{{data.currentConsumption}}</td>
+    <td class="premisesConsumption">{{data.premisesConsumption}}</td>
+    <td class="sumConsumption">{{data.sumConsumption}}</td>
+    <td class="sumMoney">{{data.sumMoney}}</td>
+    <td class="errors">
       <div v-for="error in data.errors" style="color: #ea4c4c">{{error}}</div>
     </td>
     <td width="200px">
@@ -22,23 +22,22 @@
         <button class="greenBtn">{{ $t('buttons.downloadCalculation')}}</button>
       </div>
     </td >
-    <td width="140px" v-if="isManualInputWWOP2">
-      <div class="btnPart">
-        <button class="yellowBtn" v-bind:disabled="!data.isEdit" @click="save">{{ $t('buttons.save')}}</button>
-        <button class="greyBtn" v-bind:disabled="data.isEdit" @click="edit">{{ $t('buttons.edit')}}</button>
-      </div>
-    </td>
+<!--    <td width="140px" v-if="isManualInputWWOP2">-->
+<!--      <div class="btnPart">-->
+<!--        <button class="yellowBtn" v-bind:disabled="!data.isEdit" @click="save">{{ $t('buttons.save')}}</button>-->
+<!--        <button class="greyBtn" v-bind:disabled="data.isEdit" @click="edit">{{ $t('buttons.edit')}}</button>-->
+<!--      </div>-->
+<!--    </td>-->
   </tr>
 </template>
 
 <script>
-import {mapGetters,mapActions} from 'vuex'
+import {mapActions} from 'vuex'
 export default {
   props:["tableData"],
   name: "appTrWWO",
-  computed: mapGetters(["isManualInputWWOP2"]),
   mounted() {
-    this.data = Object.assign({isEdit:true}, this.tableData);
+    this.data = Object.assign(this.tableData);
   },
   data(){
     return{
@@ -78,16 +77,6 @@ export default {
         e.preventDefault();
       }
     },
-    inputValidateKeyUp(e){
-      var limit = 6;
-      if(e.target.value.length == limit){
-        if(e.key == "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight"){
-          return
-        }else{
-          e.target.value += ",";
-        }
-      }
-    },
     removeRedBorder(el){
       setTimeout(function (){
         el.style.border = "";
@@ -112,14 +101,13 @@ table,td,th{
 td{
   height: 36px;
 }
-td:nth-child(11){
+td:nth-child(9){
   padding: 0;
-  border-right: none;
 }
-td:nth-child(12){
-  padding: 0;
-  border-left:none;
-}
+/*td:nth-child(12){*/
+/*  padding: 0;*/
+/*  border-left:none;*/
+/*}*/
 td input{
   width: 93px;
   border: 1px solid #3c3a3a;

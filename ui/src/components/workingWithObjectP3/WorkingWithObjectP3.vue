@@ -48,10 +48,10 @@
       </label>
       <button class="yellowBtn" v-bind:disabled="!isFile || isManualInputWWOP2">{{ $t('buttons.loadedData')}}</button>
       <button class="redBtn" @click="clearFile">{{ $t('buttons.clearLoadedData')}}</button>
-      <div class="btnPartDiv">
-        <span>{{ $t('buttons.manualInput')}}</span>
-        <button class=" redBtn redBtn1" @click="manualInput" v-bind:class="{greenBtn:isManualInputWWOP2}">OFF</button>
-      </div>
+<!--      <div class="btnPartDiv">-->
+<!--        <span>{{ $t('buttons.manualInput')}}</span>-->
+<!--        <button class=" redBtn redBtn1" @click="manualInput" v-bind:class="{greenBtn:isManualInputWWOP2}">OFF</button>-->
+<!--      </div>-->
     </div>
 
     <table class="distributedTable">
@@ -60,8 +60,6 @@
       <th>{{ $t('workingWithObjectP2.apartmentNumber')}}</th>
       <th>{{ $t('workingWithObjectP2.generalArea')}}</th>
       <th>{{ $t('workingWithObjectP2.heatedArea')}}</th>
-      <th>{{ $t('workingWithObjectP2.previousMeterValue')}}</th>
-      <th>{{ $t('workingWithObjectP2.currentMeterValue')}}</th>
       <th>{{ $t('workingWithObjectP2.apartmentNeedsConsumption')}}</th>
       <th>{{ $t('workingWithObjectP2.premisesNeedsConsumption')}}</th>
       <th>{{ $t('workingWithObjectP2.sumConsumptionGcal')}}</th>
@@ -70,7 +68,7 @@
       <th colspan="2">{{ $t('workingWithObjectP2.action')}}</th>
       </thead>
       <tbody>
-        <appTrWWOP2 v-for="item in flatsDataWWOP2" v-bind:tableData="item"></appTrWWOP2>
+        <appTrWWOP3 v-for="item in flatsDataWWOP2" v-bind:tableData="item"></appTrWWOP3>
       </tbody>
     </table>
 
@@ -82,8 +80,8 @@
 import {mapGetters,mapMutations,mapActions} from 'vuex'
 import AppHead from './head';
 import generalMeterReadings from './generalMeterReadings';
-import appTrWWOP2 from './appTrWWOP2'
-import feedback from "@/components/feedback/feedback";
+import appTrWWOP3 from './appTrWWOP3'
+
 export default {
   name: "WorkingWithObjectP2",
   computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback","flatsDataWWOP2"]),
@@ -98,52 +96,15 @@ export default {
         generalMeterReadings:{}
       },
       isFile:false,
-      isShowInpFile: false,
-      tableData:[{
-        apartmentNumber:1,
-        generalArea:100,
-        heatedArea:90,
-        previousReading:123456.78,
-        currentReading:"123456,78",
-        currentConsumption:123456.78,
-        premisesConsumption:123456.78,
-        sumConsumption:123456789,
-        sumMoney: 1000,
-        errors:["someError1", "someError2"]
-      },
-        {
-          apartmentNumber:2,
-          generalArea:100,
-          heatedArea:90,
-          previousReading:123456.78,
-          currentReading:"123456,78",
-          currentConsumption:123456.78,
-          premisesConsumption:123456.78,
-          sumConsumption:123456789,
-          sumMoney: 1000,
-          errors:["someError1"]
-        },
-        {
-          apartmentNumber:2,
-          generalArea:100,
-          heatedArea:90,
-          previousReading:123456.78,
-          currentReading:"123456,78",
-          currentConsumption:123456.78,
-          premisesConsumption:123456.78,
-          sumConsumption:123456789,
-          sumMoney: 1000,
-          errors:["someError1"]
-        }]
+      isShowInpFile: false
     }
   },
-  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP2:appTrWWOP2,feedback:feedback},
+  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP3:appTrWWOP3},
   methods:{
     ...mapActions(["sendFileWWOP2","saveAllFlatDataWWOP2"]),
     ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback"]),
     save(){
       var inputs1 = document.querySelector(".generalMeterReadings").querySelectorAll(".tableInput");
-      var inputs2 = document.querySelector(".distributedTable").querySelectorAll("input[type=text]");
       var el = null;
       var result1 = true;
       var result2 = true;
@@ -155,15 +116,6 @@ export default {
           if(!el) el = inputs1[k];
           this.removeRedBorder(inputs1[k]);
           result1 = false
-        }
-      }
-
-      for(var k = 0; k < inputs2.length;k++){
-        if(inputs2[k].pattern && !inputs2[k].value.match(inputs2[k].pattern)|| !inputs2[k].value){
-          inputs2[k].style.border = "1px solid red";
-          if(!el) el = inputs2[k];
-          this.removeRedBorder(inputs2[k]);
-          result2 = false;
         }
       }
 

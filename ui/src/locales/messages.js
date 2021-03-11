@@ -18,6 +18,7 @@ import buttons from './buttons'
 import organizationQuestionnaire from './organizationQuestionnaire'
 import workingWithObjectP2 from './workingWithObjectP2'
 import measurement from './measurement'
+import feedback from "@/locales/feedback";
 
 const locales = {
         common,
@@ -39,7 +40,8 @@ const locales = {
         billingMainPage,
         organizationQuestionnaire,
         workingWithObjectP2,
-        measurement
+        measurement,
+        feedback
     },
     messages = {};
 

@@ -23,7 +23,8 @@ export default {
         kq:"Kq",
         serialNum: "Серийный номер распределителя тепла",
         startMeterVal: "Начальные показания распределителя тепла",
-        purposeRoomTitle:"Выберите из списка"
+        purposeRoomTitle:"Выберите из списка",
+        roomType:"Тип помещения"
     },
     uk:{
         ignore:"Не враховувати",
@@ -49,7 +50,8 @@ export default {
         kq:"Kq",
         serialNum: "Серійний номер розподілювача тепла",
         startMeterVal: "Початкові показники розподілювача тепла",
-        purposeRoomTitle:"Виберіть зі списку"
+        purposeRoomTitle:"Виберіть зі списку",
+        roomType:"Тип приміщення"
     },
     en:{
         ignore:"Ignore",
@@ -75,6 +77,7 @@ export default {
         kq:"Сq",
         serialNum: "Heat spreader serial number",
         startMeterVal:"Heat spreader initial readings",
-        purposeRoomTitle:"Select from the list"
+        purposeRoomTitle:"Select from the list",
+        roomType:"Room type"
     }
 }

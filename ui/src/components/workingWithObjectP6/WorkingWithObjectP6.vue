@@ -57,20 +57,21 @@
     <table class="distributedTable">
       <caption>{{ $t('workingWithObjectP2.consumptionDistribution')}}</caption>
       <thead>
-      <th>{{ $t('workingWithObjectP2.apartmentNumber')}}</th>
-      <th>{{ $t('workingWithObjectP2.generalArea')}}</th>
-      <th>{{ $t('workingWithObjectP2.heatedArea')}}</th>
-      <th>{{ $t('workingWithObjectP2.previousMeterValue')}}</th>
-      <th>{{ $t('workingWithObjectP2.currentMeterValue')}}</th>
-      <th>{{ $t('workingWithObjectP2.apartmentNeedsConsumption')}}</th>
-      <th>{{ $t('workingWithObjectP2.premisesNeedsConsumption')}}</th>
-      <th>{{ $t('workingWithObjectP2.sumConsumptionGcal')}}</th>
-      <th>{{ $t('workingWithObjectP2.sumConsumptionMoney')}}</th>
-      <th>{{ $t('workingWithObjectP2.errors')}}</th>
+      <th width="80px">{{ $t('workingWithObjectP2.apartmentNumber')}}</th>
+      <th width="90px">{{ $t('workingWithObjectP2.generalArea')}}</th>
+      <th width="90px">{{ $t('workingWithObjectP2.heatedArea')}}</th>
+      <th width="200">{{ $t('objectRegistration3.roomPurpose')}}</th>
+      <th width="115px">{{ $t('workingWithObjectP2.previousMeterValue')}}</th>
+      <th width="115px">{{ $t('workingWithObjectP2.currentMeterValue')}}</th>
+      <th width="115px">{{ $t('workingWithObjectP2.apartmentNeedsConsumption')}}</th>
+      <th width="100px">{{ $t('workingWithObjectP2.premisesNeedsConsumption')}}</th>
+      <th width="100px">{{ $t('workingWithObjectP2.sumConsumptionGcal')}}</th>
+      <th width="100px">{{ $t('workingWithObjectP2.sumConsumptionMoney')}}</th>
+      <th width="90px">{{ $t('workingWithObjectP2.errors')}}</th>
       <th colspan="2">{{ $t('workingWithObjectP2.action')}}</th>
       </thead>
       <tbody>
-        <appTrWWOP2 v-for="item in flatsDataWWOP2" v-bind:tableData="item"></appTrWWOP2>
+        <appTrWWOP6 v-for="item in tableData" v-bind:tableData="item"></appTrWWOP6>
       </tbody>
     </table>
 
@@ -82,10 +83,11 @@
 import {mapGetters,mapMutations,mapActions} from 'vuex'
 import AppHead from './head';
 import generalMeterReadings from './generalMeterReadings';
-import appTrWWOP2 from './appTrWWOP2'
-import feedback from "@/components/feedback/feedback";
+import appTrWWOP6 from './appTrWWOP6'
+
 export default {
-  name: "WorkingWithObjectP2",
+  /// вместо tdableData передавать flatsDataWWOP2
+  name: "WorkingWithObjectP6",
   computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback","flatsDataWWOP2"]),
   mounted() {
     this.setHeadBtnPos();
@@ -101,43 +103,45 @@ export default {
       isShowInpFile: false,
       tableData:[{
         apartmentNumber:1,
-        generalArea:100,
-        heatedArea:90,
-        previousReading:123456.78,
-        currentReading:"123456,78",
-        currentConsumption:123456.78,
+        generalArea:40,
+        heatedArea:35,
+        roomPurpose:[
+          {room:"Кухня",
+            previousReading:"123456,78",
+            currentReading:"123456,78",
+            currentConsumption:"123456,78",
+          },
+          {room:"Зал №1",
+            previousReading:"123456,78",
+            currentReading:"123456,78",
+            currentConsumption:"123456,78",
+          }
+        ],
         premisesConsumption:123456.78,
-        sumConsumption:123456789,
-        sumMoney: 1000,
-        errors:["someError1", "someError2"]
+        sumConsumption:123456.78,
+        sumMoney:1000,
+        errors:["error1","error2"]
       },
         {
           apartmentNumber:2,
-          generalArea:100,
-          heatedArea:90,
-          previousReading:123456.78,
-          currentReading:"123456,78",
-          currentConsumption:123456.78,
+          generalArea:50,
+          heatedArea:35,
+          roomPurpose:[
+            {room:"Кухня",
+              previousReading:"123456,78",
+              currentReading:"123456,78",
+              currentConsumption:"123456,78",
+            }
+          ],
           premisesConsumption:123456.78,
-          sumConsumption:123456789,
-          sumMoney: 1000,
-          errors:["someError1"]
+          sumConsumption:123456.78,
+          sumMoney:1000,
+          errors:["error1"]
         },
-        {
-          apartmentNumber:2,
-          generalArea:100,
-          heatedArea:90,
-          previousReading:123456.78,
-          currentReading:"123456,78",
-          currentConsumption:123456.78,
-          premisesConsumption:123456.78,
-          sumConsumption:123456789,
-          sumMoney: 1000,
-          errors:["someError1"]
-        }]
+      ]
     }
   },
-  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP2:appTrWWOP2,feedback:feedback},
+  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP6:appTrWWOP6},
   methods:{
     ...mapActions(["sendFileWWOP2","saveAllFlatDataWWOP2"]),
     ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback"]),
@@ -260,6 +264,18 @@ th{
   font-size: 15px;
   font-weight: 450;
 }
+th:nth-child(4){
+  border-bottom: none;
+}
+th:nth-child(5){
+  border-bottom: none;
+}
+th:nth-child(6){
+  border-bottom: none;
+}
+th:nth-child(7){
+  border-bottom: none;
+}
 table caption{
   margin-bottom: 10px;
   font-size: 17px;
@@ -298,6 +314,7 @@ table caption{
 .btnPartDiv{
   display: flex;
   align-items: center;
+  width: 190px;
 }
 .btnPartDiv>span{
   margin-right: 10px;
@@ -312,13 +329,17 @@ table caption{
 .disabled{
   opacity: 0.5;
 }
-.distributedTable{
+table.distributedTable{
+  width: 1622px;
   margin-top: 30px;
   font-size: 14px;
 }
 table.distributedTable th{
   font-weight: 450;
   font-size: 14px;
+}
+table.distributedTable th:last-child{
+  width: auto;
 }
 /*////*/
 .yellowBtn,.greenBtn,.greenBtn1,.greyBtn,.blueBtn,.redBtn{

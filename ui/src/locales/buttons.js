@@ -24,7 +24,8 @@ export default {
         feedback:"Обратная связь",
         saveDistribution:"СОХРАНИТЬ РАСПРЕДЕЛЕНИЕ",
         detailedCalculation:"Детальный расчет",
-        downloadCalculation:"Скачать расчет"
+        downloadCalculation:"Скачать расчет",
+        sendFeedBack:"Отправить"
     },
     uk:{
         save:"Зберегти",
@@ -51,7 +52,8 @@ export default {
         feedback:"Зворотній зв\'язок",
         saveDistribution:"ЗБЕРЕГТИ РОЗПОДІЛЕННЯ",
         detailedCalculation:"Детальний розрахунок",
-        downloadCalculation:"Завантажити розрахунок"
+        downloadCalculation:"Завантажити розрахунок",
+        sendFeedBack:"Надіслати"
     },
     en:{
         save:"Save",
@@ -78,6 +80,7 @@ export default {
         feedback:"Feedback",
         saveDistribution:"SAVE DISTRIBUTION",
         detailedCalculation:"Detailed calculation",
-        downloadCalculation:"Download calculation"
+        downloadCalculation:"Download calculation",
+        sendFeedBack:"Send"
     }
 }

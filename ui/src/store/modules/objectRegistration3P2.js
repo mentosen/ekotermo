@@ -8,6 +8,7 @@ export default {
       ctx.commit("addCofObj");
       ctx.commit("addFloors", 6);
       ctx.commit("addRoomPurpose");
+      ctx.commit("addRoomTypeP3");
     },
     saveFlatData(ctx, data){
       ctx.commit("addDataFlat", data);
@@ -84,6 +85,10 @@ export default {
       state.roomPurpose = ["Кухня","Зал №1","Зал №1.1","Зал №2","Зал №2.2","Спальня №1","Спальня №1.1",
         "Спальня №2","Спальня №2.1","Ванная комната","Балкон №1",
         "Балкон №2","Лоджия","Коридор №1","Коридор №2"]
+    },
+    addRoomTypeP3(state,data){
+      var data = [{value:1,title:"Без ограничений"},{value:2,title:"С индивидуальным отоплением"},{value:3,title:"Неотапливаемое помещение"}];
+      state.roomTypeP3 = data;
     }
 
   },
@@ -98,7 +103,8 @@ export default {
     isAllFilled1: false,
     isAllFilled2: false,
     showPopUp: false,
-    roomPurpose:[]
+    roomPurpose:[],
+    roomTypeP3:[]
   },
 
   getters:{
@@ -134,6 +140,9 @@ export default {
     },
     getRoomPurpose(state){
       return state.roomPurpose;
+    },
+    roomTypeP3(state){
+      return state.roomTypeP3;
     }
   }
 }

@@ -112,6 +112,21 @@ export default new Router({
                     path: '/workingWithObjectP2',
                     name: 'working With ObjectP2',
                     component: () => import('@/components/WorkingWithObjectP2/WorkingWithObjectP2.vue'),
+                },
+                {
+                    path: '/objectRegistration3P3',
+                    name: 'object Registration3P3',
+                    component: () => import('@/components/objectRegistration3P3/objectRegistration3P3.vue'),
+                },
+                {
+                    path: '/workingWithObjectP3',
+                    name: 'working With ObjectP3',
+                    component: () => import('@/components/workingWithObjectP3/WorkingWithObjectP3.vue'),
+                },
+                {
+                    path: '/workingWithObjectP6',
+                    name: 'working With ObjectP6',
+                    component: () => import('@/components/workingWithObjectP6/WorkingWithObjectP6.vue'),
                 }
             ],
         },
