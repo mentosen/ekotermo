@@ -3,13 +3,29 @@
     <td>{{data.apartmentNumber}}</td>
     <td>{{data.generalArea}}</td>
     <td>{{data.heatedArea}}</td>
-    <td>{{data.previousReading}}</td>
-    <td>
-      <div v-if="!isManualInputWWOP2 || !data.isEdit">{{data.currentReading}}</div>
-      <input type="text" v-bind:value="data.currentReading" v-if="isManualInputWWOP2&&data.isEdit"
-      @keydown="inputValidate" @keyup="inputValidateKeyUp" pattern="^\d{6},\d{2}$" name="currentReading">
+    <td colspan="4">
+      <table class="tdTable">
+        <tbody>
+          <tr v-for="item in data.roomPurpose">
+            <td width="200px">{{item.room}}</td>
+            <td width="115px">{{item.previousReading}}</td>
+            <td width="115px">
+              <div v-if="!isManualInputWWOP2 || !data.isEdit">{{item.currentReading}}</div>
+              <input type="text" v-bind:value="item.currentReading" v-if="isManualInputWWOP2&&data.isEdit"
+                     @keydown="inputValidate" @keyup="inputValidateKeyUp" pattern="^\d{6},\d{2}$" name="currentReading">
+            </td>
+            <td width="115px">{{item.currentConsumption}}</td>
+          </tr>
+        </tbody>
+      </table>
     </td>
-    <td>{{data.currentConsumption}}</td>
+<!--    <td>{{data.previousReading}}</td>-->
+<!--    <td>-->
+<!--      <div v-if="!isManualInputWWOP2 || !data.isEdit">{{data.currentReading}}</div>-->
+<!--      <input type="text" v-bind:value="data.currentReading" v-if="isManualInputWWOP2&&data.isEdit"-->
+<!--      @keydown="inputValidate" @keyup="inputValidateKeyUp" pattern="^\d{6},\d{2}$" name="currentReading">-->
+<!--    </td>-->
+<!--    <td>{{data.currentConsumption}}</td>-->
     <td>{{data.premisesConsumption}}</td>
     <td>{{data.sumConsumption}}</td>
     <td>{{data.sumMoney}}</td>
@@ -17,11 +33,11 @@
       <div v-for="error in data.errors" style="color: #ea4c4c">{{error}}</div>
     </td>
     <td width="200px">
-      <div class="btnPart">
-        <button class="blueBtn">{{ $t('buttons.detailedCalculation')}}</button>
-        <button class="greenBtn">{{ $t('buttons.downloadCalculation')}}</button>
-      </div>
-    </td >
+        <div class="btnPart">
+          <button class="blueBtn">{{ $t('buttons.detailedCalculation')}}</button>
+          <button class="greenBtn">{{ $t('buttons.downloadCalculation')}}</button>
+        </div>
+    </td>
     <td width="140px" v-if="isManualInputWWOP2">
       <div class="btnPart">
         <button class="yellowBtn" v-bind:disabled="!data.isEdit" @click="save">{{ $t('buttons.save')}}</button>
@@ -54,7 +70,7 @@ export default {
       var result = true;
 
       for(var k = 0; k < inputs.length;k++){
-        this.data[inputs[k].name] = inputs[k].value;
+        this.data.roomPurpose[k][inputs[k].name] = inputs[k].value;
         if(inputs[k].pattern && !inputs[k].value.match(inputs[k].pattern)|| !inputs[k].value){
           inputs[k].style.border = "1px solid red";
           this.removeRedBorder(inputs[k]);
@@ -109,19 +125,49 @@ table,td,th{
   text-align: center;
   font-size: 15px;
 }
+table.tdTable{
+  border:none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+table.tdTable td{
+  border:none;
+  border-right:1px solid #3c3a3a;
+  border-bottom:1px solid #3c3a3a;
+}
+table.tdTable td:last-child{
+  border-right: none;
+}
+/*table tr table.tdTable:last-child tr:last-child td{*/
+/*  border-bottom: none;*/
+/*}*/
 td{
   height: 36px;
 }
-td:nth-child(11){
-  padding: 0;
-  border-right: none;
+td:nth-child(4){
+  padding:0px;
+  border: none;
 }
-td:nth-child(12){
+.tdTable td{
+  padding: 3px;
+}
+.tdTable tr:last-child td{
+  border-bottom: none;
+}
+.tdTable tr:first-child td{
+  border-top: 1px solid #3c3a3a;
+}
+td:nth-child(9){
+  padding: 0;
+}
+td:nth-child(10){
   padding: 0;
   border-left:none;
 }
 td input{
-  width: 93px;
+  width: 90px;
   border: 1px solid #3c3a3a;
   padding: 2px;
   font-size: 17px;
@@ -132,6 +178,15 @@ td input{
   margin-right: 5px;
   outline: none;
 }
+/*.tdBtns{*/
+/*  display: flex;*/
+/*}*/
+/*.btnPart:nth-child(1){*/
+/*  width: 200px;*/
+/*}*/
+/*.btnPart:nth-child(2){*/
+/*  width: 170px;*/
+/*}*/
 
 /*////*/
 button{
