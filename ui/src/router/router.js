@@ -127,7 +127,12 @@ export default new Router({
                     path: '/workingWithObjectP6',
                     name: 'working With ObjectP6',
                     component: () => import('@/components/workingWithObjectP6/WorkingWithObjectP6.vue'),
-                }
+                },
+                {
+                    path: '/objectRegistration3P4',
+                    name: 'object Registration3P4',
+                    component: () => import('@/components/objectRegistration3P4/ObjectRegistration3P4.vue'),
+                },
             ],
         },
         {path: '*', redirect: '/404'},
