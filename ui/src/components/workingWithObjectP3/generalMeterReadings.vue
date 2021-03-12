@@ -19,7 +19,8 @@
           <div style="margin-left: 10px">
             <div class="flex">
               <div>{{ $t('workingWithObjectP2.rate1')}}</div>
-              <input type="text" class="tdInput tableInput" name="rate1">
+              <input type="text" class="tdInput tableInput" name="rate1" @keydown="inputValidate" @keyup="inputValidateKeyUp" pattern="^\d{4},\d{2}$"
+                placeholder="0000,00">
             </div>
             <div class="flex">
               <div>{{ $t('workingWithObjectP2.period')}}</div>
@@ -39,7 +40,8 @@
                    @keydown="inputValidate" @keyup="inputValidateKeyUp"></td>
         <td>{{ $t('measurement.m3')}}</td>
         <td>{{ $t('workingWithObjectP2.meterTime')}}</td>
-        <td><input type="text" name="counterTime" class="tableInput" @keydown="inputValidate" @keyup="inputValidateKeyUp"></td>
+        <td><input type="text" name="counterTime" class="tableInput" @keydown="inputValidate" @keyup="inputValidateKeyUp"
+            pattern="^\d{6}$" placeholder="000000"></td>
         <td>{{ $t('measurement.hour')}}</td>
       </tr>
 
@@ -62,7 +64,8 @@
                 <input type="checkbox" class="tableChb" @click="chbClick">
               </div>
               <input type="text" class="tdInput" name="rate2" v-bind:disabled="!rate2Disabled"
-              v-bind:class="{tableInput: rate2Disabled}">
+              v-bind:class="{tableInput: rate2Disabled}" @keydown="inputValidate" @keyup="inputValidateKeyUp" pattern="^\d{4},\d{2}$"
+                     placeholder="0000,00">
             </div>
             <div class="flex">
               <div>{{ $t('workingWithObjectP2.period')}}</div>
@@ -153,6 +156,10 @@ export default {
         limit = 9;
       }else if(e.target.name == "duct"||e.target.name == "power"){
         limit = 8;
+      }else if(e.target.name == "counterTime"){
+        limit = 6;
+      }else if(e.target.name == "rate1" || e.target.name == "rate2"){
+        limit = 7;
       }
 
       if(e.key == "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight"|| e.key === ","){
@@ -171,6 +178,8 @@ export default {
         limit = 9;
       }else if(e.target.name == "duct"||e.target.name == "power"){
         limit = 8;
+      }else if(e.target.name == "rate1" || e.target.name == "rate2"){
+        limit = 7;
       }
 
       if(e.key == "Backspace") return

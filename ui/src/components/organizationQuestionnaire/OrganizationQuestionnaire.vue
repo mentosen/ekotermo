@@ -294,7 +294,7 @@ export default {
     validatePhoneNumber(e){
       if(e.key == "Backspace" || e.key === "+"|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
-      } else if(isNaN(e.key) || e.key == " " || e.target.value.length >=12){
+      } else if(isNaN(e.key) || e.key == " " || e.target.value.length >=13){
         e.preventDefault();
       }
     },
@@ -337,6 +337,7 @@ export default {
   }
   select{
     width: 169px;
+    background-color: #b3e5fc;
   }
   input[type=checkbox]{
     width: 20px;

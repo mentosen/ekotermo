@@ -61,7 +61,8 @@
       <th>{{ $t('workingWithObjectP2.generalArea')}}</th>
       <th>{{ $t('workingWithObjectP2.heatedArea')}}</th>
       <th>{{ $t('workingWithObjectP2.previousMeterValue')}}</th>
-      <th>{{ $t('workingWithObjectP2.currentMeterValue')}}</th>
+      <th v-if="!isManualInputWWOP2">{{ $t('workingWithObjectP2.currentMeterValue')}}</th>
+      <th v-if="isManualInputWWOP2">{{ $t('workingWithObjectP2.currentMeterValueDZ')}}</th>
       <th>{{ $t('workingWithObjectP2.apartmentNeedsConsumption')}}</th>
       <th>{{ $t('workingWithObjectP2.premisesNeedsConsumption')}}</th>
       <th>{{ $t('workingWithObjectP2.sumConsumptionGcal')}}</th>
@@ -92,8 +93,8 @@ export default {
   },
   data(){
     return{
-      inpX:null,
-      inpY:null,
+      btnX:null,
+      btnY:null,
       data:{
         generalMeterReadings:{}
       },
@@ -202,12 +203,12 @@ export default {
     setHeadBtnPos(){
       var btn = document.querySelector(".headBtnPart");
       var related = document.querySelector(".appHeadWWOP2");
-      this.inpX = related.getBoundingClientRect().left + related.offsetWidth;
-      this.inpY = related.getBoundingClientRect().top + (related.offsetHeight/2);
+      this.btnX = related.getBoundingClientRect().left + related.offsetWidth;
+      this.btnY = related.getBoundingClientRect().top + (related.offsetHeight/2);
 
       btn.style.position = "absolute";
-      btn.style.left = (this.inpX+75)  + "px";
-      btn.style.top = (this.inpY-140) + "px";
+      btn.style.left = (this.btnX+25)  + "px";
+      btn.style.top = (this.btnY-60) + "px";
     },
     showFeedback(){
       this.changeIsShowFeedback(true);
@@ -241,10 +242,10 @@ export default {
   background-color: #6ace6a;
 }
 .headBtnPart{
-  /*position: relative;*/
-  width: 200px;
-  /*top: 150px;*/
-  /*left: 600px;*/
+  /*position: absolute;*/
+  /*width: 200px;*/
+  /*top: 30%;*/
+  /*left: 80%;*/
 }
 .headBtnPart > button:first-child{
   margin-bottom: 20px;

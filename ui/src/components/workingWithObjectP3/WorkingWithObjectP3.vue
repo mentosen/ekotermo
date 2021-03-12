@@ -90,8 +90,8 @@ export default {
   },
   data(){
     return{
-      inpX:null,
-      inpY:null,
+      btnX:null,
+      btnY:null,
       data:{
         generalMeterReadings:{}
       },
@@ -154,12 +154,12 @@ export default {
     setHeadBtnPos(){
       var btn = document.querySelector(".headBtnPart");
       var related = document.querySelector(".appHeadWWOP2");
-      this.inpX = related.getBoundingClientRect().left + related.offsetWidth;
-      this.inpY = related.getBoundingClientRect().top + (related.offsetHeight/2);
+      this.btnX = related.getBoundingClientRect().left + related.offsetWidth;
+      this.btnY = related.getBoundingClientRect().top + (related.offsetHeight/2);
 
       btn.style.position = "absolute";
-      btn.style.left = (this.inpX+75)  + "px";
-      btn.style.top = (this.inpY-140) + "px";
+      btn.style.left = (this.btnX+25)  + "px";
+      btn.style.top = (this.btnY-90) + "px";
     },
     showFeedback(){
       this.changeIsShowFeedback(true);
