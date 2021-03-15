@@ -24,7 +24,10 @@ export default {
         serialNum: "Серийный номер распределителя тепла",
         startMeterVal: "Начальные показания распределителя тепла",
         purposeRoomTitle:"Выберите из списка",
-        roomType:"Тип помещения"
+        roomType:"Тип помещения",
+        accountingType:"Тип учета",
+        serialNumMeter:"Серийный номер прибора учета/распределителя тепла",
+        currentReadingsMeter:"Начальные показания прибора учета/распределителя тепла"
     },
     uk:{
         ignore:"Не враховувати",
@@ -51,7 +54,10 @@ export default {
         serialNum: "Серійний номер розподілювача тепла",
         startMeterVal: "Початкові показники розподілювача тепла",
         purposeRoomTitle:"Виберіть зі списку",
-        roomType:"Тип приміщення"
+        roomType:"Тип приміщення",
+        accountingType:"Тип обліку",
+        serialNumMeter:"Серійний номер приладу обліку/розподілювача тепла",
+        currentReadingsMeter:"Початкові покази приладу обліку/розподілювача тепла"
     },
     en:{
         ignore:"Ignore",
@@ -78,6 +84,9 @@ export default {
         serialNum: "Heat spreader serial number",
         startMeterVal:"Heat spreader initial readings",
         purposeRoomTitle:"Select from the list",
-        roomType:"Room type"
+        roomType:"Room type",
+        accountingType:"Accounting type",
+        serialNumMeter:"Serial number of metering device / heat distributor",
+        currentReadingsMeter:"Initial readings of the metering device / heat distributor"
     }
 }

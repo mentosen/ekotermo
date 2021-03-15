@@ -9,7 +9,7 @@
     <table>
       <caption class="tableCaption">{{ $t('objectRegistration3.tableCaption')}}</caption>
       <thead>
-      <th width="190">Тип учета</th>
+      <th width="190">{{ $t('objectRegistration3.accountingType')}}</th>
       <th width="75">{{ $t('objectRegistration3.flatNumber')}}</th>
       <th width="75px">{{ $t('objectRegistration3.porchNumber') }}</th>
       <th width="75">{{ $t('objectRegistration3.floorNumber')}}</th>
@@ -19,8 +19,8 @@
       <th width="180">{{ $t('objectRegistration3.roomPurpose')}}</th>
       <th width="60">{{ $t('objectRegistration3.kc')}}</th>
       <th width="60">{{ $t('objectRegistration3.kq')}}</th>
-      <th width="140">{{ $t('objectRegistration3.serialNum')}}</th>
-      <th width="140">{{ $t('objectRegistration3.startMeterVal')}}</th>
+      <th width="140">{{ $t('objectRegistration3.serialNumMeter')}}</th>
+      <th width="140">{{ $t('objectRegistration3.currentReadingsMeter')}}</th>
       <th width="110">{{ $t('objectRegistration3.objectPhoto')}}</th>
       <th width="110">{{ $t('objectRegistration3.action')}}</th>
       </thead>
