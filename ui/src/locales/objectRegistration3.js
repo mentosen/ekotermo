@@ -57,7 +57,7 @@ export default {
         roomType:"Тип приміщення",
         accountingType:"Тип обліку",
         serialNumMeter:"Серійний номер приладу обліку/розподілювача тепла",
-        currentReadingsMeter:"Початкові покази приладу обліку/розподілювача тепла"
+        currentReadingsMeter:"Початкові показання приладу обліку/розподілювача тепла"
     },
     en:{
         ignore:"Ignore",

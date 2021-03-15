@@ -35,7 +35,8 @@ export default {
         sumConsumptionGcal:"Суммарное потребление квартиры, Гкал",
         sumConsumptionMoney:"Суммарное потребление квартиры, грн.",
         errors:"Ошибки",
-        action:"Действие"
+        action:"Действие",
+
     },
     uk:{
         WWO:'Робота з об\'єктом',

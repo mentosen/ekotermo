@@ -133,6 +133,11 @@ export default new Router({
                     name: 'object Registration3P4',
                     component: () => import('@/components/objectRegistration3P4/ObjectRegistration3P4.vue'),
                 },
+                {
+                    path: '/workingWithObjectP4',
+                    name: 'working With ObjectP4',
+                    component: () => import('@/components/workingWithObjectP4/WorkingWithObjectP4.vue'),
+                }
             ],
         },
         {path: '*', redirect: '/404'},
