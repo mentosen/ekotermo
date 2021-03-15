@@ -30,14 +30,18 @@
         </select>
         <div v-if="!data.isEdit">{{data.cof}}</div>
       </td>
+
+<!--      room type-->
       <td v-if="isP3Mode">
         <select v-if="data.isEdit">
           <option v-for="item in roomTypeP3" v-bind:value="item.value" v-bind:selected="data.roomType == item.value">{{item.title}}</option>
         </select>
         <div v-if="!data.isEdit">{{data.roomType}}</div>
       </td>
-      <td v-if="!isP3Mode"></tdv-if>
-
+      <td v-if="!isP3Mode" class="emptyTd"></td>
+      <td v-if="isP3Mode" class="emptyTd"></td>
+      <td v-if="isP3Mode" class="emptyTd"></td>
+      <td v-if="isP3Mode" class="emptyTd"></td>
 <!--          room purpose-->
       <td v-if="isP6Mode">
         <select class="tableSelectPurpose" v-if="data.isEdit" @change="addRoomPurpose">
@@ -69,7 +73,7 @@
       <td v-bind:class="{purposeInp: data.isEdit}" v-if="isP6Mode">
         <div class="purposeInputDiv serialNum" v-for="(item, key) in roomPurpose" :key="key" v-if="data.isEdit">
           <input type="text" class="tableInpText" @keydown="validateCounter" v-bind:placeholder="$t('objectRegistration3.meterPlaceholder')"
-                 v-bind:value="item.serialNumber"  pattern="^\d{12}$">
+                 v-bind:value="item.serialNumber"  pattern="^\d{12}$" name="serialNumber">
         </div>
         <div v-if="!data.isEdit" v-for="(item) in roomPurpose" class="purposeInputDiv">{{item.serialNumber}}</div>
       </td>
@@ -77,22 +81,24 @@
         <div class="purposeInputDiv initVal" v-for="(item, key) in roomPurpose" :key="key" v-if="data.isEdit">
           <input type="text" class="tableInpText" @keydown="validateStartCounterVal" @keyup="validateStartCounterKeyUp"
                  placeholder="123456,78" v-bind:value="item.startCounterValue"
-                 pattern="^\d{6},\d{2}$">
+                 pattern="^\d{6},\d{2}$" name="startCounterValue">
         </div>
         <div v-if="!data.isEdit" v-for="(item) in roomPurpose" class="purposeInputDiv">{{item.startCounterValue}}</div>
       </td>
 
-      <td v-if="!isP6Mode"></td>
-      <td v-if="!isP6Mode"></td>
-      <td v-if="!isP6Mode&&isP2Mode"></td>
-      <td v-if="!isP6Mode">
-        <input type="text" class="tableInpText" @keydown="validateCounter" v-bind:placeholder="$t('objectRegistration3.meterPlaceholder')"
-               v-bind:value="data.serialNumber"  pattern="^\d{12}$">
+      <td v-if="!isP6Mode" class="emptyTd"></td>
+      <td v-if="!isP6Mode" class="emptyTd"></td>
+      <td v-if="!isP6Mode&&isP2Mode" class="emptyTd"></td>
+      <td v-if="!isP6Mode&&isP2Mode">
+        <input v-if="data.isEdit" type="text" class="tableInpText" @keydown="validateCounter" v-bind:placeholder="$t('objectRegistration3.meterPlaceholder')"
+               v-bind:value="data.serialNumber"  pattern="^\d{12}$" name="serialNumber">
+        <div v-if="data.isSaved">{{data.serialNumber}}</div>
       </td>
       <td v-if="!isP6Mode&&isP2Mode">
-        <input type="text" class="tableInpText" @keydown="validateStartCounterVal" @keyup="validateStartCounterKeyUp"
+        <input v-if="data.isEdit" type="text" class="tableInpText" @keydown="validateStartCounterVal" @keyup="validateStartCounterKeyUp"
                placeholder="123456,78" v-bind:value="data.startCounterValue"
-               pattern="^\d{6},\d{2}$">
+               pattern="^\d{6},\d{2}$" name="startCounterValue">
+        <div v-if="data.isSaved">{{data.startCounterValue}}</div>
       </td>
 <!--      end room purpose-->
 
@@ -194,50 +200,104 @@ export default {
       }
 
       if(result){
-        var purposeDiv = e.target.closest("tr").querySelectorAll(".purposeDiv");
-        var kc = e.target.closest("tr").querySelectorAll(".kc");
-        var kq = e.target.closest("tr").querySelectorAll(".kq");
-        var serialNum = e.target.closest("tr").querySelectorAll(".serialNum");
-        var initVal = e.target.closest("tr").querySelectorAll(".initVal");
-        var data = {};
-        var counter = 0;
+        var obj;
 
-        for(var k = 0; k < this.getRoomPurpose.length; k ++){
-          if(purposeDiv[0].innerText != this.getRoomPurpose[k]){
-            counter ++;
-            if(counter == 15){
-              purposeDiv[0].style.color = "red";
-              this.removeRedBorder(purposeDiv[0]);
-              return
-            }
-          }
-        }
-        for(var k = 0; k < this.roomPurpose.length; k ++){
-          data = {
-            room: purposeDiv[k].innerText,
-            kc: kc[k].querySelector("input[type=text]").value,
-            kq: kq[k].querySelector("input[type=text]").value,
-            serialNumber: serialNum[k].querySelector("input[type=text]").value,
-            startCounterValue: initVal[k].querySelector("input[type=text]").value
-          }
-          this.roomPurpose[k] = data;
+        if(this.isP6Mode){
+          obj = this.saveP6(e, parent);
+        }else if(this.isP2Mode){
+          obj = this.saveP2(e, inputs, parent);
+        }else if(this.isP3Mode){
+          obj = this.saveP3(e,parent);
         }
 
-        var obj = {
-          flatNumber: parent.children[0].innerText,
-          entrance: parent.children[1].children[0].value,
-          floor: parent.children[2].children[0].value,
-          flatType: parent.children[3].children[0].value,
-          cof: parent.children[4].children[0].value,
-          purposeRoom: this.roomPurpose,
-          objectPhoto: this.data.objectPhoto
+        if(obj){
+          this.data = obj;
+          this.saveFlatData(this.data);
+          if(this.getApartments.length === this.getDataFlat.length) this.changeIsAllFilled1(true);
         }
-
-        this.data = Object.assign(this.data, obj);
-        this.saveFlatData(this.data);
-        this.isEdit = false;
-        if(this.getApartments.length === this.getDataFlat.length) this.changeIsAllFilled1(true);
       }
+    },
+    saveP6(e, parent){
+      var purposeDiv = e.target.closest("tr").querySelectorAll(".purposeDiv");
+      var kc = e.target.closest("tr").querySelectorAll(".kc");
+      var kq = e.target.closest("tr").querySelectorAll(".kq");
+      var serialNum = e.target.closest("tr").querySelectorAll(".serialNum");
+      var initVal = e.target.closest("tr").querySelectorAll(".initVal");
+      var data = {};
+      var counter = 0;
+
+      for(var k = 0; k < this.getRoomPurpose.length; k ++){
+        if(purposeDiv[0].innerText != this.getRoomPurpose[k]){
+          counter ++;
+          if(counter == 15){
+            purposeDiv[0].style.color = "red";
+            this.removeRedBorder(purposeDiv[0]);
+            return null
+          }
+        }
+      }
+
+      for(var j = 0; j < this.roomPurpose.length; j ++){
+        data = {
+          room: purposeDiv[j].innerText,
+          kc: kc[j].querySelector("input[type=text]").value,
+          kq: kq[j].querySelector("input[type=text]").value,
+          serialNumber: serialNum[j].querySelector("input[type=text]").value,
+          startCounterValue: initVal[j].querySelector("input[type=text]").value
+        }
+        this.roomPurpose[j] = data;
+      }
+      var obj = {
+        isEdit: false,
+        isSaved:true,
+        isPhotos: this.data.isPhotos,
+        accountingType:parent.children[0].children[0].options[parent.children[0].children[0].selectedIndex].innerText,
+        flatNumber: parent.children[1].innerText,
+        entrance: parent.children[2].children[0].value,
+        floor: parent.children[3].children[0].value,
+        flatType: parent.children[4].children[0].value,
+        cof: parent.children[5].children[0].value,
+        purposeRoom: this.roomPurpose,
+        objectPhoto: this.data.objectPhoto
+      }
+      return obj;
+    },
+    saveP2(e, inputs,parent){
+      var obj = {
+        isEdit: false,
+        isSaved:true,
+        isPhotos: this.data.isPhotos,
+        accountingType:parent.children[0].children[0].options[parent.children[0].children[0].selectedIndex].innerText,
+        flatNumber: parent.children[1].innerText,
+        entrance: parent.children[2].children[0].value,
+        floor: parent.children[3].children[0].value,
+        flatType: parent.children[4].children[0].value,
+        cof: parent.children[5].children[0].value,
+        objectPhoto: this.data.objectPhoto,
+        serialNumber: null,
+        startCounterValue: null
+      }
+
+      for(var k = 0; k < inputs.length; k ++){
+        obj[inputs[k].name] = inputs[k].value;
+      }
+      return obj;
+    },
+    saveP3(e,parent){
+      var obj = {
+        isEdit: false,
+        isSaved:true,
+        isPhotos: this.data.isPhotos,
+        accountingType:parent.children[0].children[0].options[parent.children[0].children[0].selectedIndex].innerText,
+        flatNumber: parent.children[1].innerText,
+        entrance: parent.children[2].children[0].value,
+        floor: parent.children[3].children[0].value,
+        flatType: parent.children[4].children[0].value,
+        cof: parent.children[5].children[0].value,
+        roomType: parent.children[6].children[0].options[parent.children[6].children[0].selectedIndex].innerText,
+        objectPhoto: this.data.objectPhoto
+      }
+      return obj;
     },
     removeRedBorder(el){
       setTimeout(function (){
@@ -255,6 +315,7 @@ export default {
     },
     edit(){
       this.data.isEdit = true;
+      this.data.isSaved = false;
       this.changeIsAllFilled1(false);
     },
     validateCounter(e){
@@ -297,6 +358,8 @@ export default {
         this.isP3Mode = true;
         this.isP6Mode = false;
       }
+      this.data.isEdit = true;
+      this.data.isSaved = false;
     }
   },
   components:{slider:slider}
@@ -374,6 +437,11 @@ table input[type=file]{
   width: 103px;
   border: 1px solid #3c3a3a;
   outline: none;
+}
+.emptyTd{
+  background-image: url("../../assets/icons/emptyTd.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 /*buttons*/
 button{

@@ -62,7 +62,7 @@ export default {
 
     },
     register(){
-
+      this.changeShowPopUp(true);
     }
   },
   components:{Head:Head,confirmPopUp:confirmPopUp,afterHead:afterHead,appTr:appTr}
