@@ -7,6 +7,28 @@
     <div class="headBtnPart">
       <button class="greenBtn headBtns">{{ $t('buttons.objectDistributionarchive')}}</button>
       <button class="yellowBtn headBtns" @click="showFeedback">{{ $t('buttons.feedback')}}</button>
+
+      <table class="generalInfoTable">
+        <thead>
+        <th colspan="2">{{ $t('workingWithObjectP2.generalInfoTableTh')}}</th>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{ $t('workingWithObjectP2.generalInfoTableTd1')}}</td>
+          <td>0,0000</td>
+        </tr>
+        <tr>
+          <td>{{ $t('workingWithObjectP2.generalInfoTableTd2')}}</td>
+          <td>0,0000</td>
+        </tr>
+        <tr>
+          <td>{{ $t('workingWithObjectP2.generalInfoTableTd3')}}</td>
+          <td>0,0000</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <button class="orangeBtn headBtns" @click="showDownloadPopUp">{{ $t('workingWithObjectP2.downloadReportDistributed')}}</button>
     </div>
 
     <AppHead></AppHead>
@@ -62,8 +84,8 @@
       <th width="90px">{{ $t('workingWithObjectP2.generalArea')}}</th>
       <th width="90px">{{ $t('workingWithObjectP2.heatedArea')}}</th>
       <th width="200">{{ $t('objectRegistration3.roomPurpose')}}</th>
-      <th width="115px">{{ $t('workingWithObjectP2.previousDistributorValue')}}</th>
-      <th width="115px">{{ $t('workingWithObjectP2.currentDistributorValue')}}</th>
+      <th width="115px">{{ $t('workingWithObjectP2.previousDistributorValueP4')}}</th>
+      <th width="115px">{{ $t('workingWithObjectP2.currentDistributorValueP4')}}</th>
       <th width="115px">{{ $t('workingWithObjectP2.apartmentNeedsConsumption')}}</th>
       <th width="100px">{{ $t('workingWithObjectP2.premisesNeedsConsumption')}}</th>
       <th width="100px">{{ $t('workingWithObjectP2.sumConsumptionGcal')}}</th>
@@ -77,6 +99,7 @@
     </table>
 
     <button @click="save" class="greenBtn greenBtn1">{{ $t('buttons.saveDistribution')}}</button>
+    <downloadPopUp v-if="showDownloadPopUpWWO"></downloadPopUp>
   </div>
 </template>
 
@@ -85,11 +108,12 @@ import {mapGetters,mapMutations,mapActions} from 'vuex'
 import AppHead from './head';
 import generalMeterReadings from './generalMeterReadings';
 import appTrWWOP from './appTrWWOP4'
+import downloadPopUp from "@/components/workingWithObjectP4/downloadPopUp";
 
 export default {
   /// вместо tableData передавать flatsDataWWOP2
   name: "WorkingWithObjectP6",
-  computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback","flatsDataWWOP2"]),
+  computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback","flatsDataWWOP2","showDownloadPopUpWWO"]),
   mounted() {
     this.setHeadBtnPos();
   },
@@ -103,6 +127,7 @@ export default {
       isFile:false,
       isShowInpFile: false,
       tableData:[{
+        accountingType:"С индивидуальным отоплением",
         apartmentNumber:1,
         generalArea:40,
         heatedArea:35,
@@ -124,28 +149,38 @@ export default {
         errors:["error1","error2"]
       },
         {
+          accountingType:"Без ограничений",
           apartmentNumber:2,
           generalArea:50,
           heatedArea:35,
-          roomPurpose:[
-            {room:"Кухня",
-              previousReading:"123456,78",
-              currentReading:"123456,78",
-              currentConsumption:"123456,78",
-            }
-          ],
+          previousReading:"123456,78",
+          currentReading:"123456,78",
+          currentConsumption:"123456,78",
           premisesConsumption:123456.78,
           sumConsumption:123456.78,
           sumMoney:1000,
           errors:["error1"]
         },
+        {
+          accountingType:"Неотапливаемое помещение",
+          apartmentNumber:3,
+          generalArea:98,
+          heatedArea:0,
+          previousReading:"123456,78",
+          currentReading:"123456,78",
+          currentConsumption:"123456,78",
+          premisesConsumption:123456.78,
+          sumConsumption:123456.78,
+          sumMoney:1000,
+          errors:["error1"]
+        }
       ]
     }
   },
-  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP:appTrWWOP},
+  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP:appTrWWOP,downloadPopUp:downloadPopUp},
   methods:{
     ...mapActions(["sendFileWWOP2","saveAllFlatDataWWOP2"]),
-    ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback"]),
+    ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback","setShowDownloadPopUpWWO"]),
     save(){
       var inputs1 = document.querySelector(".generalMeterReadings").querySelectorAll(".tableInput");
       var inputs2 = document.querySelector(".distributedTable").querySelectorAll("input[type=text]");
@@ -211,11 +246,14 @@ export default {
       this.btnY = related.getBoundingClientRect().top + (related.offsetHeight/2);
 
       btn.style.position = "absolute";
-      btn.style.left = (this.btnX+25)  + "px";
-      btn.style.top = (this.btnY-90) + "px";
+      btn.style.left = (this.btnX+115)  + "px";
+      btn.style.top = (this.btnY-347) + "px";
     },
     showFeedback(){
       this.changeIsShowFeedback(true);
+    },
+    showDownloadPopUp(){
+      this.setShowDownloadPopUpWWO(true);
     }
   }
 }
@@ -331,30 +369,30 @@ table caption{
   opacity: 0.5;
 }
 table.distributedTable{
-  width: 1820px;
+  width: 1833px;
   margin-top: 30px;
-  font-size: 14px;
+  font-size: 13px;
 }
 table.distributedTable th{
   font-weight: 450;
-  font-size: 14px;
+  font-size: 13px;
 }
 table.distributedTable th:last-child{
   width: auto;
 }
 /*////*/
-.yellowBtn,.greenBtn,.greenBtn1,.greyBtn,.blueBtn,.redBtn{
-   width: 200px;
-   height: 30px;
-   padding: 3px;
-   border: 1px solid #f9ed17;
-   background-color: yellow;
-   font-size: 15px;
-   cursor: pointer;
-   outline: none;
-   margin-right: 10px;
-   border-radius: 3px;
- }
+.yellowBtn,.greenBtn,.greenBtn1,.greyBtn,.blueBtn,.redBtn,.orangeBtn{
+  width: 200px;
+  height: 30px;
+  padding: 3px;
+  border: 1px solid #f9ed17;
+  background-color: yellow;
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+  border-radius: 3px;
+}
 .greenBtn1{
   margin-top: 50px;
   margin-bottom: 20px;
@@ -368,7 +406,12 @@ table.distributedTable th:last-child{
 .redBtn1{
   width: 50px;
 }
-
+.orangeBtn{
+  background-color: #fdbb43;
+  border: 1px solid #ffaa0f;
+  font-size: 12px;
+  margin-top: 20px;
+}
 .greenBtn{
   background-color: #13f113;
   border: 1px solid #1bd400;
@@ -383,7 +426,9 @@ table.distributedTable th:last-child{
   background-color: #01beff;
   border: 1px solid #1183c1;
 }
-
+.orangeBtn:hover{
+  background-color: #ffcd73;
+}
 .redBtn:hover{
   background-color: #fb6f6f;
 }
@@ -402,5 +447,13 @@ table.distributedTable th:last-child{
 }
 .headBtns{
   width: 245px;
+}
+.generalInfoTable{
+  width: 245px;
+  font-size: 14px;
+  margin-top: 98px;
+}
+.generalInfoTable td,th{
+  font-size: 13px;
 }
 </style>

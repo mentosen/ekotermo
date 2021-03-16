@@ -1,10 +1,10 @@
 <template>
   <tr>
-    <td></td>
+    <td>{{data.accountingType}}</td>
     <td>{{data.apartmentNumber}}</td>
     <td>{{data.generalArea}}</td>
     <td>{{data.heatedArea}}</td>
-    <td colspan="4">
+    <td colspan="4" v-if="data.roomPurpose">
       <table class="tdTable">
         <tbody>
           <tr v-for="item in data.roomPurpose">
@@ -20,6 +20,15 @@
         </tbody>
       </table>
     </td>
+    <td v-if="!data.roomPurpose" class="emptyTd"></td>
+    <td v-if="!data.roomPurpose">{{data.previousReading}}</td>
+    <td v-if="!data.roomPurpose">
+      <div v-if="!isManualInputWWOP2 || !data.isEdit">{{data.currentReading}}</div>
+      <input type="text" v-bind:value="data.currentReading" v-if="isManualInputWWOP2&&data.isEdit"
+             @keydown="inputValidate" @keyup="inputValidateKeyUp" pattern="^\d{6},\d{2}$" name="currentReading">
+    </td>
+    <td v-if="!data.roomPurpose">{{data.currentConsumption}}</td>
+
 <!--    <td>{{data.previousReading}}</td>-->
 <!--    <td>-->
 <!--      <div v-if="!isManualInputWWOP2 || !data.isEdit">{{data.currentReading}}</div>-->
@@ -33,13 +42,13 @@
     <td>
       <div v-for="error in data.errors" style="color: #ea4c4c">{{error}}</div>
     </td>
-    <td width="200px">
+    <td width="160px">
         <div class="btnPart">
           <button class="blueBtn">{{ $t('buttons.detailedCalculation')}}</button>
           <button class="greenBtn">{{ $t('buttons.downloadCalculation')}}</button>
         </div>
     </td>
-    <td width="140px" v-if="isManualInputWWOP2">
+    <td width="120px" v-if="isManualInputWWOP2">
       <div class="btnPart">
         <button class="yellowBtn" v-bind:disabled="!data.isEdit" @click="save">{{ $t('buttons.save')}}</button>
         <button class="greyBtn" v-bind:disabled="data.isEdit" @click="edit">{{ $t('buttons.edit')}}</button>
@@ -56,12 +65,14 @@ export default {
   computed: mapGetters(["isManualInputWWOP2"]),
   mounted() {
     this.data = Object.assign({isEdit:true}, this.tableData);
+    if(this.data.roomPurpose) this.isP6Mode = true;
   },
   data(){
     return{
       data:{
 
-      }
+      },
+      isP6Mode: false
     }
   },
   methods:{
@@ -70,17 +81,29 @@ export default {
       var inputs = e.target.closest("tr").querySelectorAll("input[type=text]");
       var result = true;
 
-      for(var k = 0; k < inputs.length;k++){
-        this.data.roomPurpose[k][inputs[k].name] = inputs[k].value;
-        if(inputs[k].pattern && !inputs[k].value.match(inputs[k].pattern)|| !inputs[k].value){
-          inputs[k].style.border = "1px solid red";
-          this.removeRedBorder(inputs[k]);
-          result = false;
+      if(this.isP6Mode){
+        for(var k = 0; k < inputs.length;k++){
+          this.data.roomPurpose[k][inputs[k].name] = inputs[k].value;
+          if(inputs[k].pattern && !inputs[k].value.match(inputs[k].pattern)|| !inputs[k].value){
+            inputs[k].style.border = "1px solid red";
+            this.removeRedBorder(inputs[k]);
+            result = false;
+          }
+        }
+      }else{
+        for(var k = 0; k < inputs.length;k++){
+          this.data[inputs[k].name] = inputs[k].value;
+          if(inputs[k].pattern && !inputs[k].value.match(inputs[k].pattern)|| !inputs[k].value){
+            inputs[k].style.border = "1px solid red";
+            this.removeRedBorder(inputs[k]);
+            result = false;
+          }
         }
       }
+
       if(result){
-        this.saveDataWWOP2(Object.assign({},this.data));
         this.data.isEdit = false;
+        this.saveDataWWOP2(Object.assign({},this.data));
       }
     },
     edit(){
@@ -124,7 +147,7 @@ table,td,th{
   border-collapse: collapse;
   padding: 3px;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
 }
 table.tdTable{
   border:none;
@@ -167,6 +190,13 @@ td:nth-child(11){
   padding: 0;
   border-left:none;
 }
+td:nth-child(13){
+  padding: 0;
+}
+td:nth-child(14){
+  padding: 0;
+  border-left:none;
+}
 td input{
   width: 90px;
   border: 1px solid #3c3a3a;
@@ -178,6 +208,15 @@ td input{
   margin-left: 10px;
   margin-right: 5px;
   outline: none;
+}
+td.emptyTd{
+  background-image: url("../../assets/icons/emptyTd.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-top: 1px solid #3c3a3a;
+}
+td div{
+  font-size: 13px;
 }
 /*.tdBtns{*/
 /*  display: flex;*/
@@ -203,7 +242,7 @@ button{
   padding: 3px;
   border: 1px solid #f9ed17;
   background-color: yellow;
-  font-size: 15px;
+  font-size: 13px;
 }
 .redBtn{
   width: 100%;

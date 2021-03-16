@@ -36,7 +36,15 @@ export default {
         sumConsumptionMoney:"Суммарное потребление квартиры, грн.",
         errors:"Ошибки",
         action:"Действие",
-
+        generalInfoTableTh:"Значения потребления Гкал/м2",
+        generalInfoTableTd1:"Среднее потребление",
+        generalInfoTableTd2:"Минимальное потребление",
+        generalInfoTableTd3:"Максимальное потребление",
+        downloadReportDistributed:"Скачать общий отчет по распределению",
+        downloadBtn1:"Скачать в формате .xlsx",
+        downloadBtn2:"Скачать в формате .docx",
+        previousDistributorValueP4:"Показания прибора учета/распределителя тепла за предыдущий период, Гкал/ед.",
+        currentDistributorValueP4:"Показания прибора  учета/распределителя тепла за текущий период,  Гкал/ед."
     },
     uk:{
         WWO:'Робота з об\'єктом',
@@ -74,7 +82,16 @@ export default {
         sumConsumptionGcal:"Сумарне споживання квартири, Гкал",
         sumConsumptionMoney:"Сумарне споживання квартири, грн.",
         errors:"Помилки",
-        action:"Дія"
+        action:"Дія",
+        generalInfoTableTh:"Значення споживання Гкал / м2",
+        generalInfoTableTd1:"Середнє споживання",
+        generalInfoTableTd2:"Мінімальне споживання",
+        generalInfoTableTd3:"Максимальне споживання",
+        downloadReportDistributed:"Завантажити загальний звіт по розподілу",
+        downloadBtn1:"Завантажити в форматі .xlsx",
+        downloadBtn2:"Завантажити в форматі .docx",
+        previousDistributorValueP4:"Показання приладу обліку / розподілювача тепла за попередній період, Гкал / од.",
+        currentDistributorValueP4:"Показання приладу обліку / розподілювача тепла за поточний період, Гкал / од."
     },
     en:{
         WWO:"Working with an object",
@@ -112,6 +129,15 @@ export default {
         sumConsumptionGcal:"Total apartment consumption, Gcal",
         sumConsumptionMoney:"Total apartment consumption, UAH",
         errors:"Errors",
-        action:"Act"
+        action:"Act",
+        generalInfoTableTh:"Consumption values Gcal / m2",
+        generalInfoTableTd1:"Average consumption",
+        generalInfoTableTd2:"Minimum consumption",
+        generalInfoTableTd3:"Maximum consumption",
+        downloadReportDistributed:"Download general distribution report",
+        downloadBtn1:"Download as .xlsx",
+        downloadBtn2:"Download as .docx",
+        previousDistributorValueP4:"Readings of the metering device / heat distributor for the previous period, Gcal / unit.",
+        currentDistributorValueP4:"Readings of the metering device / heat distributor for the current period, Gcal / unit."
     }
 }

@@ -35,6 +35,9 @@ export default {
         },
         addFlatsDataWWOP3(state,data){
             state.flatsData = data;
+        },
+        setShowDownloadPopUpWWO(state, value){
+            state.showDownloadPopUpWWO = value;
         }
     },
     state:{
@@ -78,7 +81,8 @@ export default {
             generalMeterReadings:{}
         },
         isManualInputWWOP2:false,
-        isAllFilledWWOP2: false
+        isAllFilledWWOP2: false,
+        showDownloadPopUpWWO: false
     },
 
     getters:{
@@ -96,6 +100,9 @@ export default {
         },
         flatsDataWWOP2(state){
             return state.dataWWOP2.flatsData;
+        },
+        showDownloadPopUpWWO(state){
+            return state.showDownloadPopUpWWO;
         }
     }
 }
