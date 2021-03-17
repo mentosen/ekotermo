@@ -137,6 +137,11 @@ export default new Router({
                     path: '/workingWithObjectP4',
                     name: 'working With ObjectP4',
                     component: () => import('@/components/workingWithObjectP4/WorkingWithObjectP4.vue'),
+                },
+                {
+                    path: '/objectDistributionArchive',
+                    name: 'object Distribution Archive',
+                    component: () => import('@/components/objectDistributionArchive/objectDistributionArchive.vue'),
                 }
             ],
         },
