@@ -1,6 +1,7 @@
 export default {
     ru:{
         mainTitle:"АНКЕТА ОРГАНИЗАЦИИ",
+        subscriberTitle:"АНКЕТА АБОНЕНТА",
         companyTitle:"Полное наименование:",
         companyCode:"ЕДРПОУ/ИПН:",
         legalAddress:"Юридический адрес:",
@@ -19,10 +20,13 @@ export default {
         bankInfo:"Банковские реквезиты:",
         bankTitle:"Наименование банка:",
         bankCode:"МФО банка:",
-        iban:"IBAN:"
+        iban:"IBAN:",
+        IPN:"ИПН:",
+        subscriberAddress:"Адрес абонента:"
     },
     uk:{
         mainTitle:"АНКЕТА ОРГАНІЗАЦІЇ",
+        subscriberTitle:"АНКЕТА АБОНЕНТА",
         companyTitle:"Повна назва:",
         companyCode:"ЄДРПОУ/ІПН:",
         legalAddress:"Юридична адреса:",
@@ -41,10 +45,13 @@ export default {
         bankInfo:"Банківські реквізити:",
         bankTitle:"Назва банку:",
         bankCode:"МФО банку:",
-        iban:"IBAN:"
+        iban:"IBAN:",
+        IPN:"ІПН:",
+        subscriberAddress:"Адреса абонента:"
     },
     en:{
         mainTitle:"QUESTIONNAIRE OF THE ORGANIZATION",
+        subscriberTitle:"SUBSCRIPTION PROFILE",
         companyTitle:"Full name:",
         companyCode:"USREOU/TIN:",
         legalAddress:"Legal address:",
@@ -63,6 +70,8 @@ export default {
         bankInfo:"Bank details:",
         bankTitle:"Name of the bank:",
         bankCode:"MFI bank:",
-        iban:"IBAN:"
+        iban:"IBAN:",
+        IPN:"IIT:",
+        subscriberAddress:"Subscriber's address:"
     }
 }

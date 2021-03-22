@@ -13,6 +13,7 @@ import organizationQuestionnaire from "./modules/organizationQuestionnaire";
 import workingWithObjectP2 from "./modules/workingWithObjectP2"
 import feedback from './modules/feedback'
 import objectDistributionArchive from './modules/objectDistributionArchive'
+import subscriberProfile from './modules/subscriberProfile'
 
 Vue.use(Vuex);
 
@@ -29,7 +30,8 @@ const store = new Vuex.Store({
         organizationQuestionnaire,
         workingWithObjectP2,
         feedback,
-        objectDistributionArchive
+        objectDistributionArchive,
+        subscriberProfile
     },
     getters
 });

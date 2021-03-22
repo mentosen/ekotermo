@@ -142,6 +142,11 @@ export default new Router({
                     path: '/objectDistributionArchive',
                     name: 'object Distribution Archive',
                     component: () => import('@/components/objectDistributionArchive/objectDistributionArchive.vue'),
+                },
+                {
+                    path: '/subscriberProfile',
+                    name: 'subscriber Profile',
+                    component: () => import('@/components/subscriberProfile/subscriberProfile.vue'),
                 }
             ],
         },
