@@ -14,6 +14,7 @@ import workingWithObjectP2 from "./modules/workingWithObjectP2"
 import feedback from './modules/feedback'
 import objectDistributionArchive from './modules/objectDistributionArchive'
 import subscriberProfile from './modules/subscriberProfile'
+import subscriberPage from './modules/subscriberPage'
 
 Vue.use(Vuex);
 
@@ -31,7 +32,8 @@ const store = new Vuex.Store({
         workingWithObjectP2,
         feedback,
         objectDistributionArchive,
-        subscriberProfile
+        subscriberProfile,
+        subscriberPage
     },
     getters
 });

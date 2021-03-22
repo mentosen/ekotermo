@@ -147,6 +147,11 @@ export default new Router({
                     path: '/subscriberProfile',
                     name: 'subscriber Profile',
                     component: () => import('@/components/subscriberProfile/subscriberProfile.vue'),
+                },
+                {
+                    path: '/subscriberPage',
+                    name: 'subscriber Page',
+                    component: () => import('@/components/subscriberPage/subscriberPage.vue'),
                 }
             ],
         },

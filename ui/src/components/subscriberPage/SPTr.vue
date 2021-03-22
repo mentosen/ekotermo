@@ -4,34 +4,32 @@
     <td>{{data.paymentDate}}</td>
     <td>{{data.paymentFrom}}</td>
     <td>{{data.paymentTo}}</td>
+    <td>{{data.currentConsumptionGkal}}</td>
+    <td>{{data.currentConsumptionGrn}}</td>
     <td width="190px">
       <div class="btnPart">
         <button class="greenBtn" @click="redirect">{{$t('buttons.goToPage')}}</button>
         <button class="yellowBtn" @click="download">{{$t('buttons.downloadCalculation')}}</button>
       </div>
     </td>
-    <td width="80px">
-      <div class="btnPart">
-        <button class="redBtn" @click="showConfirmPopUp">{{$t('buttons.delete')}}</button>
-      </div>
-    </td>
+<!--    <td width="80px">-->
+<!--      <div class="btnPart">-->
+<!--        <button class="redBtn" @click="remove">{{$t('buttons.delete')}}</button>-->
+<!--      </div>-->
+<!--    </td>-->
     <downloadPopUp v-if="isShowDownloadPopUp" @cancelDownloadPopUp="hideDownloadPopUp"></downloadPopUp>
-    <confirmPopUp v-if="isShowConfirmPopUp" @cancelConfirmPopUp="hideConfirmPopUp"></confirmPopUp>
   </tr>
 </template>
 
 <script>
-import downloadPopUp from "@/components/objectDistributionArchive/downloadPopUp";
-import confirmPopUp from './confirmPopUp';
-
+import downloadPopUp from "@/components/subscriberPage/downloadPopUp";
 export default {
   name: "ODATr",
   props:["data"],
-  components:{downloadPopUp:downloadPopUp, confirmPopUp:confirmPopUp},
+  components:{downloadPopUp:downloadPopUp},
   data(){
     return{
-      isShowDownloadPopUp:false,
-      isShowConfirmPopUp: false
+      isShowDownloadPopUp:false
     }
   },
   methods:{
@@ -44,11 +42,8 @@ export default {
     hideDownloadPopUp(){
       this.isShowDownloadPopUp = false;
     },
-    showConfirmPopUp(){
-      this.isShowConfirmPopUp = true;
-    },
-    hideConfirmPopUp(){
-      this.isShowConfirmPopUp = false;
+    remove(){
+
     }
   }
 }
@@ -65,10 +60,10 @@ table,td,th{
 }
 td{
 }
-td:nth-child(5){
-  padding: 0;
-}
-td:nth-child(6){
+/*td:nth-child(5){*/
+/*  padding: 0;*/
+/*}*/
+td:nth-child(7){
   padding: 0px 0px 0px 0px;
 }
 

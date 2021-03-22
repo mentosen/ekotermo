@@ -23,7 +23,7 @@
       <th colspan="2">{{$t('objectDistributionArchive1.action')}}</th>
       </thead>
       <tbody>
-        <ODATr v-for="item in data" v-bind:data="item"></ODATr>
+        <ODATr v-for="item in dataODA" v-bind:data="item"></ODATr>
       </tbody>
     </table>
   </div>
@@ -37,29 +37,11 @@ export default {
   computed:mapGetters(["dataODA"]),
   components:{ODATr:ODATr},
   mounted() {
-    // this.getDataODA();
-    // this.data = this.dataODA;
+    this.getDataODA();
   },
   data(){
     return{
-      data:[{
-        paymentNumber:1,
-        paymentDate: "21.01.2020",
-        paymentFrom: "21.12.2019",
-        paymentTo:"21.01.2020"
-      },
-        {
-          paymentNumber:2,
-          paymentDate: "21.01.2020",
-          paymentFrom: "21.12.2019",
-          paymentTo:"21.01.2020"
-        },
-        {
-          paymentNumber:3,
-          paymentDate: "21.01.2020",
-          paymentFrom: "21.12.2019",
-          paymentTo:"21.01.2020"
-        }]
+      data:[]
     }
   },
   methods:{

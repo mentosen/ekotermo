@@ -5,7 +5,10 @@ export default{
         number:"№ п/п",
         paymentDate:"Дата выполнения расчета",
         paymentPeriod:"Расчетный период",
-        action:"Действие"
+        action:"Действие",
+        currentConsumptionGkal:"Потребление за отчетный период, Гкал",
+        currentConsumptionGrn:"Потребление за отчетный период, грн.",
+        confirmMessage:"Вы уверены?"
     },
     uk:{
          companyName:"Назва білінгової компанії:",
@@ -13,7 +16,10 @@ export default{
          number:"№ п/п",
          paymentDate:"Дата виконання розрахунку",
          paymentPeriod:"Розрахунковий період",
-         action:"Дія"
+         action:"Дія",
+        currentConsumptionGkal:"Споживання за звітний період, Гкал",
+        currentConsumptionGrn:"Споживання за звітний період, грн.",
+        confirmMessage:"Ви впевнені?"
     },
     en:{
          companyName:"Billing company name:",
@@ -21,6 +27,9 @@ export default{
          number:"Calculation №",
          paymentDate:"Calculation date",
          paymentPeriod:"Settlement period",
-         action:"Act"
+         action:"Act",
+        currentConsumptionGkal:"Consumption for the reporting period, Gcal",
+        currentConsumptionGrn:"Consumption for the reporting period, UAH",
+        confirmMessage:"Are you sure?"
     }
 }
