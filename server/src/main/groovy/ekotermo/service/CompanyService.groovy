@@ -25,48 +25,63 @@ class CompanyService {
         return CompanyDto.buildFromDomain(company)
     }
 
-    void create(String userId, CompanyDto companyDto){
+    CompanyDto findIdByUserId(String userId) {
+
+        log.info("Find company by userID [${userId}]")
+
+        Company company = companyDataService.findByUserId(userId)
+
+        return CompanyDto.buildSimpleFromDomain(company)
+    }
+
+    CompanyDto create(String userId, CompanyDto companyDto){
 
         log.info("Saving company ${companyDto}")
 
         User user = userDataService.findById(userId)
 
-        Company company = new Company(
-                name: companyDto.name,
-                ipn: companyDto.ipn,
+        Company company = companyDataService.getByUserId(userId)
 
-                regionPost: companyDto.regionPost,
-                cityTypePost: companyDto.cityTypePost,
-                cityNamePost: companyDto.cityNamePost,
-                streetPost: companyDto.streetPost,
-                buildingNumberPost: companyDto.buildingNumberPost,
-                roomNumberPost: companyDto.roomNumberPost,
+        if(!company){
+            company = new Company(
+                    name: companyDto.name,
+                    ipn: companyDto.ipn,
 
-                isLegalAndPostAddressSame: companyDto.isLegalAndPostAddressSame,
+                    regionPost: companyDto.regionPost,
+                    cityTypePost: companyDto.cityTypePost,
+                    cityNamePost: companyDto.cityNamePost,
+                    streetPost: companyDto.streetPost,
+                    buildingNumberPost: companyDto.buildingNumberPost,
+                    roomNumberPost: companyDto.roomNumberPost,
 
-                regionLegal: companyDto.regionLegal,
-                cityTypeLegal: companyDto.cityTypeLegal,
-                cityNameLegal: companyDto.cityNameLegal,
-                streetLegal: companyDto.streetLegal,
-                buildingNumberLegal: companyDto.buildingNumberLegal,
-                roomNumberLegal: companyDto.roomNumberLegal,
+                    isLegalAndPostAddressSame: companyDto.isLegalAndPostAddressSame,
 
-                chiefName: companyDto.chiefName,
-                chiefPosition: companyDto.chiefPosition,
-                chiefPhoneNumber: companyDto.chiefPhoneNumber,
-                chiefEmail: companyDto.chiefEmail,
+                    regionLegal: companyDto.regionLegal,
+                    cityTypeLegal: companyDto.cityTypeLegal,
+                    cityNameLegal: companyDto.cityNameLegal,
+                    streetLegal: companyDto.streetLegal,
+                    buildingNumberLegal: companyDto.buildingNumberLegal,
+                    roomNumberLegal: companyDto.roomNumberLegal,
 
-                bankName: companyDto.bankName,
-                mfo: companyDto.mfo,
-                iban: companyDto.iban,
+                    chiefName: companyDto.chiefName,
+                    chiefPosition: companyDto.chiefPosition,
+                    chiefPhoneNumber: companyDto.chiefPhoneNumber,
+                    chiefEmail: companyDto.chiefEmail,
 
-                user: user
-        )
+                    bankName: companyDto.bankName,
+                    mfo: companyDto.mfo,
+                    iban: companyDto.iban,
 
-        companyDataService.save(company)
+                    user: user
+            )
+        }
+
+        company = companyDataService.save(company)
+
+        return CompanyDto.buildFromDomain(company)
     }
 
-    void edit(String userId, CompanyDto companyDto){
+    CompanyDto edit(String userId, CompanyDto companyDto){
 
         log.info("Edit company ${companyDto}")
 
@@ -100,7 +115,9 @@ class CompanyService {
         company.mfo = companyDto.mfo
         company.iban = companyDto.iban
 
-        companyDataService.save(company)
+        company = companyDataService.save(company)
+
+        return CompanyDto.buildFromDomain(company)
     }
 
     void delete(){

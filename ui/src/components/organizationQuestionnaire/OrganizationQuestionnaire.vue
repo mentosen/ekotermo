@@ -8,68 +8,68 @@
     <div class="head">
       <div>
         <div>{{$t('organizationQuestionnaire.companyTitle')}}</div>
-        <input type="text" name="companyTitle" v-if="data.isEdit" v-bind:value="data.companyTitle"
+        <input type="text" name="companyTitle" v-if="isEdit" v-bind:value="data.companyTitle"
         @keydown="textValidate" @input="onInput">
-        <div v-if="!data.isEdit">{{data.companyTitle}}</div>
+        <div v-if="!isEdit">{{data.companyTitle}}</div>
       </div>
       <div>
         <div>{{$t('organizationQuestionnaire.companyCode')}}</div>
-        <input type="text" name="companyCode" pattern="^\d{10}$" v-if="data.isEdit" v-bind:value="data.companyCode"
+        <input type="text" name="companyCode" pattern="^\d{10}$" v-if="isEdit" v-bind:value="data.companyCode"
         @keydown="enterLimit" placeholder="1234567890" @input="onInput">
-        <div v-if="!data.isEdit">{{data.companyCode}}</div>
+        <div v-if="!isEdit">{{data.companyCode}}</div>
       </div>
     </div>
 
-      <div class="legalAddress" v-bind:class="{noBorder:data.isEdit}">
+      <div class="legalAddress" v-bind:class="{noBorder:isEdit}">
         <div class="legalLeft">
           <span>{{$t('organizationQuestionnaire.legalAddress')}}</span>
         </div>
         <div class="legalRight">
           <div>
             <span>{{$t('organizationQuestionnaire.region')}}</span>
-            <select name="legalRegion" v-if="data.isEdit">
+            <select name="legalRegion" v-if="isEdit">
               <option v-bind:value="item" v-for="item in regionsOQ" v-bind:selected="data.legalRegion == item">{{item}}</option>
             </select>
-            <span v-if="!data.isEdit">{{data.legalRegion}}</span>
+            <span v-if="!isEdit">{{data.legalRegion}}</span>
           </div>
           <div>
             <span>{{$t('organizationQuestionnaire.cityType')}}</span>
-            <select name="legalTypeSettlement" v-if="data.isEdit">
+            <select name="legalTypeSettlement" v-if="isEdit">
               <option v-bind:value="item" v-for="item in citiesTypeOQ" v-bind:selected="data.legalTypeSettlement == item">{{item}}</option>
             </select>
-            <span v-if="!data.isEdit">{{data.legalTypeSettlement}}</span>
+            <span v-if="!isEdit">{{data.legalTypeSettlement}}</span>
           </div>
           <div>
             <span>{{$t('organizationQuestionnaire.cityTitle')}}</span>
-            <input type="text" name="legalCity" pattern="\w" v-if="data.isEdit" v-bind:value="data.legalCity"
+            <input type="text" name="legalCity" pattern="\w" v-if="isEdit" v-bind:value="data.legalCity"
             @keydown="textValidate"  @input="onInput">
-            <span v-if="!data.isEdit">{{data.legalCity}}</span>
+            <span v-if="!isEdit">{{data.legalCity}}</span>
           </div>
           <div>
-            <select name="legalTypeStreet" v-if="data.isEdit">
+            <select name="legalTypeStreet" v-if="isEdit">
               <option v-bind:value="item" v-for="item in streetTypeOQ" v-bind:selected="data.legalTypeStreet == item">{{item}}</option>
             </select>
-            <span v-if="!data.isEdit">{{data.legalTypeStreet}}</span>
-            <input type="text" name="legalStreet"  pattern="\w" v-if="data.isEdit" v-bind:value="data.legalStreet"
+            <span v-if="!isEdit">{{data.legalTypeStreet}}</span>
+            <input type="text" name="legalStreet"  pattern="\w" v-if="isEdit" v-bind:value="data.legalStreet"
                    @keydown="textValidate" @input="onInput">
-            <span v-if="!data.isEdit">{{data.legalStreet}}</span>
+            <span v-if="!isEdit">{{data.legalStreet}}</span>
           </div>
           <div>
             <span>{{$t('organizationQuestionnaire.buildingNumber')}}</span>
-            <input type="text" name="legalBuildingNumber" pattern="^\d{1,4}$" v-if="data.isEdit" v-bind:value="data.legalBuildingNumber"
+            <input type="text" name="legalBuildingNumber" pattern="^\d{1,4}$" v-if="isEdit" v-bind:value="data.legalBuildingNumber"
             @keydown="enterLimit" placeholder="1234" @input="onInput">
-            <span v-if="!data.isEdit">{{data.legalBuildingNumber}}</span>
+            <span v-if="!isEdit">{{data.legalBuildingNumber}}</span>
           </div>
           <div>
             <span>{{$t('organizationQuestionnaire.roomNumber')}}</span>
-            <input type="text" name="legalRoomNumber" pattern="^\d{1,4}$" v-if="data.isEdit" v-bind:value="data.legalRoomNumber"
+            <input type="text" name="legalRoomNumber" pattern="^\d{1,4}$" v-if="isEdit" v-bind:value="data.legalRoomNumber"
             @keydown="enterLimit" placeholder="1234" @input="onInput">
-            <span v-if="!data.isEdit">{{data.legalRoomNumber}}</span>
+            <span v-if="!isEdit">{{data.legalRoomNumber}}</span>
           </div>
         </div>
       </div>
 
-    <div class="addressesMatch" v-if="data.isEdit">
+    <div class="addressesMatch" v-if="isEdit">
       <input type="checkbox" @click="chbClick" v-bind:checked="data.addressMatch">
       <span>{{$t('organizationQuestionnaire.match')}}</span>
     </div>
@@ -81,44 +81,44 @@
       <div class="legalRight">
         <div>
           <span>{{$t('organizationQuestionnaire.region')}}</span>
-          <select name="postalRegion" v-if="data.isEdit">
+          <select name="postalRegion" v-if="isEdit">
             <option v-bind:value="item" v-for="item in regionsOQ" v-bind:selected="data.postalRegion == item">{{item}}</option>
           </select>
-          <span v-if="!data.isEdit">{{data.postalRegion}}</span>
+          <span v-if="!isEdit">{{data.postalRegion}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.cityType')}}</span>
-          <select name="postalTypeSettlement" v-if="data.isEdit">
+          <select name="postalTypeSettlement" v-if="isEdit">
             <option v-bind:value="item" v-for="item in citiesTypeOQ" v-bind:selected="data.postalTypeSettlement == item">{{item}}</option>
           </select>
-          <span v-if="!data.isEdit">{{data.postalTypeSettlement}}</span>
+          <span v-if="!isEdit">{{data.postalTypeSettlement}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.cityTitle')}}</span>
-          <input type="text" name="postalCity" pattern="\w" v-if="data.isEdit" v-bind:value="data.postalCity"
+          <input type="text" name="postalCity" pattern="\w" v-if="isEdit" v-bind:value="data.postalCity"
                  @keydown="textValidate" @input="onInput">
-          <span v-if="!data.isEdit">{{data.postalCity}}</span>
+          <span v-if="!isEdit">{{data.postalCity}}</span>
         </div>
         <div>
-          <select name="postalTypeStreet" v-if="data.isEdit">
+          <select name="postalTypeStreet" v-if="isEdit">
             <option v-bind:value="item" v-for="item in streetTypeOQ"  v-bind:selected="data.postalTypeStreet == item">{{item}}</option>
           </select>
-          <span v-if="!data.isEdit">{{data.postalTypeStreet}}</span>
-          <input type="text" name="postalStreet" pattern="\w" v-if="data.isEdit" v-bind:value="data.postalStreet"
+          <span v-if="!isEdit">{{data.postalTypeStreet}}</span>
+          <input type="text" name="postalStreet" pattern="\w" v-if="isEdit" v-bind:value="data.postalStreet"
                  @keydown="textValidate" @input="onInput">
-          <span v-if="!data.isEdit">{{data.postalStreet}}</span>
+          <span v-if="!isEdit">{{data.postalStreet}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.buildingNumber')}}</span>
-          <input type="text" name="postalBuildingNumber" pattern="^\d{1,4}$" v-if="data.isEdit" v-bind:value="data.postalBuildingNumber"
+          <input type="text" name="postalBuildingNumber" pattern="^\d{1,4}$" v-if="isEdit" v-bind:value="data.postalBuildingNumber"
           @keydown="enterLimit"  placeholder="1234" @input="onInput">
-          <span v-if="!data.isEdit">{{data.postalBuildingNumber}}</span>
+          <span v-if="!isEdit">{{data.postalBuildingNumber}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.roomNumber')}}</span>
-          <input type="text" name="postalRoomNumber" pattern="^\d{1,4}$" v-if="data.isEdit" v-bind:value="data.postalRoomNumber"
+          <input type="text" name="postalRoomNumber" pattern="^\d{1,4}$" v-if="isEdit" v-bind:value="data.postalRoomNumber"
           @keydown="enterLimit"  placeholder="1234" @input="onInput">
-          <span v-if="!data.isEdit">{{data.postalRoomNumber}}</span>
+          <span v-if="!isEdit">{{data.postalRoomNumber}}</span>
         </div>
       </div>
     </div>
@@ -129,27 +129,27 @@
       <div class="rightGuidance">
         <div>
           <span>{{$t('organizationQuestionnaire.position')}}</span>
-          <input type="text" name="position" pattern="\w" v-if="data.isEdit" v-bind:value="data.position" @keydown="textValidate"
+          <input type="text" name="position" pattern="\w" v-if="isEdit" v-bind:value="data.position" @keydown="textValidate"
                  @input="onInput">
-          <span v-if="!data.isEdit">{{data.position}}</span>
+          <span v-if="!isEdit">{{data.position}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.initials')}}</span>
-          <input type="text" name="initials" pattern="\w" v-if="data.isEdit" v-bind:value="data.initials" @keydown="textValidate"
+          <input type="text" name="initials" pattern="\w" v-if="isEdit" v-bind:value="data.initials" @keydown="textValidate"
                  @input="onInput">
-          <span v-if="!data.isEdit">{{data.initials}}</span>
+          <span v-if="!isEdit">{{data.initials}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.phoneNumber')}}</span>
-          <input type="text" name="phoneNumber" pattern="^\+\d{12}$" v-if="data.isEdit" v-bind:value="data.phoneNumber"
+          <input type="text" name="phoneNumber" pattern="^\+\d{12}$" v-if="isEdit" v-bind:value="data.phoneNumber"
           @keydown="validatePhoneNumber"  placeholder="+380123456789" @input="onInput">
-          <span v-if="!data.isEdit">{{data.phoneNumber}}</span>
+          <span v-if="!isEdit">{{data.phoneNumber}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.email')}}</span>
-          <input type="text" name="email" pattern="\w" v-if="data.isEdit" v-bind:value="data.email" placeholder="some@email.net"
+          <input type="text" name="email" pattern="\w" v-if="isEdit" v-bind:value="data.email" placeholder="some@email.net"
                  @input="onInput">
-          <span v-if="!data.isEdit">{{data.email}}</span>
+          <span v-if="!isEdit">{{data.email}}</span>
         </div>
       </div>
     </div>
@@ -161,50 +161,56 @@
       <div class="bankRight">
         <div>
           <span>{{$t('organizationQuestionnaire.bankTitle')}}</span>
-          <input type="text" name="bankTitle" v-if="data.isEdit" v-bind:value="data.bankTitle" @keydown="textValidate" @input="onInput">
-          <span v-if="!data.isEdit">{{data.bankTitle}}</span>
+          <input type="text" name="bankTitle" v-if="isEdit" v-bind:value="data.bankTitle" @keydown="textValidate" @input="onInput">
+          <span v-if="!isEdit">{{data.bankTitle}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.bankCode')}}</span>
-          <input type="text" name="bankCode" pattern="^\d{6}$" v-if="data.isEdit" v-bind:value="data.bankCode"
+          <input type="text" name="bankCode" pattern="^\d{6}$" v-if="isEdit" v-bind:value="data.bankCode"
           @keydown="enterLimit" placeholder="123456" @input="onInput">
-          <span v-if="!data.isEdit">{{data.bankCode}}</span>
+          <span v-if="!isEdit">{{data.bankCode}}</span>
         </div>
         <div>
           <span>{{$t('organizationQuestionnaire.iban')}}</span>
-          <input type="text" name="iban" pattern="^\w[a-z,A-Z]{1}\d{27}$" v-if="data.isEdit" v-bind:value="data.iban"
+          <input type="text" name="iban" pattern="^\w[a-z,A-Z]{1}\d{27}$" v-if="isEdit" v-bind:value="data.iban"
           @keydown="enterLimit" placeholder="UA27-digit" @input="onInput">
-          <span v-if="!data.isEdit">{{data.iban}}</span>
+          <span v-if="!isEdit">{{data.iban}}</span>
         </div>
       </div>
     </div>
     
     <div class="btnPart">
-      <button class="yellowBtn" @click="save" v-bind:disabled="!data.isEdit">{{$t('buttons.save')}}</button>
-      <button class="greyBtn" @click="edit" v-bind:disabled="data.isEdit">{{$t('buttons.edit')}}</button>
+      <button class="yellowBtn" @click="save" v-bind:disabled="!isEdit">{{$t('buttons.save')}}</button>
+      <button class="greyBtn" @click="edit" v-bind:disabled="isEdit">{{$t('buttons.edit')}}</button>
     </div>
     
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from "vuex"
+import {mapGetters, mapActions} from "vuex";
+import {getCompanyByUser} from '@/api/company';
 export default {
   name: "organizationQuestionnaire",
   mounted() {
-    this.getRegionsOQ();
-    this.getCitiesTypeOQ();
-    this.getStreetTypeOQ();
+    let that = this;
 
-    if(this.dataOQ.companyTitle){
-      this.data = this.dataOQ;
-    }
+    getByCompanyUser().then(response => {
+      if(response.data.id){
+        that.data = response.data;
+        that.isEdit = false;
+        that.data.isAccounted = true;
+      }
+    })
+    that.getRegionsOQ();
+    that.getCitiesTypeOQ();
+    that.getStreetTypeOQ();
   },
   computed:mapGetters(["regionsOQ","citiesTypeOQ","streetTypeOQ","dataOQ"]),
   data(){
     return{
+      isEdit: true,
       data:{
-        isEdit: true,
         addressMatch: false,
         phoneNumber:"+380",
         iban:"UA",
@@ -213,7 +219,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(["getRegionsOQ","getCitiesTypeOQ","getStreetTypeOQ","saveDataOQ"]),
+    ...mapActions(["getRegionsOQ","getCitiesTypeOQ","getStreetTypeOQ", "saveDataOQ", 'updateDataOQ', 'getCompany']),
     save(){
       var result = true;
       var inputs = document.querySelectorAll("input[type=text], select");
@@ -241,13 +247,19 @@ export default {
 
       if(result){
         this.data.isAccounted = true;
-        this.data.isEdit = false;
-        this.saveDataOQ(Object.assign({},this.data));
+        this.isEdit = false;
+
+        if(this.data.id){
+          this.updateDataOQ(Object.assign({},this.data));
+        } else {
+          this.saveDataOQ(Object.assign({},this.data));
+        }
       }
 
     },
     edit(){
-      this.data.isEdit = true;
+      let that = this;
+      that.isEdit = true;
     },
     removeRedBorder(el){
       setTimeout(function (){

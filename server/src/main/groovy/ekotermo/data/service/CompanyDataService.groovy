@@ -22,8 +22,17 @@ class CompanyDataService {
 
         if(!company){
             log.debug("Company not found by userId [${userId}]")
-            throw new CompanyNotFoundException("Company by userId [${userId}] not found")
+            return new Company()
         }
+
+        return company
+    }
+
+    Company getByUserId(String userId){
+
+        log.debug("Get company by userId [${userId}]")
+
+        Company company = companyRepository.findByUserId(userId)
 
         return company
     }

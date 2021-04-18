@@ -1,3 +1,5 @@
+import {saveCompany, updateCompany} from '@/api/questionare';
+
 export default {
     actions:{
         getRegionsOQ(ctx){
@@ -10,11 +12,20 @@ export default {
             ctx.commit("addStreetTypeOQ", ["вулиця","переулок","проспект","тупік"]);
         },
         saveDataOQ(ctx, data){
-            ///post
-            ctx.commit("updateDataOQ", data);
+            saveCompany(data).then(response => {
+                ctx.commit("saveDataOQ", response.data);
+            })
+        },
+        updateDataOQ(ctx, data){
+            updateCompany(data).then(response => {
+                ctx.commit("updateDataOQ", response.data);
+            })
         }
     },
     mutations:{
+        getCompany(state, data){
+            state.dataOQ = data;
+        },
         addRegionsOQ(state,data){
             state.regionsOQ = data;
         },
@@ -24,9 +35,11 @@ export default {
         addStreetTypeOQ(state,data){
             state.streetTypeOQ = data;
         },
+        saveDataOQ(state,data){
+            state.dataOQ = data;
+        },
         updateDataOQ(state,data){
             state.dataOQ = data;
-            console.log(state.dataOQ);
         }
     },
     state:{

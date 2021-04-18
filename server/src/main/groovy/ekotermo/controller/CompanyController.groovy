@@ -26,15 +26,21 @@ class CompanyController {
         return companyService.findByUserId(principal.userId)
     }
 
+    @GetMapping("/getCompanyId")
+    CompanyDto findCompanyIdByUser(@AuthenticationPrincipal UserPrincipal principal) {
+
+        return companyService.findIdByUserId(principal.userId)
+    }
+
     @PostMapping("/")
-    void create(@AuthenticationPrincipal UserPrincipal principal,
+    CompanyDto create(@AuthenticationPrincipal UserPrincipal principal,
                 @RequestBody CompanyDto companyDto) {
 
         companyService.create(principal.userId, companyDto)
     }
 
     @PutMapping("/")
-    void edit(@AuthenticationPrincipal UserPrincipal principal,
+    CompanyDto edit(@AuthenticationPrincipal UserPrincipal principal,
               @RequestBody CompanyDto companyDto) {
 
         companyService.edit(principal.userId, companyDto)

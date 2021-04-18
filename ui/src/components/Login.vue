@@ -65,6 +65,7 @@
 <script>
     import {signin} from '@/api/auth';
     import { setToken } from "@/utils/auth";
+    import {getSimpleCompanyByUser} from '@/api/company';
 
     export default {
         name: "Login",
@@ -106,8 +107,13 @@
                                 that.currentUser = that.$store.getters.getUserInfo;
 
                                 if(that.currentUser.roles.includes('ROLE_COMPANY')){
-                                    // this.$router.push('/billingMainPage')
-                                    this.$router.push('/organizationQuestionnaire')
+                                    getSimpleCompanyByUser().then(response => {
+                                        if(response.data.id){
+                                            this.$router.push('/billingMainPage')
+                                        } else {
+                                            this.$router.push('/organizationQuestionnaire')
+                                        }
+                                    })
                                 } else {
                                     this.$router.push('/')
                                 }

@@ -15,6 +15,7 @@ class Company extends BaseDomain {
     String cityTypePost
     String cityNamePost
     String streetPost
+    String streetTypePost
     Integer buildingNumberPost
     Integer roomNumberPost
 
@@ -24,6 +25,7 @@ class Company extends BaseDomain {
     String cityTypeLegal
     String cityNameLegal
     String streetLegal
+    String streetTypeLegal
     Integer buildingNumberLegal
     Integer roomNumberLegal
 
