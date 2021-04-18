@@ -19,6 +19,7 @@ import organizationQuestionnaire from './organizationQuestionnaire'
 import workingWithObjectP2 from './workingWithObjectP2'
 import measurement from './measurement'
 import feedback from "@/locales/feedback";
+import objectDistributionArchive1 from "./objectDistributionArchive1";
 
 const locales = {
         common,
@@ -41,7 +42,8 @@ const locales = {
         organizationQuestionnaire,
         workingWithObjectP2,
         measurement,
-        feedback
+        feedback,
+        objectDistributionArchive1
     },
     messages = {};
 

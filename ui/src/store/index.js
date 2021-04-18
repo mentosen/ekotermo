@@ -12,6 +12,9 @@ import objectRegistration3P6 from "./modules/objectRegistration3P6";
 import organizationQuestionnaire from "./modules/organizationQuestionnaire";
 import workingWithObjectP2 from "./modules/workingWithObjectP2"
 import feedback from './modules/feedback'
+import objectDistributionArchive from './modules/objectDistributionArchive'
+import subscriberProfile from './modules/subscriberProfile'
+import subscriberPage from './modules/subscriberPage'
 
 Vue.use(Vuex);
 
@@ -27,7 +30,10 @@ const store = new Vuex.Store({
         objectRegistration3P6,
         organizationQuestionnaire,
         workingWithObjectP2,
-        feedback
+        feedback,
+        objectDistributionArchive,
+        subscriberProfile,
+        subscriberPage
     },
     getters
 });

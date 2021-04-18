@@ -51,6 +51,16 @@
         </tbody>
       </table>
 
+<!--      <div class="generalReadings">-->
+<!--        <div class="generalInfo">Колличество дней потребления</div>-->
+<!--        <div></div>-->
+<!--        <div class="generalInfo">Потребление Гкал/м2</div>-->
+<!--        <div></div>-->
+<!--        <div class="generalInfo">Общее потребление дома за отчетный период Гкал</div>-->
+<!--        <div></div>-->
+<!--        <div class="generalInfo" style="width: 300px">Объем потребленной тепловой энергии местами общего пользования</div>-->
+<!--        <div></div>-->
+<!--      </div>-->
     </div>
 
     <div class="btnPart">
@@ -69,12 +79,13 @@
     <table class="distributedTable">
       <caption>{{ $t('workingWithObjectP2.consumptionDistribution')}}</caption>
       <thead>
+      <th width="190">{{ $t('objectRegistration3.accountingType')}}</th>
       <th width="80px">{{ $t('workingWithObjectP2.apartmentNumber')}}</th>
       <th width="90px">{{ $t('workingWithObjectP2.generalArea')}}</th>
       <th width="90px">{{ $t('workingWithObjectP2.heatedArea')}}</th>
       <th width="200">{{ $t('objectRegistration3.roomPurpose')}}</th>
-      <th width="115px">{{ $t('workingWithObjectP2.previousDistributorValue')}}</th>
-      <th width="115px">{{ $t('workingWithObjectP2.currentDistributorValue')}}</th>
+      <th width="115px">{{ $t('workingWithObjectP2.previousDistributorValueP4')}}</th>
+      <th width="115px">{{ $t('workingWithObjectP2.currentDistributorValueP4')}}</th>
       <th width="115px">{{ $t('workingWithObjectP2.apartmentNeedsConsumption')}}</th>
       <th width="100px">{{ $t('workingWithObjectP2.premisesNeedsConsumption')}}</th>
       <th width="100px">{{ $t('workingWithObjectP2.sumConsumptionGcal')}}</th>
@@ -83,7 +94,7 @@
       <th colspan="2">{{ $t('workingWithObjectP2.action')}}</th>
       </thead>
       <tbody>
-        <appTrWWOP6 v-for="item in tableData" v-bind:tableData="item"></appTrWWOP6>
+        <appTrWWOP v-for="item in tableData" v-bind:tableData="item"></appTrWWOP>
       </tbody>
     </table>
 
@@ -96,11 +107,11 @@
 import {mapGetters,mapMutations,mapActions} from 'vuex'
 import AppHead from './head';
 import generalMeterReadings from './generalMeterReadings';
-import appTrWWOP6 from './appTrWWOP6'
-import downloadPopUp from "@/components/workingWithObjectP6/downloadPopUp";
+import appTrWWOP from './appTrWWOP4'
+import downloadPopUp from "@/components/workingWithObjectP4/downloadPopUp";
 
 export default {
-  /// вместо tdableData передавать flatsDataWWOP2
+  /// вместо tableData передавать flatsDataWWOP2
   name: "WorkingWithObjectP6",
   computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback","flatsDataWWOP2","showDownloadPopUpWWO"]),
   mounted() {
@@ -116,6 +127,7 @@ export default {
       isFile:false,
       isShowInpFile: false,
       tableData:[{
+        accountingType:"С индивидуальным отоплением",
         apartmentNumber:1,
         generalArea:40,
         heatedArea:35,
@@ -137,25 +149,35 @@ export default {
         errors:["error1","error2"]
       },
         {
+          accountingType:"Без ограничений",
           apartmentNumber:2,
           generalArea:50,
           heatedArea:35,
-          roomPurpose:[
-            {room:"Кухня",
-              previousReading:"123456,78",
-              currentReading:"123456,78",
-              currentConsumption:"123456,78",
-            }
-          ],
+          previousReading:"123456,78",
+          currentReading:"123456,78",
+          currentConsumption:"123456,78",
           premisesConsumption:123456.78,
           sumConsumption:123456.78,
           sumMoney:1000,
           errors:["error1"]
         },
+        {
+          accountingType:"Неотапливаемое помещение",
+          apartmentNumber:3,
+          generalArea:98,
+          heatedArea:0,
+          previousReading:"123456,78",
+          currentReading:"123456,78",
+          currentConsumption:"123456,78",
+          premisesConsumption:123456.78,
+          sumConsumption:123456.78,
+          sumMoney:1000,
+          errors:["error1"]
+        }
       ]
     }
   },
-  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP6:appTrWWOP6,downloadPopUp:downloadPopUp},
+  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP:appTrWWOP,downloadPopUp:downloadPopUp},
   methods:{
     ...mapActions(["sendFileWWOP2","saveAllFlatDataWWOP2"]),
     ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback","setShowDownloadPopUpWWO"]),
@@ -347,13 +369,13 @@ table caption{
   opacity: 0.5;
 }
 table.distributedTable{
-  width: 1622px;
+  width: 1833px;
   margin-top: 30px;
-  font-size: 14px;
+  font-size: 13px;
 }
 table.distributedTable th{
   font-weight: 450;
-  font-size: 14px;
+  font-size: 13px;
 }
 table.distributedTable th:last-child{
   width: auto;

@@ -114,7 +114,6 @@ td{
 }
 td:nth-child(11){
   padding: 0;
-  border-right: none;
 }
 td:nth-child(12){
   padding: 0;

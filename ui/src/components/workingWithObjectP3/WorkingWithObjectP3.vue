@@ -7,6 +7,28 @@
     <div class="headBtnPart">
       <button class="greenBtn headBtns">{{ $t('buttons.objectDistributionarchive')}}</button>
       <button class="yellowBtn headBtns" @click="showFeedback">{{ $t('buttons.feedback')}}</button>
+
+      <table class="generalInfoTable">
+        <thead>
+        <th colspan="2">{{ $t('workingWithObjectP2.generalInfoTableTh')}}</th>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{ $t('workingWithObjectP2.generalInfoTableTd1')}}</td>
+          <td>0,0000</td>
+        </tr>
+        <tr>
+          <td>{{ $t('workingWithObjectP2.generalInfoTableTd2')}}</td>
+          <td>0,0000</td>
+        </tr>
+        <tr>
+          <td>{{ $t('workingWithObjectP2.generalInfoTableTd3')}}</td>
+          <td>0,0000</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <button class="orangeBtn headBtns" @click="showDownloadPopUp">{{ $t('workingWithObjectP2.downloadReportDistributed')}}</button>
     </div>
 
     <AppHead></AppHead>
@@ -29,16 +51,6 @@
         </tbody>
       </table>
 
-<!--      <div class="generalReadings">-->
-<!--        <div class="generalInfo">Колличество дней потребления</div>-->
-<!--        <div></div>-->
-<!--        <div class="generalInfo">Потребление Гкал/м2</div>-->
-<!--        <div></div>-->
-<!--        <div class="generalInfo">Общее потребление дома за отчетный период Гкал</div>-->
-<!--        <div></div>-->
-<!--        <div class="generalInfo" style="width: 300px">Объем потребленной тепловой энергии местами общего пользования</div>-->
-<!--        <div></div>-->
-<!--      </div>-->
     </div>
 
     <div class="btnPart">
@@ -73,6 +85,7 @@
     </table>
 
     <button @click="save" class="greenBtn greenBtn1">{{ $t('buttons.saveDistribution')}}</button>
+    <downloadPopUp v-if="showDownloadPopUpWWO"></downloadPopUp>
   </div>
 </template>
 
@@ -81,17 +94,18 @@ import {mapGetters,mapMutations,mapActions} from 'vuex'
 import AppHead from './head';
 import generalMeterReadings from './generalMeterReadings';
 import appTrWWOP3 from './appTrWWOP3'
+import downloadPopUp from "@/components/workingWithObjectP3/downloadPopUp";
 
 export default {
   name: "WorkingWithObjectP2",
-  computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback","flatsDataWWOP2"]),
+  computed: mapGetters(["getFileWWOP2","isManualInputWWOP2","isAllFilledWWOP2","dataWWOP2","isShowFeedback","flatsDataWWOP2","showDownloadPopUpWWO"]),
   mounted() {
     this.setHeadBtnPos();
   },
   data(){
     return{
-      inpX:null,
-      inpY:null,
+      btnX:null,
+      btnY:null,
       data:{
         generalMeterReadings:{}
       },
@@ -99,10 +113,10 @@ export default {
       isShowInpFile: false
     }
   },
-  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP3:appTrWWOP3},
+  components:{AppHead:AppHead,generalMeterReadings:generalMeterReadings,appTrWWOP3:appTrWWOP3,downloadPopUp:downloadPopUp},
   methods:{
     ...mapActions(["sendFileWWOP2","saveAllFlatDataWWOP2"]),
-    ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback"]),
+    ...mapMutations(["changeIsManualInputWWOP2","changeIsAllFilledWWOP2","addMeterReadingsWWOP2","changeIsShowFeedback","setShowDownloadPopUpWWO"]),
     save(){
       var inputs1 = document.querySelector(".generalMeterReadings").querySelectorAll(".tableInput");
       var el = null;
@@ -154,15 +168,18 @@ export default {
     setHeadBtnPos(){
       var btn = document.querySelector(".headBtnPart");
       var related = document.querySelector(".appHeadWWOP2");
-      this.inpX = related.getBoundingClientRect().left + related.offsetWidth;
-      this.inpY = related.getBoundingClientRect().top + (related.offsetHeight/2);
+      this.btnX = related.getBoundingClientRect().left + related.offsetWidth;
+      this.btnY = related.getBoundingClientRect().top + (related.offsetHeight/2);
 
       btn.style.position = "absolute";
-      btn.style.left = (this.inpX+75)  + "px";
-      btn.style.top = (this.inpY-140) + "px";
+      btn.style.left = (this.btnX+115)  + "px";
+      btn.style.top = (this.btnY-347) + "px";
     },
     showFeedback(){
       this.changeIsShowFeedback(true);
+    },
+    showDownloadPopUp(){
+      this.setShowDownloadPopUpWWO(true);
     }
   }
 }
@@ -273,18 +290,18 @@ table.distributedTable th{
   font-size: 14px;
 }
 /*////*/
-.yellowBtn,.greenBtn,.greenBtn1,.greyBtn,.blueBtn,.redBtn{
-   width: 200px;
-   height: 30px;
-   padding: 3px;
-   border: 1px solid #f9ed17;
-   background-color: yellow;
-   font-size: 15px;
-   cursor: pointer;
-   outline: none;
-   margin-right: 10px;
-   border-radius: 3px;
- }
+.yellowBtn,.greenBtn,.greenBtn1,.greyBtn,.blueBtn,.redBtn,.orangeBtn{
+  width: 200px;
+  height: 30px;
+  padding: 3px;
+  border: 1px solid #f9ed17;
+  background-color: yellow;
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+  border-radius: 3px;
+}
 .greenBtn1{
   margin-top: 50px;
   margin-bottom: 20px;
@@ -298,7 +315,12 @@ table.distributedTable th{
 .redBtn1{
   width: 50px;
 }
-
+.orangeBtn{
+  background-color: #fdbb43;
+  border: 1px solid #ffaa0f;
+  font-size: 12px;
+  margin-top: 20px;
+}
 .greenBtn{
   background-color: #13f113;
   border: 1px solid #1bd400;
@@ -313,7 +335,9 @@ table.distributedTable th{
   background-color: #01beff;
   border: 1px solid #1183c1;
 }
-
+.orangeBtn:hover{
+  background-color: #ffcd73;
+}
 .redBtn:hover{
   background-color: #fb6f6f;
 }
@@ -332,5 +356,13 @@ table.distributedTable th{
 }
 .headBtns{
   width: 245px;
+}
+.generalInfoTable{
+  width: 245px;
+  font-size: 14px;
+  margin-top: 98px;
+}
+.generalInfoTable td,th{
+  font-size: 13px;
 }
 </style>

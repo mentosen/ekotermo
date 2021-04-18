@@ -235,11 +235,14 @@ input, select{
   border: none;
   outline: none;
   text-align: center;
-  border:1px solid #ccc;
+  border:1px solid #3c3a3a;
   padding-left: 5px;
   width: 150px;
   border-radius: 3px;
   text-align-last:center;
+}
+select{
+  background-color: #b3e5fc;
 }
 select>option{
   width: 290px;

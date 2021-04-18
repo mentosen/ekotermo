@@ -35,6 +35,9 @@ export default {
         },
         addFlatsDataWWOP3(state,data){
             state.flatsData = data;
+        },
+        setShowDownloadPopUpWWO(state, value){
+            state.showDownloadPopUpWWO = value;
         }
     },
     state:{
@@ -44,7 +47,7 @@ export default {
                 generalArea:100,
                 heatedArea:90,
                 previousReading:123456.78,
-                currentReading:"123456,78",
+                currentReading:"000000,00",
                 currentConsumption:123456.78,
                 premisesConsumption:123456.78,
                 sumConsumption:123456789,
@@ -56,7 +59,7 @@ export default {
                     generalArea:100,
                     heatedArea:90,
                     previousReading:123456.78,
-                    currentReading:"123456,78",
+                    currentReading:"000000,00",
                     currentConsumption:123456.78,
                     premisesConsumption:123456.78,
                     sumConsumption:123456789,
@@ -68,7 +71,7 @@ export default {
                     generalArea:100,
                     heatedArea:90,
                     previousReading:123456.78,
-                    currentReading:"123456,78",
+                    currentReading:"000000,00",
                     currentConsumption:123456.78,
                     premisesConsumption:123456.78,
                     sumConsumption:123456789,
@@ -78,7 +81,8 @@ export default {
             generalMeterReadings:{}
         },
         isManualInputWWOP2:false,
-        isAllFilledWWOP2: false
+        isAllFilledWWOP2: false,
+        showDownloadPopUpWWO: false
     },
 
     getters:{
@@ -96,6 +100,9 @@ export default {
         },
         flatsDataWWOP2(state){
             return state.dataWWOP2.flatsData;
+        },
+        showDownloadPopUpWWO(state){
+            return state.showDownloadPopUpWWO;
         }
     }
 }

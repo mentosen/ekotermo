@@ -9,6 +9,7 @@ export default {
       ctx.commit("addFloors", 6);
       ctx.commit("addRoomPurpose");
       ctx.commit("addRoomTypeP3");
+      ctx.commit("addTypeAccounted");
     },
     saveFlatData(ctx, data){
       ctx.commit("addDataFlat", data);
@@ -69,6 +70,12 @@ export default {
      var data = [{value:1,title:"1"},{value:0.9,title:"0.9"},{value:0.8,title:"0.8"}];
       state.cof = data;
     },
+    addTypeAccounted(state,data){
+      var data = [{value:1,title:"Счетчик тепла"},
+        {value:2,title:"Распределитель тепла"},
+        {value:3,title:"Без учета"}];
+      state.typeAccountedP4 = data;
+    },
     changeShowPopUp(state, value){
       state.showPopUp = value;
     },
@@ -104,7 +111,8 @@ export default {
     isAllFilled2: false,
     showPopUp: false,
     roomPurpose:[],
-    roomTypeP3:[]
+    roomTypeP3:[],
+    typeAccountedP4:[]
   },
 
   getters:{
@@ -143,6 +151,9 @@ export default {
     },
     roomTypeP3(state){
       return state.roomTypeP3;
+    },
+    typeAccountedP4(state){
+      return state.typeAccountedP4;
     }
   }
 }

@@ -127,6 +127,31 @@ export default new Router({
                     path: '/workingWithObjectP6',
                     name: 'working With ObjectP6',
                     component: () => import('@/components/workingWithObjectP6/WorkingWithObjectP6.vue'),
+                },
+                {
+                    path: '/objectRegistration3P4',
+                    name: 'object Registration3P4',
+                    component: () => import('@/components/objectRegistration3P4/ObjectRegistration3P4.vue'),
+                },
+                {
+                    path: '/workingWithObjectP4',
+                    name: 'working With ObjectP4',
+                    component: () => import('@/components/workingWithObjectP4/WorkingWithObjectP4.vue'),
+                },
+                {
+                    path: '/objectDistributionArchive',
+                    name: 'object Distribution Archive',
+                    component: () => import('@/components/objectDistributionArchive/objectDistributionArchive.vue'),
+                },
+                {
+                    path: '/subscriberProfile',
+                    name: 'subscriber Profile',
+                    component: () => import('@/components/subscriberProfile/subscriberProfile.vue'),
+                },
+                {
+                    path: '/subscriberPage',
+                    name: 'subscriber Page',
+                    component: () => import('@/components/subscriberPage/subscriberPage.vue'),
                 }
             ],
         },

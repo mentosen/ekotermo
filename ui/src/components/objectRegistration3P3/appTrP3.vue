@@ -291,13 +291,14 @@ button{
 .tableSelect{
   display: block;
   outline: none;
-  border: 1px solid white;
+  border: 1px solid #b3e5fc;
   width: 100%;
   height: 100%;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
   text-align-last:center;
+  background-color: #b3e5fc;
 }
 
 .tableInpFile{
