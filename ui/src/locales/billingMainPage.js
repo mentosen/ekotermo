@@ -24,20 +24,21 @@ export default {
         objectStatus2:"На регистрации",
         objectStatus3:"Удален",
         filterAll:"ВСЕ",
-        currentMeterReadings:"Текущие показания счетчика"
+        currentMeterReadings:"Текущие показания счетчика",
+        noBuildings:'Нет зарегистрированніх обьектов'
     },
     uk:{
         additionalFunctions:"Додаткові функції",
         enterMeterReadings:"Внести показання лічильника",
-        objectQuestionnaireForm:"Анкета об\'єкту",
+        objectQuestionnaireForm:"Анкета об'єкту",
         invoiceForPayment:"Рахунок до сплати",
         statistics:"Статистика",
         normativeDocuments:"Нормативна документація",
         feedback:"Зворотній звязок",
-        numberOfObjects:"Кількість об\'єктів:",
+        numberOfObjects:"Кількість об'єктів:",
         registeredDistributors:"Кількість зареєстрованих розподілювачів:",
-        registerNewObject:"Реєстрація нового об\'єкта",
-        objectList:"Перелік об\'єктів",
+        registerNewObject:"Реєстрація нового об'єкта",
+        objectList:"Перелік об'єктів",
         serialNumber:"№ п/п",
         address:"Адреса",
         buildingCategory:"Категорія будинку",
@@ -51,7 +52,8 @@ export default {
         objectStatus2:"На реєстрації",
         objectStatus3:"Видалений",
         filterAll:"ВСІ",
-        currentMeterReadings:"Теперішні показання лічильника"
+        currentMeterReadings:"Теперішні показання лічильника",
+        noBuildings:"Немає зареєстрованих об'єктів"
     },
     en:{
         additionalFunctions:"Additional functions",
@@ -78,6 +80,7 @@ export default {
         objectStatus2:"On registration",
         objectStatus3:"Deleted",
         filterAll:"ALL",
-        currentMeterReadings:"Current meter readings"
+        currentMeterReadings:"Current meter readings",
+        noBuildings:'There are no registered objects'
     }
 }

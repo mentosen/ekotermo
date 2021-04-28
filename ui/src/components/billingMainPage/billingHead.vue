@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <div class="headDivsTop">
-      <div class="title">Название билинговой компании</div>
+      <div v-if="company" class="title">{{company.companyTitle}}</div>
       <div class="dropMenu" @mouseover="onMenuOver" @mouseout="onMenuOut">
         <button class="dropMenuItem">{{$t('billingMainPage.additionalFunctions')}}</button>
 
@@ -21,11 +21,11 @@
     <div class="headDivs">
       <div>
         <span>{{$t('billingMainPage.numberOfObjects')}}</span>
-        <span class="countSpan"></span>
+        <span class="countSpan">{{company.buildings ? company.buildings.length() : 0}}</span>
       </div>
       <div>
         <span>{{$t('billingMainPage.registeredDistributors')}}</span>
-        <span class="countSpan"></span>
+        <span class="countSpan">{{company.distributors ? company.distributors.length() : 0}}</span>
       </div>
       <div>
         <router-link to="/objectRegistration1">
@@ -38,16 +38,27 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import {getCompanyByUser} from '@/api/company';
 export default {
   name: "billingHead",
   data(){
     return{
       top: null,
-      left:null
+      left:null,
+      company: {}
     }
+  },
+  mounted() {
+    this.getCompany();
   },
   computed: mapGetters(["billingDataHead"]),
   methods:{
+    getCompany(){
+      let that = this;
+      getCompanyByUser().then(response => {
+        that.company = response.data
+      })
+    },
     onMenuOver(e){
       var parent = e.target.closest(".dropMenu");
       !this.top? this.top = e.target.offsetTop: "";

@@ -1,7 +1,6 @@
 package ekotermo.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonProperty
 import ekotermo.data.domain.Company
 import groovy.transform.ToString
 
@@ -61,7 +60,13 @@ class CompanyDto extends BaseDto{
     String mfo
     String iban
 
+    List<BuildingDto> buildings
+
     static buildFromDomain(Company company){
+
+        List<BuildingDto> buildingDtos = company.buildings.collect {
+            return BuildingDto.buildFromDomain(it)
+        }
 
         return new CompanyDto(
                 id:company.id,
@@ -94,6 +99,8 @@ class CompanyDto extends BaseDto{
                 bankName: company.bankName,
                 mfo: company.mfo,
                 iban: company.iban,
+
+                buildings: buildingDtos
         )
     }
 

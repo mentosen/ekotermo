@@ -27,8 +27,13 @@
       </tr>
 
       </thead>
-      <tbody>
+      <tbody v-if="billingObjects.length > 0">
         <BillingTr v-for="(item, key) in billingObjects" v-bind:index="key" :key="key"></BillingTr>
+      </tbody>
+      <tbody v-else>
+      <tr>
+        <td colspan="8">{{$t('billingMainPage.noBuildings')}}</td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -51,9 +56,13 @@ export default {
       tableHeadTr1: null,
       tableHeadTr2: null,
       filter:{
-        regions:["Миколаївська","Київська","Івано-Франківська"],
+        // regions:["Миколаївська","Київська","Івано-Франківська"],
+        // regionsIsShow: false,
+        // streets:["Соборна","Богдана Хмельницького","Площа ринок"],
+        // streetsIsShow: false
+        regions:[],
         regionsIsShow: false,
-        streets:["Соборна","Богдана Хмельницького","Площа ринок"],
+        streets:[],
         streetsIsShow: false
       }
     }
@@ -62,23 +71,23 @@ export default {
   components:{BillingHead: BillingHead, BillingTr:BillingTr, tableFilter:tableFilter},
   methods:{
     onThClick(e){
-      if(e.target == this.tableHeadTr2[0]){
+      if(e.target === this.tableHeadTr2[0]){
         this.filter.regionsIsShow = true;
-      }else if(e.target == this.tableHeadTr2[2]){
+      }else if(e.target === this.tableHeadTr2[2]){
         this.filter.streetsIsShow = true;
       }
     },
     hideFilter(title){
-      if(title == "region"){
+      if(title === "region"){
         this.filter.regionsIsShow = false;
-      }else if(title == "street"){
+      }else if(title === "street"){
         this.filter.streetsIsShow = false;
       }
     },
     confirmFilter(title){
-      if(title == "region"){
+      if(title === "region"){
         this.filter.regionsIsShow = false;
-      }else if(title == "street"){
+      }else if(title === "street"){
         this.filter.streetsIsShow = false;
       }
     }

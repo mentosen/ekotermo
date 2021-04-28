@@ -22,41 +22,42 @@ export default {
     state:{
         billingData: null,
         billingDataHead: null,
-        billingObjects:[{
-            number:1,
-            region:"Івано-Франківська",
-            city:"Івано-Франківськ",
-            street:"Богдана Хмельницького",
-            buildingNumber:"5",
-            status: "onAccount",
-            category:"Розділ ІІ пункт 3 підпункт 2",
-            isSaved:false,
-            isEdit: true,
-            counterValue: null
-        }, {
-            number:2,
-            region:"Миколаївська",
-            city:"Миколаїв",
-            street:"Соборна",
-            buildingNumber:"14",
-            status: "onDeleted",
-            category:"Розділ ІІ пункт 3 підпункт 2",
-            isSaved:false,
-            isEdit: true,
-            counterValue: null
-        }, {
-            number:3,
-            region:"Херсонська",
-            city:"Херсон",
-            street:"Мазепи",
-            buildingNumber:"29",
-            status: "onRegister",
-            category:"Розділ ІІ пункт 3 підпункт 2",
-            isSaved:false,
-            isEdit: true,
-            counterValue: null
-            }
-        ]
+        // billingObjects:[{
+        //     number:1,
+        //     region:"Івано-Франківська",
+        //     city:"Івано-Франківськ",
+        //     street:"Богдана Хмельницького",
+        //     buildingNumber:"5",
+        //     status: "onAccount",
+        //     category:"Розділ ІІ пункт 3 підпункт 2",
+        //     isSaved:false,
+        //     isEdit: true,
+        //     counterValue: null
+        // }, {
+        //     number:2,
+        //     region:"Миколаївська",
+        //     city:"Миколаїв",
+        //     street:"Соборна",
+        //     buildingNumber:"14",
+        //     status: "onDeleted",
+        //     category:"Розділ ІІ пункт 3 підпункт 2",
+        //     isSaved:false,
+        //     isEdit: true,
+        //     counterValue: null
+        // }, {
+        //     number:3,
+        //     region:"Херсонська",
+        //     city:"Херсон",
+        //     street:"Мазепи",
+        //     buildingNumber:"29",
+        //     status: "onRegister",
+        //     category:"Розділ ІІ пункт 3 підпункт 2",
+        //     isSaved:false,
+        //     isEdit: true,
+        //     counterValue: null
+        //     }
+        // ]
+        billingObjects:[]
     },
     getters:{
         billingData(state){
