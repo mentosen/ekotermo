@@ -195,11 +195,13 @@ export default {
   mounted() {
     let that = this;
 
-    getByCompanyUser().then(response => {
+    getCompanyByUser().then(response => {
       if(response.data.id){
         that.data = response.data;
         that.isEdit = false;
         that.data.isAccounted = true;
+      } else {
+        that.isEdit = true;
       }
     })
     that.getRegionsOQ();
@@ -209,7 +211,7 @@ export default {
   computed:mapGetters(["regionsOQ","citiesTypeOQ","streetTypeOQ","dataOQ"]),
   data(){
     return{
-      isEdit: true,
+      isEdit: false,
       data:{
         addressMatch: false,
         phoneNumber:"+380",
