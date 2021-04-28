@@ -1,4 +1,4 @@
-import {saveCompany, updateCompany} from '@/api/questionare';
+import {saveCompany, updateCompany} from '@/api/company';
 
 export default {
     actions:{
