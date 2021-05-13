@@ -1,14 +1,14 @@
 <template>
   <tr>
-    <td>{{ data.number }}</td>
+    <td>{{ this.index+1 }}</td>
     <td>{{ data.region }}</td>
     <td>{{ data.city }}</td>
     <td>{{ data.street }}</td>
     <td>{{ data.buildingNumber }}</td>
-    <td>{{data.category}}</td>
-    <td v-if="data.status == 'onAccount'" class="green" v-bind:title="$t('billingMainPage.objectStatus1')"></td>
-    <td v-if="data.status == 'onRegister'" class="yellow" v-bind:title="$t('billingMainPage.objectStatus2')"></td>
-    <td v-if="data.status == 'onDeleted'" class="red" v-bind:title="$t('billingMainPage.objectStatus3')"></td>
+    <td>{{$t('objectRegistration.' + getBuildingCategory())}}</td>
+    <td v-if="data.status === 'REGISTERED'" class="green" v-bind:title="$t('billingMainPage.objectStatus1')"></td>
+    <td v-if="data.status === 'NEW'" class="yellow" v-bind:title="$t('billingMainPage.objectStatus2')"></td>
+    <td v-if="data.status === 'DELETED'" class="red" v-bind:title="$t('billingMainPage.objectStatus3')"></td>
     <td class="arrowRight"></td>
   </tr>
 </template>
@@ -28,7 +28,14 @@ export default {
   },
   computed:mapGetters(["billingObjects"]),
   methods:{
+    getBuildingCategory(){
+      let that = this;
+      return typeof that.data.buildingCategory !== 'undefined' ? that.convertSnakeCaseToCamelCase(that.data.buildingCategory) + 'Title' : "";
+    },
 
+    convertSnakeCaseToCamelCase(string){
+      return string.toLowerCase().replace(/([-_]\w)/g, group => group[1].toUpperCase());
+    }
   }
 }
 </script>

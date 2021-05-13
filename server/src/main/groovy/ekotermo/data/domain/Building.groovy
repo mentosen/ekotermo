@@ -1,6 +1,7 @@
 package ekotermo.data.domain
 
 import ekotermo.data.enums.BuildingCategory
+import ekotermo.data.enums.BuildingStatus
 import groovy.transform.ToString
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -15,6 +16,7 @@ class Building extends BaseDomain{
     int buildingNumber
 
     BuildingCategory buildingCategory
+    BuildingStatus status
 
     int entranceCount
     int flatsCount

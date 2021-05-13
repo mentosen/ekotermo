@@ -1,7 +1,9 @@
 package ekotermo.service
 
+import ekotermo.data.domain.Building
 import ekotermo.data.domain.Company
 import ekotermo.data.domain.User
+import ekotermo.data.service.BuildingDataService
 import ekotermo.data.service.CompanyDataService
 import ekotermo.data.service.UserDataService
 import ekotermo.dto.CompanyDto
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service
 class CompanyService {
 
     @Autowired private CompanyDataService companyDataService
+    @Autowired private BuildingDataService buildingDataService
     @Autowired private UserDataService userDataService
 
     CompanyDto findByUserId(String userId) {
@@ -21,7 +24,8 @@ class CompanyService {
         log.info("Find company by userID [${userId}]")
 
         Company company = companyDataService.findByUserId(userId)
-
+        company.buildings = buildingDataService.findAllByUserId(userId)
+        
         return CompanyDto.buildFromDomain(company)
     }
 

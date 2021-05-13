@@ -5,33 +5,39 @@
     </router-link>
 
     <div class="headHeading">{{ $t('objectRegistration.objectRegistration')}}<br>{{ $t('objectRegistration.section')}} №1</div>
+
     <div class="address">
       <div class="addressTitle">{{ $t('objectRegistration.objectAddress')}}</div>
+
       <div class="addressInfo">
         <div class="addressData">
           <span>{{ $t('common.region')}}:</span>
-          <select name="region" class="required" v-if="isEdit">
-            <option v-bind:value="data.value" v-for="data in getRegions" v-bind:selected="getFlatInfo.region == data.value">{{data.title}}</option>
+          <select name="region" class="required region" v-if="isEdit" @change="onRegionChange($event)">
+            <option v-bind:value="data.name" v-for="data in regions" v-bind:selected="getFlatInfo.region == data.name">{{data.name}}</option>
           </select>
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.region}}</div>
         </div>
+
         <div class="addressData">
           <span>{{ $t('common.area')}}:</span>
           <input type="text" @keydown="textValidate" name="area"  v-if="isEdit" v-bind:value="getFlatInfo.area">
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.area}}</div>
         </div>
+
         <div class="addressData">
           <span>{{ $t('registration.city')}}:</span>
-          <select name="cities" class="required" v-if="isEdit">
-            <option v-bind:value="data.value" v-for="data in getCities" v-bind:selected="getFlatInfo.cities == data.value">{{data.title}}</option>
+          <select name="city" class="required" v-if="isEdit">
+            <option v-bind:value="data.name" v-for="data in getCities" v-bind:selected="getFlatInfo.city == data.value">{{data.name}}</option>
           </select>
-          <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.cities}}</div>
+          <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.city}}</div>
         </div>
+
         <div class="addressData">
           <span>{{ $t('registration.street')}}:</span>
           <input type="text" class="required" @keydown="textValidate" name="street"  v-if="isEdit" v-bind:value="getFlatInfo.street">
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.street}}</div>
         </div>
+
         <div class="addressData">
           <span>{{ $t('registration.building')}}:</span>
           <input type="text" class="required" @keydown="validate" name="buildingNumber" v-if="isEdit" v-bind:value="getFlatInfo.buildingNumber">
@@ -52,7 +58,7 @@
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointTwoTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointTwo')}}</div>
               </div>
-              <input type="checkbox" value="2" @change="changeChbChecked"  name="buildingCategory">
+              <input type="checkbox" value="SECTION_POINT_TWO" @change="changeChbChecked"  name="buildingCategory">
             </div>
             <div class="chbsWrapper">
               <div><div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeTitle')}}</div>
@@ -64,35 +70,35 @@
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeSubOneTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointThreeSubOne')}}</div>
               </div>
-              <input type="checkbox" value="3.1" @change="changeChbChecked" name="buildingCategory">
+              <input type="checkbox" value="SECTION_POINT_THREE_SUB_ONE" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeSubTwoTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointThreeSubTwo')}}</div>
               </div>
-              <input type="checkbox" value="3.2" @change="changeChbChecked" name="buildingCategory">
+              <input type="checkbox" value="SECTION_POINT_THREE_SUB_TWO" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointFourTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointFour')}}</div>
               </div>
-              <input type="checkbox" value="4" @change="changeChbChecked" name="buildingCategory">
+              <input type="checkbox" value="SECTION_POINT_FOUR" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointFiveTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointFive')}}</div>
               </div>
-              <input type="checkbox" value="5" @change="changeChbChecked" name="buildingCategory">
+              <input type="checkbox" value="SECTION_POINT_FIVE" @change="changeChbChecked" name="buildingCategory">
             </div>
             <div class="chbsWrapper">
               <div>
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointSixTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointSix')}}</div>
               </div>
-              <input type="checkbox" value="6" @change="changeChbChecked" name="buildingCategory">
+              <input type="checkbox" value="SECTION_POINT_SIX" @change="changeChbChecked" name="buildingCategory">
             </div>
           </div>
         </div>
@@ -139,7 +145,7 @@
                      @keyup="validateGeneralCounterValueKeyUp"
                      name="generalCounterValue"
                      value=","
-                     placeholder="000000,00" v-if="isEdit"
+                     placeholder="000000.00" v-if="isEdit"
                      v-bind:value="getFlatInfo.generalCounterValue">
               <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.generalCounterValue}}</div>
             </div>
@@ -181,18 +187,18 @@
                          placeholder="+380456789123"
                          @keyup="validatePhoneNumberKeyUp"
                          @keydown="validatePhoneNumber"
-                         name="personPhoneNum1" v-if="isEdit"
-                         v-bind:value="getFlatInfo.personPhoneNum1">
-                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNum1}}</div>
+                         name="personPhoneNumFirst" v-if="isEdit"
+                         v-bind:value="getFlatInfo.personPhoneNumFirst">
+                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNumFirst}}</div>
                   <input type="text"
                          value="+380"
                          class="phoneNumber phone2"
                          placeholder="+380456789123"
                          @keyup="validatePhoneNumberKeyUp"
                          @keydown="validatePhoneNumber"
-                         name="personPhoneNum2" v-if="isEdit"
-                         v-bind:value="getFlatInfo.personPhoneNum2">
-                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNum2}}</div>
+                         name="personPhoneNumSecond" v-if="isEdit"
+                         v-bind:value="getFlatInfo.personPhoneNumSecond">
+                  <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNumSecond}}</div>
                 </div>
               </div>
             </div>
@@ -215,26 +221,10 @@
 </template>
 
 <script>
-import {mapGetters, mapActions,mapMutations} from 'vuex'
+import {mapActions,mapMutations} from 'vuex'
 import delPopUp from './deletePopUp.vue'
 export default {
   name: 'objectRegistration1',
-  mounted() {
-    this.getAllRegions();
-    this.data = this.getFlatInfo;
-
-    if(this.data.personPhoneNum1 || this.data.personPhoneNum2){
-      if(this.data.personPhoneNum1) this.phoneNumbers.phone1 = this.data.personPhoneNum1;
-      if(this.data.personPhoneNum2) this.phoneNumbers.phone2 = this.data.personPhoneNum2;
-    }
-    if(this.getFlatInfo.isEdit === false){
-      this.isEdit = this.getFlatInfo.isEdit;
-    }
-    if(this.getFlatInfo.isSaved){
-      this.isSaved = this.getFlatInfo.isSaved;
-    }
-    this.checkChbs();
-  },
   data(){
     return{
       isSaved: false,
@@ -253,12 +243,44 @@ export default {
       floorsLimit:1
     }
   },
-  computed: mapGetters(["getRegions","getCities","getIsDel","getFlatInfo"]),
+  created() {
+    this.getAllRegions();
+  },
+  mounted() {
+    this.data = this.getFlatInfo;
+    if(this.data.personPhoneNumFirst || this.data.personPhoneNumSecond){
+      if(this.data.personPhoneNumFirst) this.phoneNumbers.phone1 = this.data.personPhoneNumFirst;
+      if(this.data.personPhoneNumSecond) this.phoneNumbers.phone2 = this.data.personPhoneNumSecond;
+    }
+    if(this.getFlatInfo.isEdit === false){
+      this.isEdit = this.getFlatInfo.isEdit;
+    }
+    if(this.getFlatInfo.isSaved){
+      this.isSaved = this.getFlatInfo.isSaved;
+    }
+    this.checkChbs();
+  },
+  computed: {
+    getCities() {
+      return this.$store.getters.getCities
+    },
+    getIsDel() {
+      return this.$store.getters.getIsDel
+    },
+    getFlatInfo() {
+      return this.$store.getters.getFlatInfo
+    },
+    regions() {
+      return this.$store.getters.getRegions
+    },
+
+  },
   components:{delPopUp: delPopUp},
   methods:{
     ...mapActions(["saveData"]),
     ...mapMutations(["changeIsDel","changeSection3Url"]),
     ...mapActions(["getAllRegions"]),
+
     save(){
     var inputs = document.querySelectorAll("input[type=text],input[type=checkbox],select");
     var chbsWrap = document.querySelectorAll(".chbsWrapper");
@@ -317,7 +339,7 @@ export default {
 
       for(var k = 0; k < arr.length;k++){
         if(arr[k].name === "generalCounterValue"){
-          var regEx = /^\d{6},\d{2}$/;
+          var regEx = /^\d{6}.\d{2}$/;
           if(!arr[k].value.match(regEx)){
             result = false;
             arr[k].style.border = "1px solid red";
@@ -402,7 +424,7 @@ export default {
       }
     },
     validateGeneralCounterValue(e){
-      if(e.key == "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight"|| e.key == ","){
+      if(e.key == "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight"|| e.key == "."){
         return
       } else if(isNaN(e.key) || e.key == " " ||e.target.value.length === 9){
         e.preventDefault();
@@ -412,7 +434,7 @@ export default {
     validateGeneralCounterValueKeyUp(e){
       if(e.target.value.length == 6){
         if(e.key === "Backspace") return
-        e.target.value += ",";
+        e.target.value += ".";
       }
     },
     counterFocus(e){
@@ -498,6 +520,17 @@ export default {
       this.changeIsDel(true);
     },
     toRegForm2(){
+
+    },
+
+
+    onRegionChange(event){
+      let that = this;
+      debugger
+      that.getFlatInfo.region = event.target.value;
+
+      let cities = that.$store.getters.getRegions.find(region => region.name === that.getFlatInfo.region).cities;
+      that.$store.commit('addCities', cities)
 
     }
   }
@@ -596,6 +629,12 @@ export default {
   display: flex;
   align-items: center;
 }
+
+.addressData select.region{
+  width: 175px;
+}
+
+
  .addressData input,.addressData select{
    border: 1px solid #3c3a3a;
    padding: 2px;

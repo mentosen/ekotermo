@@ -6,7 +6,7 @@
     </div>
 
     <div class="tableFilterDiv" v-for="title in arr">
-      <input type="checkbox" value="" checked @click="clickChbs">
+      <input type="checkbox" v-bind:value="title" checked @click="clickChbs">
       <div class="tableFilterTitle">
         {{title}}
       </div>
@@ -29,7 +29,7 @@ export default {
     var top;
     var left;
     this.el = document.querySelector("." + className);
-
+debugger
     parent = this.el.closest("th");
     top = parent.getBoundingClientRect().top + document.body.scrollTop + parent.offsetHeight;
     left = parent.getBoundingClientRect().left + document.body.scrollLeft+1;
@@ -42,14 +42,17 @@ export default {
   data(){
     return{
       el: null,
-      uncheckedChbs:[]
+      uncheckedChbs:[],
+      listToShow: []
     }
   },
   methods:{
     confirm(){
+      debugger
       this.$emit('filtered', this.title);
     },
     cancel(){
+      debugger
       for(var k = 0; k < this.uncheckedChbs.length; k ++){
         this.uncheckedChbs[k].checked = true;
       }
@@ -61,6 +64,7 @@ export default {
       if(!e.target.checked){
         this.uncheckedChbs.push(e.target);
       }else{
+        this.listToShow.push()
         for(var k = 0; k < arr.length; k ++){
           if(e.target == arr[k]){
             this.uncheckedChbs.splice(k,1);

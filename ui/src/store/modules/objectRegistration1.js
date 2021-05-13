@@ -1,17 +1,22 @@
 import { createBuilding } from "@/api/building";
+import { getRegions } from "@/api/region";
 
 export default {
   actions:{
     saveData(ctx, data){
       //send data
+      debugger
       createBuilding(data);
       //update state
       ctx.commit("saveData", data);
     },
-    getAllRegions(ctx){
-      //
-      ctx.commit("addRegions", 1);
-      ctx.commit("addCities", 2);
+    getAllRegions({commit}){
+      getRegions().then(response => {
+        response.data.sort((a, b) => a.name > b.name ? 1 : -1)
+
+        commit("addRegions", response.data);
+        commit("addCities", response.data[0].cities);
+      })
     }
   },
   mutations:{
@@ -24,23 +29,11 @@ export default {
     changeIsDel(state, value){
       state.isDel = value;
     },
-    addRegions(state, num){
-      var data = [];
-
-      for(var k = 0; k < num; k++){
-        var obj = {title:"some", value:"some"};
-        data.push(obj);
-      }
-      state.regions = data;
+    addRegions(state, regions){
+      state.regions = regions;
     },
-    addCities(state, num){
-      var data = [];
-
-      for(var k = 0; k < num; k++){
-        var obj = {title: "Kiev"+k, value: "Kiev"+k};
-        data.push(obj);
-      }
-      state.cities = data;
+    addCities(state, cities){
+      state.cities = cities;
     }
   },
   state:{

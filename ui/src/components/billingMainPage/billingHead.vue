@@ -21,7 +21,7 @@
     <div class="headDivs">
       <div>
         <span>{{$t('billingMainPage.numberOfObjects')}}</span>
-        <span class="countSpan">{{company.buildings ? company.buildings.length() : 0}}</span>
+        <span class="countSpan">{{buildings}}</span>
       </div>
       <div>
         <span>{{$t('billingMainPage.registeredDistributors')}}</span>
@@ -51,12 +51,18 @@ export default {
   mounted() {
     this.getCompany();
   },
-  computed: mapGetters(["billingDataHead"]),
+  // computed: mapGetters(["billingDataHead"]),
+  computed: {
+    buildings() {
+      return this.company.buildings ? this.company.buildings.length : 0
+    }
+  },
   methods:{
     getCompany(){
       let that = this;
       getCompanyByUser().then(response => {
         that.company = response.data
+        that.$store.dispatch('saveBillingObjects', that.company.buildings)
       })
     },
     onMenuOver(e){

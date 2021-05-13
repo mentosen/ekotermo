@@ -1,6 +1,7 @@
 package ekotermo.service
 
 import ekotermo.data.domain.Building
+import ekotermo.data.enums.BuildingStatus
 import ekotermo.data.service.BuildingDataService
 import ekotermo.dto.BuildingDto
 import ekotermo.dto.FlatTypeDto
@@ -16,22 +17,23 @@ class BuildingService {
 
     void create(String userId, BuildingDto buildingDto){
 
-        log.info("Saving building ${buildingDto.region}, ${buildingDto.area}, ${buildingDto.cities}, ${buildingDto.street}, ${buildingDto.buildingNumber}")
+        log.info("Saving building ${buildingDto.region}, ${buildingDto.area}, ${buildingDto.city}, ${buildingDto.street}, ${buildingDto.buildingNumber}")
 
         Building building = new Building(
                 region: buildingDto.region,
                 area: buildingDto.area,
-                city: buildingDto.cities,
+                city: buildingDto.city,
                 street: buildingDto.street,
-                buildingNumber: buildingDto.buildingNumber,
+                buildingNumber: buildingDto.buildingNumber.toInteger(),
 
                 buildingCategory: buildingDto.buildingCategory,
+                status: BuildingStatus.NEW,
 
-                entranceCount: buildingDto.entranceCount,
-                flatsCount: buildingDto.flatsCount,
-                floorsCount: buildingDto.floorsCount,
-                numerableFlatsFrom: buildingDto.numerableFlatsFrom,
-                numerableFlatsTo: buildingDto.numerableFlatsTo,
+                entranceCount: buildingDto.entranceCount.toInteger(),
+                flatsCount: buildingDto.flatsCount.toInteger(),
+                floorsCount: buildingDto.floorsCount.toInteger(),
+                numerableFlatsFrom: buildingDto.numerableFlatsFrom.toInteger(),
+                numerableFlatsTo: buildingDto.numerableFlatsTo.toInteger(),
 
                 generalCounterValue: buildingDto.generalCounterValue.toDouble(),
 
@@ -61,6 +63,7 @@ class BuildingService {
         building.buildingNumber = buildingDto.buildingNumber
 
         building.buildingCategory = buildingDto.buildingCategory
+        building.status = buildingDto.status
 
         building.entranceCount = buildingDto.entranceCount
         building.flatsCount = buildingDto.flatsCount

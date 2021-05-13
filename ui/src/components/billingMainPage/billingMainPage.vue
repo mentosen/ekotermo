@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <BillingHead></BillingHead>
+
     <div class="billingTableTitle">{{$t('billingMainPage.objectList')}}</div>
     <table class="billingTable">
       <thead>
@@ -14,13 +15,13 @@
       <tr>
         <th width="170px" @click="onThClick" class="filter">
           {{$t('billingMainPage.region')}}
-          <tableFilter v-bind:arr="filter.regions" title="region" v-show="filter.regionsIsShow"
+          <tableFilter v-if="filter.regions.length > 0" v-bind:arr="filter.regions" title="region" v-show="filter.regionsIsShow"
                        @cancelFilter="hideFilter" @filtered="confirmFilter"></tableFilter>
         </th>
         <th width="150px">{{$t('billingMainPage.city')}}</th>
         <th width="200px" @click="onThClick" class="filter">
           {{$t('billingMainPage.street')}}
-          <tableFilter v-bind:arr="filter.streets" title="street" v-show="filter.streetsIsShow"
+          <tableFilter v-if="filter.streets.length > 0" v-bind:arr="filter.streets" title="street" v-show="filter.streetsIsShow"
                        @cancelFilter="hideFilter" @filtered="confirmFilter"></tableFilter>
         </th>
         <th width="70px">{{$t('billingMainPage.buildingNumber')}}</th>
@@ -55,11 +56,8 @@ export default {
     return{
       tableHeadTr1: null,
       tableHeadTr2: null,
+      objectsBilling:[],
       filter:{
-        // regions:["Миколаївська","Київська","Івано-Франківська"],
-        // regionsIsShow: false,
-        // streets:["Соборна","Богдана Хмельницького","Площа ринок"],
-        // streetsIsShow: false
         regions:[],
         regionsIsShow: false,
         streets:[],
@@ -67,7 +65,27 @@ export default {
       }
     }
   },
-  computed:mapGetters(["billingObjects"]),
+  // computed:mapGetters(["billingObjects"]),
+  computed:{
+    billingObjects(){
+      let that = this;
+
+      if(this.$store.getters.billingObjects.length > 0){
+        let buildings = this.$store.getters.billingObjects;
+        that.filter.regions = [...new Set(buildings.map(function (item) {
+          return item.region
+        }))]
+
+        that.filter.streets = [...new Set(buildings.map(function (item) {
+          return item.street
+        }))]
+
+        return this.$store.getters.billingObjects;
+      } else {
+        return [];
+      }
+    }
+  },
   components:{BillingHead: BillingHead, BillingTr:BillingTr, tableFilter:tableFilter},
   methods:{
     onThClick(e){
@@ -85,10 +103,13 @@ export default {
       }
     },
     confirmFilter(title){
+      let that = this;
+      debugger
       if(title === "region"){
-        this.filter.regionsIsShow = false;
+        that.filter.regionsIsShow = false;
+        // that.objectsBilling =
       }else if(title === "street"){
-        this.filter.streetsIsShow = false;
+        that.filter.streetsIsShow = false;
       }
     }
   }

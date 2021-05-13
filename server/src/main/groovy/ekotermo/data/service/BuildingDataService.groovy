@@ -27,6 +27,20 @@ class BuildingDataService {
         return building
     }
 
+    List<Building> findAllByUserId(String userId){
+
+        log.debug("Find building by user ID [${userId}]")
+
+        List<Building> buildings = buildingRepository.findAllByUserId(userId)
+
+        if(!buildings){
+            log.debug("Not found buildings by userID [$userId]")
+            return []
+        }
+
+        return buildings
+    }
+
     Building save(Building building) {
 
         log.debug('Saving building')
