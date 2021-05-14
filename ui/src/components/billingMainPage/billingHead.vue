@@ -28,7 +28,7 @@
         <span class="countSpan">{{company.distributors ? company.distributors.length() : 0}}</span>
       </div>
       <div>
-        <router-link to="/objectRegistration1">
+        <router-link to="/objectRegistration1/">
           <button class="yellowBtn">{{$t('billingMainPage.registerNewObject')}}</button>
         </router-link>
       </div>

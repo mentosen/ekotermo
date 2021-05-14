@@ -1,12 +1,12 @@
 <template>
   <div class="tableFilter" v-bind:class="arr[0]">
     <div class="tableFilterDiv">
-      <input type="checkbox" value="ALL" checked @click="onClickAll">
+      <input type="checkbox" value="ALL" @click="onClickAll">
       <div class="tableFilterTitle">{{$t('billingMainPage.filterAll')}}</div>
     </div>
 
-    <div class="tableFilterDiv" v-for="title in arr">
-      <input type="checkbox" v-bind:value="title" checked @click="clickChbs">
+    <div class="tableFilterDiv" v-for="title in arr" @click="clickChbs">
+      <input type="checkbox" :value="title">
       <div class="tableFilterTitle">
         {{title}}
       </div>
@@ -29,7 +29,7 @@ export default {
     var top;
     var left;
     this.el = document.querySelector("." + className);
-debugger
+
     parent = this.el.closest("th");
     top = parent.getBoundingClientRect().top + document.body.scrollTop + parent.offsetHeight;
     left = parent.getBoundingClientRect().left + document.body.scrollLeft+1;
@@ -42,43 +42,41 @@ debugger
   data(){
     return{
       el: null,
-      uncheckedChbs:[],
+      selected: null,
+      checkedChbs:[],
       listToShow: []
     }
   },
   methods:{
     confirm(){
-      debugger
-      this.$emit('filtered', this.title);
+      let toSend = this.listToShow.map((item) => item.value ? item.value : item);
+      this.$emit('filtered', this.title, toSend);
     },
     cancel(){
-      debugger
-      for(var k = 0; k < this.uncheckedChbs.length; k ++){
-        this.uncheckedChbs[k].checked = true;
-      }
-      this.uncheckedChbs = [];
       this.$emit('cancelFilter', this.title);
     },
     clickChbs(e){
-      var arr = this.uncheckedChbs;
-      if(!e.target.checked){
-        this.uncheckedChbs.push(e.target);
-      }else{
-        this.listToShow.push()
-        for(var k = 0; k < arr.length; k ++){
-          if(e.target == arr[k]){
-            this.uncheckedChbs.splice(k,1);
-            break;
-          }
-        }
+      if(e.target.checked && !this.listToShow.includes(e.target.value)){
+        this.listToShow.push(e.target.value);
+      } else {
+        this.listToShow = this.listToShow.filter((item) => item !== e.target.value);
       }
     },
     onClickAll(e){
+      this.uncheckAll(e.target);
       if(e.target.checked){
-        for(var k = 0; k < this.uncheckedChbs.length; k ++){
-          this.uncheckedChbs[k].checked = true;
+        this.listToShow = this.arr;
+      } else {
+        this.listToShow = [];
+      }
+    },
+    uncheckAll(targetExcept) {
+      let inputs = document.getElementsByTagName('input');
+      inputs = Array.from(inputs).filter((item) => item !== targetExcept);
+      for (let i = 0; i < inputs.length; ++i) {
+        if (inputs[i].checked) {
+          inputs[i].checked = false;
         }
-        this.uncheckedChbs = [];
       }
     }
   }

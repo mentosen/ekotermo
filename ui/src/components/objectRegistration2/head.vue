@@ -4,26 +4,26 @@
       <div class="headInfo">
         <div class="headAddress">
           <div>{{ $t('objectRegistrationHead.objectAddress')}}</div>
-          <div>Region</div>
-          <div>City</div>
-          <div>Street</div>
-          <div>HouseNumber</div>
+          <div>{{data.region}}</div>
+          <div>{{data.city}}</div>
+          <div>{{data.street}}</div>
+          <div>{{data.buildingNumber}}</div>
         </div>
         <div class="houseInfo">
           <div>{{ $t('objectRegistrationHead.porchNumber')}}</div>
-          <div></div>
+          <div>{{data.entranceCount}}</div>
           <div>{{ $t('objectRegistrationHead.floorNumber')}}</div>
-          <div></div>
+          <div>{{data.floorsCount}}</div>
           <div>{{ $t('objectRegistrationHead.flatNumber')}}</div>
-          <div></div>
+          <div>{{data.flatsCount}}</div>
           <div>{{ $t('objectRegistrationHead.flatNumeration')}} {{ $t('common.from')}}</div>
-          <div></div>
+          <div>{{data.numerableFlatsFrom}}</div>
           <div>{{ $t('common.to')}}</div>
-          <div></div>
+          <div>{{data.numerableFlatsTo}}</div>
         </div>
         <div class="headCategory">
           <div>{{ $t('objectRegistrationHead.buildingCategory')}}</div>
-          <div></div>
+          <div>{{data.buildingCategory}}</div>
         </div>
         <div class="headTitle">
           <div>{{ $t('objectRegistrationHead.buildingTitle')}}</div>
@@ -34,13 +34,32 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
 export default {
   name: 'appHead',
   data(){
     return{
+      data:{}
     }
   },
+  created() {
+    let id = this.$route.params.id;
+    if(typeof id !== 'undefined'){
+      this.findBuilding(id);
+    }
+  },
+  mounted() {
+    this.data = this.getFlatInfo;
+    debugger
+  },
+  computed: {
+    getFlatInfo() {
+      debugger
+      return this.$store.getters.getFlatInfo
+    },
+  },
   methods:{
+    ...mapActions(["findBuilding"]),
     }
   }
 </script>

@@ -29,7 +29,7 @@
 
       </thead>
       <tbody v-if="billingObjects.length > 0">
-        <BillingTr v-for="(item, key) in billingObjects" v-bind:index="key" :key="key"></BillingTr>
+        <BillingTr v-for="(item, key) in billingObjects" :item="item" :index="key" :key="key"></BillingTr>
       </tbody>
       <tbody v-else>
       <tr>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
 import BillingHead from './billingHead'
 import BillingTr from './billingTr'
 import tableFilter from './tableFilter'
@@ -56,7 +55,7 @@ export default {
     return{
       tableHeadTr1: null,
       tableHeadTr2: null,
-      objectsBilling:[],
+      listToShow:[],
       filter:{
         regions:[],
         regionsIsShow: false,
@@ -65,11 +64,9 @@ export default {
       }
     }
   },
-  // computed:mapGetters(["billingObjects"]),
   computed:{
-    billingObjects(){
+    billingObjects() {
       let that = this;
-
       if(this.$store.getters.billingObjects.length > 0){
         let buildings = this.$store.getters.billingObjects;
         that.filter.regions = [...new Set(buildings.map(function (item) {
@@ -80,7 +77,14 @@ export default {
           return item.street
         }))]
 
-        return this.$store.getters.billingObjects;
+        if(that.listToShow.length > 0){
+          let result = that.$store.getters.billingObjects.filter(function (item) {
+            return that.listToShow.includes(item.region) || that.listToShow.includes(item.street)
+          });
+          return result
+        } else {
+          return that.$store.getters.billingObjects
+        }
       } else {
         return [];
       }
@@ -102,13 +106,13 @@ export default {
         this.filter.streetsIsShow = false;
       }
     },
-    confirmFilter(title){
+    confirmFilter(title, listToShow){
       let that = this;
-      debugger
       if(title === "region"){
         that.filter.regionsIsShow = false;
-        // that.objectsBilling =
+        that.listToShow = listToShow;
       }else if(title === "street"){
+        that.listToShow = listToShow;
         that.filter.streetsIsShow = false;
       }
     }

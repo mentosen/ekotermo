@@ -24,13 +24,9 @@
         dataTitle: 'nonLivePremises',
         tableTitle: this.$t('objectRegistration2.nonLivePremisesTableTitle')}"></FlatData>
     <div class="btnPart">
-      <router-link to="/objectRegistration1">
-        <button class="yellowBtn" @click="toRegForm1">{{ $t('buttons.backToSection1')}}</button>
-      </router-link>
+      <button class="yellowBtn" @click="toRegForm1">{{ $t('buttons.backToSection1')}}</button>
 
-      <router-link v-bind:to="section3Url">
-        <button class="greenBtn" @click="toRegForm3" v-bind:disabled="!getIsSaved">{{ $t('buttons.toSection3')}}</button>
-      </router-link>
+      <button class="greenBtn" @click="toRegForm3" v-bind:disabled="!getIsSaved">{{ $t('buttons.toSection3')}}</button>
     </div>
   </div>
 </template>
@@ -41,10 +37,11 @@ import FlatData from './flatData'
 import Head from './head'
 export default {
   name: 'app',
-  mounted() {
-  },data(){
+  data(){
     return{
     }
+  },
+  mounted() {
   },
   computed:{
     ...mapGetters(["getIsSaved","section3Url"])
@@ -54,10 +51,10 @@ export default {
     ...mapMutations([]),
 
     toRegForm1(){
-
+      this.$router.push({ name: 'Object registration1', params: { id: this.$route.params.id } })
     },
     toRegForm3(){
-
+      this.$router.push({ name: 'Object registration3', params: { id: this.$route.params.id } })
     }
   } ,
   components:{FlatData: FlatData, Head: Head}

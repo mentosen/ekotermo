@@ -13,7 +13,7 @@
         <div class="addressData">
           <span>{{ $t('common.region')}}:</span>
           <select name="region" class="required region" v-if="isEdit" @change="onRegionChange($event)">
-            <option v-bind:value="data.name" v-for="data in regions" v-bind:selected="getFlatInfo.region == data.name">{{data.name}}</option>
+            <option v-bind:value="data.name" v-for="data in regions" v-bind:selected="getFlatInfo.region === data.name">{{data.name}}</option>
           </select>
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.region}}</div>
         </div>
@@ -27,7 +27,7 @@
         <div class="addressData">
           <span>{{ $t('registration.city')}}:</span>
           <select name="city" class="required" v-if="isEdit">
-            <option v-bind:value="data.name" v-for="data in getCities" v-bind:selected="getFlatInfo.city == data.value">{{data.name}}</option>
+            <option v-bind:value="data.name" v-for="data in getCities" v-bind:selected="getFlatInfo.city === data.name">{{data.name}}</option>
           </select>
           <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.city}}</div>
         </div>
@@ -212,9 +212,7 @@
       <button class="yellowBtn" @click="save" v-bind:disabled="isSaved">{{ $t('buttons.save')}}</button>
       <button class="greyBtn"  @click="edit" v-bind:disabled="!isSaved">{{ $t('buttons.edit')}}</button>
       <button class="redBtn" @click="removeBuilding" v-bind:disabled="isEdit">{{ $t('buttons.delete')}}</button>
-      <router-link to="/objectRegistration2">
-        <button class="greenBtn" @click="toRegForm2" v-bind:disabled="!isSaved">{{ $t('buttons.toSection2')}}</button>
-      </router-link>
+      <button class="greenBtn" @click="toRegForm2" v-bind:disabled="!isSaved">{{ $t('buttons.toSection2')}}</button>
     </div>
     <delPopUp v-if="getIsDel"></delPopUp>
   </div>
@@ -245,9 +243,17 @@ export default {
   },
   created() {
     this.getAllRegions();
+
+    let id = this.$route.params.id;
+    if(typeof id !== 'undefined'){
+      this.findBuilding(id);
+      this.isSaved = true;
+      this.isEdit = false;
+    }
   },
   mounted() {
     this.data = this.getFlatInfo;
+    debugger
     if(this.data.personPhoneNumFirst || this.data.personPhoneNumSecond){
       if(this.data.personPhoneNumFirst) this.phoneNumbers.phone1 = this.data.personPhoneNumFirst;
       if(this.data.personPhoneNumSecond) this.phoneNumbers.phone2 = this.data.personPhoneNumSecond;
@@ -277,9 +283,8 @@ export default {
   },
   components:{delPopUp: delPopUp},
   methods:{
-    ...mapActions(["saveData"]),
+    ...mapActions(["saveData", "getAllRegions", "findBuilding"]),
     ...mapMutations(["changeIsDel","changeSection3Url"]),
-    ...mapActions(["getAllRegions"]),
 
     save(){
     var inputs = document.querySelectorAll("input[type=text],input[type=checkbox],select");
@@ -322,6 +327,7 @@ export default {
     edit(){
       this.isSaved = false;
       this.isEdit = true;
+      this.onRegionChange(null)
       var chbsWrap = document.querySelectorAll(".chbsWrapper");
 
       for(var k = 0; k < chbsWrap.length;k++){
@@ -504,11 +510,11 @@ export default {
       var chbs = e.target.closest(".category").querySelectorAll("input[type=checkbox]");
       for(var k = 0; k < chbs.length;k++){
         if(chbs[k] === e.target){
-          if(e.target.value == 6){
+          if(e.target.value === 'SECTION_POINT_SIX'){
             this.changeSection3Url('/objectRegistration3P6');
-          }else if(e.target.value == 2){
+          }else if(e.target.value === 'SECTION_POINT_TWO'){
             this.changeSection3Url('/objectRegistration3P2');
-          }else if(e.target.value == 3.1||e.target.value == 3.2){
+          }else if(e.target.value === 'SECTION_POINT_THREE_SUB_ONE' || e.target.value === 'SECTION_POINT_THREE_SUB_TWO'){
             this.changeSection3Url('/objectRegistration3P3');
           }
           continue;
@@ -520,14 +526,11 @@ export default {
       this.changeIsDel(true);
     },
     toRegForm2(){
-
+      this.$router.push({ name: 'Object registration2', params: { id: this.getFlatInfo.id } })
     },
-
-
     onRegionChange(event){
       let that = this;
-      debugger
-      that.getFlatInfo.region = event.target.value;
+      that.getFlatInfo.region = event && event.target.value ? event.target.value : this.getFlatInfo.region;
 
       let cities = that.$store.getters.getRegions.find(region => region.name === that.getFlatInfo.region).cities;
       that.$store.commit('addCities', cities)

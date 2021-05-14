@@ -1,11 +1,10 @@
-import { createBuilding } from "@/api/building";
+import { createBuilding, findBuilding } from "@/api/building";
 import { getRegions } from "@/api/region";
 
 export default {
   actions:{
     saveData(ctx, data){
       //send data
-      debugger
       createBuilding(data);
       //update state
       ctx.commit("saveData", data);
@@ -16,6 +15,12 @@ export default {
 
         commit("addRegions", response.data);
         commit("addCities", response.data[0].cities);
+      })
+    },
+    findBuilding(ctx, data){
+      debugger
+      findBuilding(data).then(response => {
+        ctx.commit("saveData", response.data);
       })
     }
   },
@@ -42,7 +47,7 @@ export default {
     flatInfo:{},
     accountState: false,
     isDel: false,
-    section3Url: '/objectRegistration3P2'
+    section3Url: '/objectRegistration3P2',
   },
   getters:{
     getRegions(state){

@@ -9,24 +9,23 @@
     <td v-if="data.status === 'REGISTERED'" class="green" v-bind:title="$t('billingMainPage.objectStatus1')"></td>
     <td v-if="data.status === 'NEW'" class="yellow" v-bind:title="$t('billingMainPage.objectStatus2')"></td>
     <td v-if="data.status === 'DELETED'" class="red" v-bind:title="$t('billingMainPage.objectStatus3')"></td>
-    <td class="arrowRight"></td>
+    <td class="arrowRight" @click="moveToObject"></td>
   </tr>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
 export default {
   name: "billingTr",
-  props:["index"],
-  mounted() {
-    this.data = Object.assign({}, this.billingObjects[this.index]);
+  props:["item", "index"],
+  computed: {
+    data() {
+      return this.item
+    }
   },
   data(){
     return{
-      data:{}
     }
   },
-  computed:mapGetters(["billingObjects"]),
   methods:{
     getBuildingCategory(){
       let that = this;
@@ -35,6 +34,10 @@ export default {
 
     convertSnakeCaseToCamelCase(string){
       return string.toLowerCase().replace(/([-_]\w)/g, group => group[1].toUpperCase());
+    },
+
+    moveToObject(){
+      this.$router.push({ name: 'Object registration1', params: { id: this.data.id } })
     }
   }
 }

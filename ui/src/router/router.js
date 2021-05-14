@@ -74,17 +74,17 @@ export default new Router({
                     component: () => import('@/components/mainBtnPages/HeatPoint.vue'),
                 },
                 {
-                    path: '/objectRegistration1',
+                    path: '/objectRegistration1/:id?',
                     name: 'Object registration1',
                     component: () => import('@/components/objectRegistration1/ObjectRegistration1.vue'),
                 },
                 {
-                    path: '/objectRegistration2',
+                    path: '/objectRegistration2/:id?',
                     name: 'Object registration2',
                     component: () => import('@/components/objectRegistration2/ObjectRegistration2.vue'),
                 },
                 {
-                    path: '/objectRegistration3P2',
+                    path: '/objectRegistration3P2/:id?',
                     name: 'Object registration3P2',
                     component: () => import('@/components/objectRegistration3P2/ObjectRegistration3P2.vue'),
                 },
@@ -99,7 +99,7 @@ export default new Router({
                     component: () => import('@/components/enterCounterValue/enterCounterValue'),
                 },
                 {
-                    path: '/objectRegistration3P6',
+                    path: '/objectRegistration3P6/:id?',
                     name: 'object Registration 3P6',
                     component: () => import('@/components/objectRegistration3P6/ObjectRegistration3P6'),
                 },
@@ -109,12 +109,12 @@ export default new Router({
                     component: () => import('@/components/organizationQuestionnaire/OrganizationQuestionnaire.vue'),
                 },
                 {
-                    path: '/workingWithObjectP2',
+                    path: '/workingWithObjectP2/',
                     name: 'working With ObjectP2',
                     component: () => import('@/components/WorkingWithObjectP2/WorkingWithObjectP2.vue'),
                 },
                 {
-                    path: '/objectRegistration3P3',
+                    path: '/objectRegistration3P3/:id?',
                     name: 'object Registration3P3',
                     component: () => import('@/components/objectRegistration3P3/objectRegistration3P3.vue'),
                 },
@@ -129,7 +129,7 @@ export default new Router({
                     component: () => import('@/components/workingWithObjectP6/WorkingWithObjectP6.vue'),
                 },
                 {
-                    path: '/objectRegistration3P4',
+                    path: '/objectRegistration3P4/:id?',
                     name: 'object Registration3P4',
                     component: () => import('@/components/objectRegistration3P4/ObjectRegistration3P4.vue'),
                 },

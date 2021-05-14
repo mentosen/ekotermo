@@ -56,6 +56,8 @@ class BuildingDto extends BaseDto{
     static buildFromDomain(Building building){
 
         return new BuildingDto(
+                id: building.id,
+
                 region: building.region,
                 area: building.area,
                 city: building.city,

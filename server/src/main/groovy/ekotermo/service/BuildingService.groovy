@@ -15,6 +15,13 @@ class BuildingService {
 
     @Autowired private BuildingDataService buildingDataService
 
+    BuildingDto findByIdAndUserId(String buildingId, String userId){
+
+        Building building = buildingDataService.findByIdAndUserId(buildingId, userId)
+
+        return BuildingDto.buildFromDomain(building)
+    }
+
     void create(String userId, BuildingDto buildingDto){
 
         log.info("Saving building ${buildingDto.region}, ${buildingDto.area}, ${buildingDto.city}, ${buildingDto.street}, ${buildingDto.buildingNumber}")
