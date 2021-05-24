@@ -1,11 +1,15 @@
-import { createBuilding, findBuilding } from "@/api/building";
+import { createBuilding, findBuilding, editBuilding } from "@/api/building";
 import { getRegions } from "@/api/region";
 
 export default {
   actions:{
     saveData(ctx, data){
       //send data
-      createBuilding(data);
+      if(data.id){
+        editBuilding(data)
+      } else {
+        createBuilding(data);
+      }
       //update state
       ctx.commit("saveData", data);
     },
@@ -18,7 +22,6 @@ export default {
       })
     },
     findBuilding(ctx, data){
-      debugger
       findBuilding(data).then(response => {
         ctx.commit("saveData", response.data);
       })

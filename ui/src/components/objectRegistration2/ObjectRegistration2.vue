@@ -5,23 +5,24 @@
     </router-link>
 
     <Head></Head>
+
     <FlatData v-bind:flatData="{title: $t('objectRegistration2.oneFlatRoom'),
-        dataTitle: 'oneFlatRoom',
+        dataTitle: 'SINGLE_ROOM',
         tableTitle: $t('objectRegistration2.oneFlatRoomTableTitle')}" style="margin-top: 50px"></FlatData>
     <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.twoFlatRoom'),
-        dataTitle: 'twoFlatRoom',
+        dataTitle: 'DOUBLE_ROOM',
         tableTitle: this.$t('objectRegistration2.twoFlatRoomTableTitle')}"></FlatData>
     <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.threeFlatRoom'),
-        dataTitle: 'threeFlatRoom',
+        dataTitle: 'TRIPLE_ROOM',
         tableTitle: this.$t('objectRegistration2.threeFlatRoomTableTitle')}"></FlatData>
     <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.fourFlatRoom'),
-        dataTitle: 'fourFlatRoom',
+        dataTitle: 'QUADRUPLE_ROOM',
         tableTitle: this.$t('objectRegistration2.fourFlatRoomTableTitle')}"></FlatData>
     <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.fiveFlatRoom'),
-        dataTitle: 'fiveFlatRoom',
+        dataTitle: 'QUINTUPLE_ROOM',
         tableTitle: this.$t('objectRegistration2.fiveFlatRoomTableTitle')}"></FlatData>
     <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.nonLivePremises'),
-        dataTitle: 'nonLivePremises',
+        dataTitle: 'NON_LIVE_PREMISES',
         tableTitle: this.$t('objectRegistration2.nonLivePremisesTableTitle')}"></FlatData>
     <div class="btnPart">
       <button class="yellowBtn" @click="toRegForm1">{{ $t('buttons.backToSection1')}}</button>
@@ -41,13 +42,23 @@ export default {
     return{
     }
   },
+  created(){
+    this.findAllFlatTypes(this.$route.params.id)
+  },
   mounted() {
   },
   computed:{
-    ...mapGetters(["getIsSaved","section3Url"])
+    ...mapGetters(["section3Url"]),
+
+    flatsData() {
+      return this.$store.getters.getFlatsData
+    },
+    getIsSaved() {
+      return this.$store.getters.isSaved
+    }
   },
   methods:{
-    ...mapActions(["saveData"]),
+    ...mapActions(["saveData", "findAllFlatTypes"]),
     ...mapMutations([]),
 
     toRegForm1(){

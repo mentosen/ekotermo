@@ -65,7 +65,7 @@ class BuildingService {
 
         building.region = buildingDto.region
         building.area = buildingDto.area
-        building.city = buildingDto.cities
+        building.city = buildingDto.city
         building.street = buildingDto.street
         building.buildingNumber = buildingDto.buildingNumber
 

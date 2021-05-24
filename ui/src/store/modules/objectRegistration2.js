@@ -1,9 +1,20 @@
+import { createFlatType, editFlatType, findAllFlatTypes } from "@/api/flatType";
+
 export default {
   actions:{
     saveFlatData(ctx, data){
-      //send state.flatsData
-      //update state
-      ctx.commit("addFlatData", data);
+      createFlatType(data);
+
+      ctx.commit("saveFlatTypeData", data);
+    },
+    findAllFlatTypes(ctx, data){
+      findAllFlatTypes(data).then(response => {
+        debugger
+        if(response.data.length){
+          ctx.commit("changeIsSaved", true);
+        }
+        ctx.commit("addFlatData", response.data);
+      })
     }
   },
   mutations:{
@@ -11,42 +22,32 @@ export default {
       var keys = Object.keys(state.flatsData);
 
       for(var k = 0; k < keys.length;k++){
-        if(keys[k] === data.flatType){
-          state.flatsData[keys[k]][data.typeFull] = {totalArea: data.totalArea,
-                                                    heatingArea: data.heatingArea,
-                                                    typeShort: data.typeShort,
-                                                    scan: data.scan,
-                                                    flatType:data.flatType,
-                                                    typeFull:data.typeFull};
-          break;
-        }
+        state.flatsData[keys[k]] = data.filter(function (item) {
+          return item.flatType.toLowerCase() === keys[k];
+        });
       }
+    },
 
+    saveFlatTypeData(state, data){
+      state.flatsData[data.flatType.toLowerCase()].push(data);
     },
 
     editFlatData(state, data){
-      var keys = Object.keys(state.flatsData);
-      var dataKeys = Object.keys(data);
-
-      for(var k = 0; k < keys.length;k++){
-        for(var j = 0; j < dataKeys.length;j++){
-          if(keys[k] == data[dataKeys[j]].flatType){
-            Object.assign(state.flatsData[keys[k]][data[dataKeys[j]].typeFull], data[dataKeys[j]]);
-          }
-        }
-      }
+debugger
+      editFlatType(data)
     },
     changeIsSaved(state, bool){
+      debugger
       state.isSaved = bool;
     }
   },
   state:{
     flatsData:{
-      oneFlatRoom:{},
-      twoFlatRoom:{},
-      threeFlatRoom:{},
-      fourFlatRoom:{},
-      fiveFlatRoom:{},
+      single_room:{},
+      double_room:{},
+      triple_room:{},
+      quadriple_room:{},
+      quintiple_room:{},
       nonLivePremises:{}
     },
     isSaved: false

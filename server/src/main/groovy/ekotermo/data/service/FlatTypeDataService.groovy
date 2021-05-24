@@ -27,10 +27,45 @@ class FlatTypeDataService {
         return flat
     }
 
+    List<FlatType> findAllByIdsAndUserId(List<String> ids, String userId){
+
+        log.debug("Find flat by ids [${ids}] and user ID [${userId}]")
+
+        List<FlatType> flatTypes = flatRepository.findByIdInAndUserId(ids, userId)
+
+        if(!flatTypes){
+            log.debug("Flat not found by ID [$ids]")
+            return []
+        }
+
+        return flatTypes
+    }
+
+    List<FlatType> findAllByBuildingIdAndUserId(String buildingId, String userId){
+
+        log.debug("Find flat by buildingId [${buildingId}] and user ID [${userId}]")
+
+        List<FlatType> flatTypes = flatRepository.findByBuildingIdAndUserId(buildingId, userId)
+
+        if(!flatTypes){
+            log.debug("Flat not found by buildingId [$buildingId]")
+            return []
+        }
+
+        return flatTypes
+    }
+
     FlatType save(FlatType flat) {
 
         log.debug('Saving building')
 
         return flatRepository.save(flat)
+    }
+
+    List<FlatType> saveAll(List<FlatType> flatTypes) {
+
+        log.debug('Saving flatTypes')
+
+        return flatRepository.saveAll(flatTypes)
     }
 }

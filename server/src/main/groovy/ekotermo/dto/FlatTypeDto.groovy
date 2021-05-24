@@ -1,5 +1,6 @@
 package ekotermo.dto
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import ekotermo.data.domain.FlatType
 import ekotermo.data.domain.Image
 import ekotermo.data.enums.FlatRoomType
@@ -8,27 +9,33 @@ import groovy.transform.ToString
 @ToString(includeFields = true, includeNames = true, includePackage = false)
 class FlatTypeDto extends BaseDto{
 
+    @JsonProperty('flatType')
     FlatRoomType roomType
 
+    @JsonProperty('typeShort')
     int numberType
 
+    @JsonProperty('totalArea')
     double fullSpace
-
+    @JsonProperty('heatingArea')
     double heatingSpace
 
+    @JsonProperty('scan')
     List<Image> images
 
+    @JsonProperty('buildingId')
     String buildingId
 
-    static buildFromDomain(FlatType flat){
+    static buildFromDomain(FlatType flatType){
 
         return new FlatTypeDto(
-                roomType: flat.roomType,
-                numberType: flat.numberType,
-                fullSpace: flat.fullSpace,
-                heatingSpace: flat.heatingSpace,
-                images: flat.images,
-                buildingId: flat.buildingId
+                id: flatType.id,
+                roomType: flatType.roomType,
+                numberType: flatType.numberType,
+                fullSpace: flatType.fullSpace,
+                heatingSpace: flatType.heatingSpace,
+                images: flatType.images,
+                buildingId: flatType.buildingId
         )
     }
 }

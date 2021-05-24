@@ -13,6 +13,13 @@ class FlatTypeController {
 
     @Autowired private FlatTypeService flatTypeService
 
+    @GetMapping("/")
+    List<FlatTypeDto> findAllByBuildingId(@AuthenticationPrincipal UserPrincipal principal,
+                @RequestParam ('buildingId') String buildingId) {
+
+        flatTypeService.findAllTypeByBuildingId(principal.userId, buildingId)
+    }
+
     @PostMapping("/")
     void create(@AuthenticationPrincipal UserPrincipal principal,
                 @RequestBody FlatTypeDto flatTypeDto) {
@@ -22,8 +29,8 @@ class FlatTypeController {
 
     @PutMapping("/")
     void edit(@AuthenticationPrincipal UserPrincipal principal,
-              @RequestBody FlatTypeDto flatTypeDto) {
+              @RequestBody List<FlatTypeDto> flatTypeDtos) {
 
-        flatTypeService.edit(principal.userId, flatTypeDto)
+        flatTypeService.edit(principal.userId, flatTypeDtos)
     }
 }

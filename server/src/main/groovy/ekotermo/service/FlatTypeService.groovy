@@ -13,6 +13,12 @@ class FlatTypeService {
 
     @Autowired private FlatTypeDataService flatTypeDataService
 
+    List<FlatTypeDto> findAllTypeByBuildingId(String userId, String buildingId){
+        List<FlatType> flatTypes = flatTypeDataService.findAllByBuildingIdAndUserId(buildingId, userId)
+
+        return flatTypes.collect{FlatTypeDto.buildFromDomain(it)}
+    }
+
     void create(String userId, FlatTypeDto flatDto){
 
         log.info("Saving flat ${flatDto.toString()}")
@@ -29,18 +35,20 @@ class FlatTypeService {
         flatTypeDataService.save(flat)
     }
 
-    void edit(String userId, FlatTypeDto flatDto){
+    void edit(String userId, List<FlatTypeDto> flatTypeDtos){
 
-        log.info("Edit flat ${flatDto.toString()}")
+        log.info("Edit flatType ${flatTypeDtos.id}")
 
-        FlatType flat = flatDataService.findByIdAndUserId(flatDto.id, userId)
+        List<FlatType> flatTypes = flatTypeDataService.findAllByIdsAndUserId(flatTypeDtos.id, userId)
 
-        flat.roomType = flatDto.roomType
-        flat.numberType = flatDto.numberType
-        flat.fullSpace = flatDto.fullSpace
-        flat.heatingSpace = flatDto.heatingSpace
+        FlatTypeDto flatTypeDto
+        flatTypes.each {
+            flatTypeDto = flatTypeDtos.find {item -> item.id == it.id}
+            it.fullSpace = flatTypeDto.fullSpace
+            it.heatingSpace = flatTypeDto.heatingSpace
+        }
 
-        flatTypeDataService.save(flat)
+        flatTypeDataService.saveAll(flatTypes)
     }
 
     void delete(){

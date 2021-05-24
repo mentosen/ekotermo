@@ -9,13 +9,13 @@
 
     <div class="data flex" v-if="visibilityForm">
       <div class="leftPart">
-        <div class="flatType leftPartData">Тип № <span class="typeCount">{{typeCount}}</span></div>
+        <div class="flatType leftPartData">Тип № <span class="typeCount">{{typeNumber}}</span></div>
         <div class="flex leftPartData">
           <div>{{ $t('objectRegistration2.totalArea')}}</div>
           <div>
             <input type="text" v-model="totalArea" @keydown="validate($event)"
                    @keyup="validateKeyUp" class="totalArea"
-                   v-bind:class="flatType+'Total'" placeholder="00000,000">
+                   v-bind:class="flatType+'Total'" placeholder="00000.000">
             <span>м2</span>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div>
             <input type="text" v-model="heatingArea" @keydown="validate($event)" @keyup="validateKeyUp"
                    class="heatingArea"
-                   v-bind:class="flatType+'Heating'" placeholder="00000,000">
+                   v-bind:class="flatType+'Heating'" placeholder="00000.000">
             <span>м2</span>
           </div>
         </div>
@@ -36,7 +36,6 @@
         </div>
         <div class="buttonPart">
           <button class="yellowBtn" @click="saveType">{{ $t('buttons.saveType')}}</button>
-          <button class="greenBtn" @click="changeType">{{ $t('buttons.addType')}}</button>
           <button class="greyBtn" @click="edit" v-show="!isEdit">{{ $t('buttons.edit')}}</button>
           <button class="blueBtn" @click="saveChanges" v-show="isEdit">{{ $t('buttons.saveChanges')}}</button>
         </div>
@@ -57,33 +56,33 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="value in data">
+          <tr v-for="value in flatTypes">
             <td>{{ $t('objectRegistration2.type')}} {{value.typeShort}}</td>
             <td class="editInputTd">
 
               <input type="text" v-if="isEdit"
-                     v-bind:value=value.totalArea
+                     v-model=value.totalArea
                      class="editInput"
                      @keydown="validate($event, value.typeFull)"
                      @keyup="validateKeyUp"
-                     @change="changeTotalValue"
-                     placeholder="00000,000">
+                     @change="changeValue(value)"
+                     placeholder="00000.000">
 
               <span v-else>{{value.totalArea}}</span>
             </td>
             <td class="editInputTd">
 
               <input type="text" v-if="isEdit"
-                     v-bind:value=value.heatingArea
+                     v-model=value.heatingArea
                      class="editInput"
                      @keydown="validate($event)"
                      @keyup="validateKeyUp"
-                     @change="changeHeatingValue"
-                     placeholder="00000,000">
+                     @change="changeValue(value)"
+                     placeholder="00000.000">
 
               <span v-else>{{value.heatingArea}}</span>
             </td>
-            <td class="editInputTd" width="200">{{value.scan.name}}</td>
+            <td class="editInputTd" width="200">{{value.scan ? value.scan.name : ''}}</td>
             <td v-if="isEdit">
               <input type="checkbox" class="switch">
             </td>
@@ -99,26 +98,34 @@
 import {mapMutations, mapGetters, mapActions} from 'vuex'
   export default{
     name:"FlatData",
-    props: ["flatData"],
+    props: ["flatData", "types"],
     data(){
       return{
         flatType: this.flatData.dataTitle,
         visibilityForm: false,
-        typeCount: 1,
         totalArea: null,
         heatingArea: null,
         scan: null,
-        data: null,
         isEdit: false,
-        editedData:{},
+        editedData:[],
         greyTd: []
       }
     },
 
-    computed: mapGetters(['getFlatsData','getIsSaved']),
+    computed: {
+      ...mapGetters(['getIsSaved']),
+      flatTypes(){
+        if(this.$store.getters.getFlatsData[this.flatData.dataTitle.toLowerCase()].length > 0){
+          this.changeIsSaved(true);
+        }
+        return this.$store.getters.getFlatsData[this.flatData.dataTitle.toLowerCase()]
+      },
+      typeNumber() {
+        return this.flatTypes.length > 0 ? this.flatTypes.length + 1 : 1;
+      }
+    },
 
     mounted() {
-      this.data = this.getFlatsData[this.flatData.dataTitle];
     },
 
     methods:{
@@ -126,8 +133,8 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
       ...mapActions(["saveFlatData"]),
 
       changeType(){
-        this.typeCount++;
-        if(this.typeCount > 5) this.typeCount = 1;
+        this.typeNumber++;
+        if(this.typeNumber > 5) this.typeNumber = 1;
       },
 
       saveType(){
@@ -144,7 +151,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
           this.removeRedBorder(heatingArea);
 
         } else{
-          var regEx = /^\d{5},\d{3}$/;
+          var regEx = /^\d{5}.\d{3}$/;
           var total = this.totalArea.match(regEx);
           var heating = this.heatingArea.match(regEx);
 
@@ -162,21 +169,21 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
 
             var data = {
               flatType: this.flatType,
-              typeFull: "type"+this.typeCount,
-              typeShort: this.typeCount,
+              typeFull: "type"+this.typeNumber,
+              typeShort: this.typeNumber,
               totalArea: this.totalArea,
               heatingArea: this.heatingArea,
-              scan: this.scan
+              scan: this.scan,
+              buildingId: this.$route.params.id
             };
 
 
             this.totalArea = this.heatingArea = "";
             inpFile.value = "";
             this.changeType();
-            this.data = this.getFlatsData[this.flatData.dataTitle];
             this.changeIsSaved(true);
-            this.saveFlatData(data);
 
+            this.saveFlatData(data);
           }
         }
       },
@@ -218,7 +225,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
       },
 
       saveChanges(){
-        var regEx = /^\d{5},\d{3}$/;
+        var regEx = /^\d{5}.\d{3}$/;
         var id = this.flatType + "Table";
         var table = document.querySelector("#"+id);
         var trs = table.querySelectorAll("tbody>tr");
@@ -242,7 +249,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
         if(result){
           this.editFlatData(this.editedData);
           this.isEdit = false;
-          this.editedData = this.getFlatsData[this.flatData.dataTitle];
+          this.editedData = this.flatTypes[this.flatData.dataTitle.toLowerCase()];
         }
       },
 
@@ -256,27 +263,11 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
       validateKeyUp(e){
         if(e.target.value.length == 5){
           if(e.key === "Backspace") return
-          e.target.value += ",";
+          e.target.value += ".";
         }
       },
-      changeTotalValue(e){
-        var typeNumber = (e.target.parentElement.parentElement.children[0].innerText).split("")[5];
-        var typeFull = "type"+typeNumber;
-        if(!this.editedData[typeFull]) this.editedData[typeFull] = {};
-        this.editedData[typeFull].totalArea = e.target.value;
-        this.editedData[typeFull].typeFull = typeFull;
-        this.editedData[typeFull].typeShort = typeNumber;
-        this.editedData[typeFull].flatType = this.flatData.dataTitle;
-      },
-
-      changeHeatingValue(e){
-        var typeNumber = (e.target.parentElement.parentElement.children[0].innerText).split("")[5];
-        var typeFull = "type"+typeNumber;
-        if(!this.editedData[typeFull]) this.editedData[typeFull]= {};
-        this.editedData[typeFull].heatingArea = e.target.value;
-        this.editedData[typeFull].typeFull = typeFull;
-        this.editedData[typeFull].typeShort = typeNumber;
-        this.editedData[typeFull].flatType = this.flatData.dataTitle;
+      changeValue(item){
+        this.editedData.push(item)
       }
     }
   }
@@ -351,6 +342,7 @@ input[type=checkbox]{
 }
 
 .yellowBtn,.greenBtn,.greyBtn,.blueBtn{
+  margin-right: 5px;
   width: 130px;
   height: 36px;
   padding: 3px;
@@ -457,7 +449,6 @@ input[type=checkbox]{
 .buttonPart{
   margin-top: 30px;
   display: flex;
-  justify-content: space-between;
 }
 
 .tableTitle{

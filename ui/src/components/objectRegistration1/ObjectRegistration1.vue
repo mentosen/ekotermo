@@ -58,7 +58,9 @@
                 <div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointTwoTitle')}}</div>
                 <div>{{ $t('objectRegistration.sectionPointTwo')}}</div>
               </div>
-              <input type="checkbox" value="SECTION_POINT_TWO" @change="changeChbChecked"  name="buildingCategory">
+              <input type="checkbox" value="SECTION_POINT_TWO"
+                     @change="changeChbChecked"
+                     name="buildingCategory" checked="getFlatInfo.buildingCategory === 'SECTION_POINT_TWO'">
             </div>
             <div class="chbsWrapper">
               <div><div class="categoryItemTitle">{{ $t('objectRegistration.sectionPointThreeTitle')}}</div>
@@ -188,7 +190,7 @@
                          @keyup="validatePhoneNumberKeyUp"
                          @keydown="validatePhoneNumber"
                          name="personPhoneNumFirst" v-if="isEdit"
-                         v-bind:value="getFlatInfo.personPhoneNumFirst">
+                         v-model="getFlatInfo.personPhoneNumFirst">
                   <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNumFirst}}</div>
                   <input type="text"
                          value="+380"
@@ -197,7 +199,7 @@
                          @keyup="validatePhoneNumberKeyUp"
                          @keydown="validatePhoneNumber"
                          name="personPhoneNumSecond" v-if="isEdit"
-                         v-bind:value="getFlatInfo.personPhoneNumSecond">
+                         v-model="getFlatInfo.personPhoneNumSecond">
                   <div v-if="!isEdit" class="inputDiv">{{getFlatInfo.personPhoneNumSecond}}</div>
                 </div>
               </div>
@@ -253,7 +255,6 @@ export default {
   },
   mounted() {
     this.data = this.getFlatInfo;
-    debugger
     if(this.data.personPhoneNumFirst || this.data.personPhoneNumSecond){
       if(this.data.personPhoneNumFirst) this.phoneNumbers.phone1 = this.data.personPhoneNumFirst;
       if(this.data.personPhoneNumSecond) this.phoneNumbers.phone2 = this.data.personPhoneNumSecond;
@@ -264,7 +265,6 @@ export default {
     if(this.getFlatInfo.isSaved){
       this.isSaved = this.getFlatInfo.isSaved;
     }
-    this.checkChbs();
   },
   computed: {
     getCities() {
@@ -280,6 +280,11 @@ export default {
       return this.$store.getters.getRegions
     },
 
+  },
+  watch: {
+    getFlatInfo() {
+      this.checkChbs();
+    }
   },
   components:{delPopUp: delPopUp},
   methods:{
@@ -299,7 +304,7 @@ export default {
 
          if(chb){
            if(chb.checked){
-             this.data[chb.name] = chb.value;
+             this.getFlatInfo[chb.name] = chb.value;
              chb.style.display = "none";
            }else{
              chbsWrap[j].style.display= "none";
@@ -313,15 +318,16 @@ export default {
          if(inputs[k].type == "checkbox"){
            continue;
          }
-         this.data[inputs[k].name] = inputs[k].value;
-         if(inputs[k].value === "+380")this.data[inputs[k].name] = null;
+         this.getFlatInfo[inputs[k].name] = inputs[k].value;
+         if(inputs[k].value === "+380")this.getFlatInfo[inputs[k].name] = null;
        }
-       this.data.isEdit = false;
-       this.data.isSaved = true;
-       this.saveData(Object.assign({},this.data));
+       this.getFlatInfo.isEdit = false;
+       this.getFlatInfo.isSaved = true;
+
+       this.saveData(Object.assign({},this.getFlatInfo));
        this.isSaved = true;
        this.isEdit = false;
-       console.log(this.data);
+       console.log(this.getFlatInfo);
      }
     },
     edit(){
@@ -380,13 +386,13 @@ export default {
       return result
     },
     checkChbs(){
-      if(this.data.buildingCategory){
+      if(this.getFlatInfo.buildingCategory){
         var chbsWrap = document.querySelectorAll(".chbsWrapper");
         var chb;
         for(var k = 0; k < chbsWrap.length; k++){
           chb = chbsWrap[k].querySelector("input[type=checkbox]");
           if(chb){
-            if(this.data.buildingCategory == chb.value){
+            if(this.getFlatInfo.buildingCategory === chb.value){
               chb.checked = true;
               chb.style.display = "none";
             }else{
@@ -401,7 +407,7 @@ export default {
     checkPhoneNumbers(){
       var phoneInputs = document.querySelectorAll(".phoneNumber");
       var result = false;
-      if(this.phoneNumbers.phone1 || this.phoneNumbers.phone2){
+      if(this.getFlatInfo.personPhoneNumFirst || this.getFlatInfo.personPhoneNumSecond){
         result = true;
       }else{
         phoneInputs[0].style.border = "1px solid red";
