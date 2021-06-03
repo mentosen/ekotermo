@@ -8,11 +8,11 @@ export function findAllFlatTypes(buildingId){
     })
 }
 
-export function createFlatType(data){
+export function createFlatType(file){
     return request({
         url: '/api/flat-type/',
         method: 'post',
-        data: data
+        data: file
     })
 }
 

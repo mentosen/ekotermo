@@ -19,7 +19,7 @@ class FlatTypeService {
         return flatTypes.collect{FlatTypeDto.buildFromDomain(it)}
     }
 
-    void create(String userId, FlatTypeDto flatDto){
+    FlatTypeDto create(String userId, FlatTypeDto flatDto){
 
         log.info("Saving flat ${flatDto.toString()}")
 
@@ -32,7 +32,7 @@ class FlatTypeService {
                 userId: userId
         )
 
-        flatTypeDataService.save(flat)
+        return FlatTypeDto.buildFromDomain(flatTypeDataService.save(flat))
     }
 
     void edit(String userId, List<FlatTypeDto> flatTypeDtos){

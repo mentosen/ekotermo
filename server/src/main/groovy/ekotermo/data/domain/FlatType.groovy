@@ -2,6 +2,7 @@ package ekotermo.data.domain
 
 import ekotermo.data.enums.FlatRoomType
 import groovy.transform.ToString
+import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = 'flatTypes')
@@ -16,7 +17,8 @@ class FlatType extends BaseDomain{
 
     double heatingSpace
 
-    List<Image> images
+    @DBRef(lazy = true)
+    Image image
 
     String userId
 

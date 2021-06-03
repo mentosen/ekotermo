@@ -82,9 +82,9 @@
 
               <span v-else>{{value.heatingArea}}</span>
             </td>
-            <td class="editInputTd" width="200">{{value.scan ? value.scan.name : ''}}</td>
+            <td class="editInputTd" width="200">{{value.image ? value.image.name : ''}}</td>
             <td v-if="isEdit">
-              <input type="checkbox" class="switch">
+              <input type="checkbox" class="switch" v-bind:value="value.id" @change="prepareImageForDelete($event)">
             </td>
           </tr>
           </tbody>
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+  import { deleteImage} from "@/api/image";
 import {mapMutations, mapGetters, mapActions} from 'vuex'
   export default{
     name:"FlatData",
@@ -108,7 +109,8 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
         scan: null,
         isEdit: false,
         editedData:[],
-        greyTd: []
+        greyTd: [],
+        flatTypeIdsForDeleteImage: []
       }
     },
 
@@ -130,7 +132,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
 
     methods:{
       ...mapMutations(["addFlatData", "editFlatData","changeIsSaved"]),
-      ...mapActions(["saveFlatData"]),
+      ...mapActions(["saveFlatTypeData"]),
 
       changeType(){
         this.typeNumber++;
@@ -167,23 +169,29 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
             inpFile.files[0]?scan = inpFile.files[0]:scan="";
             this.scan = scan;
 
-            var data = {
+            const formData = new FormData();
+            formData.append("scan", scan, scan.name);
+
+            var flatType = {
               flatType: this.flatType,
               typeFull: "type"+this.typeNumber,
               typeShort: this.typeNumber,
               totalArea: this.totalArea,
               heatingArea: this.heatingArea,
-              scan: this.scan,
               buildingId: this.$route.params.id
             };
 
+            var data = {
+              flatType: flatType,
+              scan: formData,
+            };
 
             this.totalArea = this.heatingArea = "";
             inpFile.value = "";
             this.changeType();
             this.changeIsSaved(true);
 
-            this.saveFlatData(data);
+            this.saveFlatTypeData(data);
           }
         }
       },
@@ -222,6 +230,8 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
           this.editedData[typeFull].typeFull = typeFull;
           this.editedData[typeFull].typeShort = typeNumber;
         }
+
+        deleteImage(this.flatTypeIdsForDeleteImage)
       },
 
       saveChanges(){
@@ -268,6 +278,15 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
       },
       changeValue(item){
         this.editedData.push(item)
+      },
+      prepareImageForDelete(event){
+        if(event.target.checked){
+          this.flatTypeIdsForDeleteImage.push(event.target.value)
+        } else {
+          this.flatTypeIdsForDeleteImage = this.flatTypeIdsForDeleteImage.filter(function (item) {
+            return item !== event.target.value;
+          });
+        }
       }
     }
   }

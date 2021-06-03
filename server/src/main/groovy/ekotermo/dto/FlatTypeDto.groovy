@@ -20,13 +20,18 @@ class FlatTypeDto extends BaseDto{
     @JsonProperty('heatingArea')
     double heatingSpace
 
-    @JsonProperty('scan')
-    List<Image> images
+    @JsonProperty('image')
+    ImageDto image
 
     @JsonProperty('buildingId')
     String buildingId
 
     static buildFromDomain(FlatType flatType){
+
+        ImageDto imageDto = null
+        if(flatType.image){
+            imageDto = ImageDto.buildFromDomain(flatType.image)
+        }
 
         return new FlatTypeDto(
                 id: flatType.id,
@@ -34,7 +39,7 @@ class FlatTypeDto extends BaseDto{
                 numberType: flatType.numberType,
                 fullSpace: flatType.fullSpace,
                 heatingSpace: flatType.heatingSpace,
-                images: flatType.images,
+                image: imageDto,
                 buildingId: flatType.buildingId
         )
     }

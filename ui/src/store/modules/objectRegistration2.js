@@ -1,15 +1,18 @@
 import { createFlatType, editFlatType, findAllFlatTypes } from "@/api/flatType";
+import { upload} from "@/api/image";
 
 export default {
   actions:{
-    saveFlatData(ctx, data){
-      createFlatType(data);
-
-      ctx.commit("saveFlatTypeData", data);
+    saveFlatTypeData(ctx, data){
+      createFlatType(data.flatType).then(response => {
+        upload(data.scan, response.data.id).then(image => {
+          data.flatType.image = image.data;
+          ctx.commit("saveFlatTypeData", data.flatType);
+        })
+      });
     },
     findAllFlatTypes(ctx, data){
       findAllFlatTypes(data).then(response => {
-        debugger
         if(response.data.length){
           ctx.commit("changeIsSaved", true);
         }
@@ -33,11 +36,9 @@ export default {
     },
 
     editFlatData(state, data){
-debugger
       editFlatType(data)
     },
     changeIsSaved(state, bool){
-      debugger
       state.isSaved = bool;
     }
   },
