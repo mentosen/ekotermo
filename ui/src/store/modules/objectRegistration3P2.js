@@ -1,18 +1,34 @@
+import { findBuilding } from "@/api/building";
+import { createFlat, editFlat } from "@/api/flat";
+
 export default {
   actions:{
-    getData(ctx){
+    getData(ctx, id){
       //get request
-      ctx.commit("addFlatsObj", 2);
-      ctx.commit("addEntranceObj", 3);
-      ctx.commit("addFlatTypeObj", 4);
-      ctx.commit("addCofObj");
-      ctx.commit("addFloors", 6);
-      ctx.commit("addRoomPurpose");
-      ctx.commit("addRoomTypeP3");
-      ctx.commit("addTypeAccounted");
+
+      findBuilding(id).then(response => {
+
+        let flatsObj = {
+          startNumber: response.data.numerableFlatsFrom,
+          flatsCount: response.data.flatsCount,
+          savedFlats: typeof response.data.flats !== "undefined" ? response.data.flats : []
+        }
+
+        ctx.commit("addFlatsObj", flatsObj);
+        ctx.commit("addEntranceObj", response.data.entranceCount);
+        ctx.commit("addFlatTypeObj", response.data.flatTypes);
+        ctx.commit("addCofObj");
+        ctx.commit("addFloors", response.data.floorsCount);
+        ctx.commit("addRoomPurpose");
+        ctx.commit("addRoomTypeP3");
+        ctx.commit("addTypeAccounted");
+      })
     },
     saveFlatData(ctx, data){
-      ctx.commit("addDataFlat", data);
+      debugger
+      createFlat(data).then(response => {
+        ctx.commit("addDataFlat", data);
+      })
       // post request
     },
     removeImage(ctx, index){
@@ -39,12 +55,18 @@ export default {
       }
       state.floors = data;
     },
-    addFlatsObj(state, num){
+    addFlatsObj(state, flatInfo){
       var data = [];
+      data = data.concat(flatInfo.savedFlats);
+      let flatNumbers = flatInfo.savedFlats.map((item) => {
+        return item.flatNumber;
+      })
 
-      for(var k = 0; k < num; k++){
-        var obj = {num: k+1, objectPhoto: null};
-        data.push(obj);
+      for(var k = 0; k < flatInfo.flatsCount; k++){
+        if(!flatNumbers.includes(k+flatInfo.startNumber)){
+          var obj = {flatNumber: k+flatInfo.startNumber, objectPhoto: null};
+          data.push(obj);
+        }
       }
       state.apartments = data;
     },
@@ -57,14 +79,15 @@ export default {
       }
       state.entrance = data;
     },
-    addFlatTypeObj(state, num){
-     var data = [];
+    addFlatTypeObj(state, data){
+     var typeObjects = [];
 
-      for(var k = 0; k < num; k++){
-        var obj = {num: k+1};
-        data.push(obj);
-      }
-      state.flatType = data;
+      data.forEach((type) => {
+        type.name = type.flatType.toLowerCase().replace(/([-_]\w)/g, group => group[1].toUpperCase());
+        typeObjects.push(type)
+      })
+
+      state.flatType = typeObjects
     },
     addCofObj(state, num){
      var data = [{value:1,title:"1"},{value:0.9,title:"0.9"},{value:0.8,title:"0.8"}];
@@ -112,7 +135,7 @@ export default {
     showPopUp: false,
     roomPurpose:[],
     roomTypeP3:[],
-    typeAccountedP4:[]
+    typeAccountedP4:[],
   },
 
   getters:{

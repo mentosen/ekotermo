@@ -52,8 +52,20 @@ class BuildingDto extends BaseDto{
     String personPhoneNumFirst
     @JsonProperty('personPhoneNumSecond')
     String personPhoneNumSecond
+    @JsonProperty('flatTypes')
+    List<FlatTypeDto> flatTypeDtos = []
+    @JsonProperty('flats')
+    List<FlatDto> flats = []
 
     static buildFromDomain(Building building){
+
+        List<FlatTypeDto> flatTypeDtos = building.flatTypes.collect {
+            FlatTypeDto.buildFromDomain(it)
+        }
+
+        List<FlatDto> flats = building.flats.collect {
+            FlatDto.buildFromDomain(it)
+        }
 
         return new BuildingDto(
                 id: building.id,
@@ -80,7 +92,10 @@ class BuildingDto extends BaseDto{
                 thirdName: building.thirdName,
                 personPosition: building.personPosition,
                 personPhoneNumFirst: building.personPhoneNumFirst,
-                personPhoneNumSecond: building.personPhoneNumSecond
+                personPhoneNumSecond: building.personPhoneNumSecond,
+
+                flatTypeDtos: flatTypeDtos,
+                flats: flats
         )
     }
 }

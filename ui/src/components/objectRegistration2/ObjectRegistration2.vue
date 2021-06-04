@@ -6,19 +6,19 @@
 
     <Head></Head>
 
-    <FlatData v-bind:flatData="{title: $t('objectRegistration2.oneFlatRoom'),
+    <FlatData v-bind:flatData="{title: $t('objectRegistration2.singleRoom'),
         dataTitle: 'SINGLE_ROOM',
-        tableTitle: $t('objectRegistration2.oneFlatRoomTableTitle')}" style="margin-top: 50px"></FlatData>
-    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.twoFlatRoom'),
+        tableTitle: this.$t('objectRegistration2.oneFlatRoomTableTitle')}" style="margin-top: 50px"></FlatData>
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.doubleRoom'),
         dataTitle: 'DOUBLE_ROOM',
         tableTitle: this.$t('objectRegistration2.twoFlatRoomTableTitle')}"></FlatData>
-    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.threeFlatRoom'),
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.tripleRoom'),
         dataTitle: 'TRIPLE_ROOM',
         tableTitle: this.$t('objectRegistration2.threeFlatRoomTableTitle')}"></FlatData>
-    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.fourFlatRoom'),
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.quadripleRoom'),
         dataTitle: 'QUADRUPLE_ROOM',
         tableTitle: this.$t('objectRegistration2.fourFlatRoomTableTitle')}"></FlatData>
-    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.fiveFlatRoom'),
+    <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.quintipleRoom'),
         dataTitle: 'QUINTUPLE_ROOM',
         tableTitle: this.$t('objectRegistration2.fiveFlatRoomTableTitle')}"></FlatData>
     <FlatData v-bind:flatData="{title: this.$t('objectRegistration2.nonLivePremises'),
@@ -54,7 +54,16 @@ export default {
       return this.$store.getters.getFlatsData
     },
     getIsSaved() {
-      return this.$store.getters.isSaved
+      let that = this;
+      let isSaved = false;
+
+      Object.keys(that.flatsData).forEach(function (item) {
+        if(that.flatsData[item].length > 0){
+          isSaved = true;
+        }
+      })
+
+      return isSaved
     }
   },
   methods:{
@@ -65,8 +74,8 @@ export default {
       this.$router.push({ name: 'Object registration1', params: { id: this.$route.params.id } })
     },
     toRegForm3(){
-      this.$router.push({ name: 'Object registration3', params: { id: this.$route.params.id } })
-    }
+      this.$router.push({ name: 'Object registration3P2', params: { id: this.$route.params.id } })
+    },
   } ,
   components:{FlatData: FlatData, Head: Head}
 

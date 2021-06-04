@@ -169,8 +169,12 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
             inpFile.files[0]?scan = inpFile.files[0]:scan="";
             this.scan = scan;
 
-            const formData = new FormData();
-            formData.append("scan", scan, scan.name);
+            let formData = null;
+
+            if(scan !== ""){
+              formData = new FormData();
+              formData.append("scan", scan, scan.name);
+            }
 
             var flatType = {
               flatType: this.flatType,

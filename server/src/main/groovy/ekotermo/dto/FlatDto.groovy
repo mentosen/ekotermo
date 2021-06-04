@@ -1,24 +1,34 @@
 package ekotermo.dto
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import ekotermo.data.domain.Flat
-import ekotermo.data.domain.Image
 import groovy.transform.ToString
 
 @ToString(includeFields = true, includeNames = true, includePackage = false)
 class FlatDto extends BaseDto{
 
+    @JsonProperty('flatNumber')
     int number
+    @JsonProperty('entrance')
     int entranceNumber
+    @JsonProperty('floor')
     int floorNumber
-    int counterNumber
-    int firstDataCounter
+    @JsonProperty('counterNum')
+    long counterNumber
+    @JsonProperty('counterStartVal')
+    Double firstDataCounter
 
-    double coefficient
+    @JsonProperty('cof')
+    Double coefficient
 
-    List<Image> images
+//    @JsonProperty('flatNumber')
+//    List<Image> images
 
+    @JsonProperty('userId')
     String userId
+    @JsonProperty('buildingId')
     String buildingId
+    @JsonProperty('flatTypeId')
     String flatTypeId
 
     static buildFromDomain(Flat flat){
@@ -30,7 +40,7 @@ class FlatDto extends BaseDto{
                 counterNumber: flat.counterNumber,
                 firstDataCounter: flat.firstDataCounter,
                 coefficient: flat.coefficient,
-                images: flat.images,
+//                images: flat.images,
                 userId: flat.userId,
                 buildingId: flat.buildingId,
                 flatTypeId: flat.flatTypeId

@@ -8,19 +8,20 @@
     <afterHead></afterHead>
     <table>
       <caption class="tableCaption">{{ $t('objectRegistration3.tableCaption')}}</caption>
+      <caption class="tableCaption">{{ $t('objectRegistration3.tableCorrectionFactor')}}</caption>
       <thead>
       <th width="75">{{ $t('objectRegistration3.flatNumber')}}</th>
-      <th>{{ $t('objectRegistration3.porchNumber') }}</th>
-      <th width="110">{{ $t('objectRegistration3.floorNumber')}}</th>
-      <th>{{ $t('objectRegistration3.flatType')}}</th>
-      <th width="180">{{ $t('objectRegistration3.tableCorrectionFactor')}}</th>
+      <th width="60">{{ $t('objectRegistration3.porchNumber') }}</th>
+      <th width="60">{{ $t('objectRegistration3.floorNumber')}}</th>
+      <th width="190">{{ $t('objectRegistration3.flatType')}}</th>
+      <th width="130">{{ $t('objectRegistration3.tableCorrectionFactorShort')}}</th>
       <th width="140">{{ $t('objectRegistration3.meterSerialNumber')}}</th>
       <th width="140">{{ $t('objectRegistration3.initialMeterValue')}}</th>
       <th width="110">{{ $t('objectRegistration3.objectPhoto')}}</th>
       <th width="110">{{ $t('objectRegistration3.action')}}</th>
       </thead>
       <tbody>
-        <appTr v-for="(data, key) in getApartments" v-bind:flatNumber="key+1" :key="data.num"></appTr>
+        <appTr v-for="(data, key) in getApartments" :flat="data" :key="data.flatNumber"></appTr>
       </tbody>
     </table>
     <div class="btnPart">
@@ -42,14 +43,30 @@ import afterHead from "@/components/objectRegistration3P2/afterHead";
 
 export default {
   name: 'registrationForm3P2',
-  mounted() {
-    this.getData();
-  },
   data(){
     return{
     }
   },
-  computed: mapGetters(["getApartments", "getIsAllFilled1","getIsAllFilled2","getShowPopUp"]),
+  created(){
+    this.getData(this.$route.params.id);
+  },
+  mounted() {
+  },
+  computed:{
+    getApartments() {
+      return this.$store.getters.getApartments;
+    },
+    getIsAllFilled1() {
+      return this.$store.getters.getIsAllFilled1;
+    },
+    getIsAllFilled2() {
+      return this.$store.getters.getIsAllFilled2;
+    },
+    getShowPopUp() {
+      return this.$store.getters.getShowPopUp;
+    }
+  },
+  // computed: mapGetters(["getApartments", "getIsAllFilled1","getIsAllFilled2","getShowPopUp"]),
   methods:{
     ...mapActions(["getData",'saveAllFlatDataP2']),
     ...mapMutations(["changeShowPopUp"]),

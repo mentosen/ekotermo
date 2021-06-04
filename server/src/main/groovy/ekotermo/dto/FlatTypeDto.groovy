@@ -2,7 +2,6 @@ package ekotermo.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import ekotermo.data.domain.FlatType
-import ekotermo.data.domain.Image
 import ekotermo.data.enums.FlatRoomType
 import groovy.transform.ToString
 

@@ -1,56 +1,58 @@
 <template>
   <tr class="appTr">
-    <td>{{flatNumber}}</td>
+    <td>{{flat.flatNumber}}</td>
     <td class="selectTd">
       <select class="tableSelect" v-if="isEdit">
-        <option v-for="(num, key) in getEntrance" v-bind:value="num.num" v-bind:selected="data.entrance == num.num">{{key+1}}</option>
+        <option v-for="(num, key) in getEntrance" :value="num.num" :selected="flat.entrance === num.num">{{key+1}}</option>
       </select>
-      <div v-if="!isEdit">{{data.entrance}}</div>
+      <div v-if="!isEdit">{{flat.entrance}}</div>
     </td>
     <td>
       <select class="tableSelect"  v-if="isEdit">
-        <option v-for="(num, key) in getFloors" v-bind:value="num.num" v-bind:selected="data.floor == num.num">{{key+1}}</option>
+        <option v-for="(num, key) in getFloors" :value="num.num" :selected="flat.floor === num.num">{{key+1}}</option>
       </select>
-      <div v-if="!isEdit">{{data.floor}}</div>
+      <div v-if="!isEdit">{{flat.floor}}</div>
+    </td>
+    <td class="selectTd">
+      <select class="tableSelect" v-if="isEdit && getFlatType.length > 0">
+        <option v-for="type in getFlatType" :value="type.id" :selected="type.typeShort === type.num">
+          {{ $t('objectRegistration2.' + type.name + 'Short')}} {{ $t('objectRegistration3.type')}}{{type.typeShort}}
+        </option>
+      </select>
+      <div v-if="!isEdit">{{ $t('objectRegistration2.' + type.name + 'Short')}} {{ $t('objectRegistration3.type')}} {{flat.flatType.typeShort}}</div>
     </td>
     <td class="selectTd">
       <select class="tableSelect" v-if="isEdit">
-        <option v-for="(num, key) in getFlatType" v-bind:value="num.num" v-bind:selected="data.flatType == num.num">{{ $t('objectRegistration3.type')}}{{key+1}}</option>
+        <option v-for="item in getCof" :value="item.value" :selected="flat.cof === item.value">{{item.title}}</option>
       </select>
-      <div v-if="!isEdit">{{ $t('objectRegistration3.type')}} {{data.flatType}}</div>
-    </td>
-    <td class="selectTd">
-      <select class="tableSelect" v-if="isEdit">
-        <option v-for="item in getCof" v-bind:value="item.value" v-bind:selected="data.cof == item.value">{{item.title}}</option>
-      </select>
-      <div v-if="!isEdit">{{data.cof}}</div>
+      <div v-if="!isEdit">{{flat.cof}}</div>
     </td>
     <td>
-      <input type="text" class="tableInpText" @keydown="validateCounter" v-bind:placeholder="$t('objectRegistration3.meterPlaceholder')"
-             v-if="isEdit" v-bind:value="data.counterNum" @change="saveValue" name="counterNum">
-      <div v-if="!isEdit">{{data.counterNum}}</div>
+      <input type="text" class="tableInpText" @keydown="validateCounter" :placeholder="$t('objectRegistration3.meterPlaceholder')"
+             v-if="isEdit" :value="flat.counterNum" @change="saveValue" name="counterNum">
+      <div v-if="!isEdit">{{flat.counterNum}}</div>
     </td>
     <td>
       <input type="text" class="tableInpText" @keydown="validateStartCounterVal" @keyup="validateStartCounterKeyUp"
-      placeholder="123456,78" v-if="isEdit" v-bind:value="data.counterStartVal" @change="saveValue" name="counterStartVal">
-      <div v-if="!isEdit">{{data.counterStartVal}}</div>
+      placeholder="123456.78" v-if="isEdit" :value="flat.counterStartVal" @change="saveValue" name="counterStartVal">
+      <div v-if="!isEdit">{{flat.counterStartVal}}</div>
     </td>
     <td>
       <div class="btnPart">
         <label>
-          <div class="greenBtn btnDiv" v-bind:class="{disabled:!isEdit}">{{ $t('buttons.addPhoto')}}</div>
-          <input type="file" class="tableInpFile" @change="addPhoto" accept="application/pdf,image/*" multiple v-bind:disabled="!isEdit">
+          <div class="greenBtn btnDiv" :class="{disabled:!isEdit}">{{ $t('buttons.addPhoto')}}</div>
+          <input type="file" class="tableInpFile" @change="addPhoto" accept="application/pdf,image/*" multiple :disabled="!isEdit">
         </label>
-        <button class="blueBtn" v-bind:disabled="!isPhotos" @click="showAllPhotos">{{ $t('buttons.viewPhoto')}}</button>
+        <button class="blueBtn" :disabled="!isPhotos" @click="showAllPhotos">{{ $t('buttons.viewPhoto')}}</button>
       </div>
     </td>
     <td>
       <div class="btnPart">
-        <button class="yellowBtn" @click="save" v-bind:disabled="!isEdit">{{ $t('buttons.save')}}</button>
-        <button class="greyBtn" @click="edit" v-bind:disabled="isEdit">{{ $t('buttons.edit')}}</button>
+        <button class="yellowBtn" @click="save" :disabled="!isEdit">{{ $t('buttons.save')}}</button>
+        <button class="greyBtn" @click="edit" :disabled="isEdit">{{ $t('buttons.edit')}}</button>
       </div>
     </td>
-    <slider v-if="showPhotos" v-bind:photos="urls" @closeSlider="closeSlider" @isPhoto="isPhotos = false"></slider>
+    <slider v-if="showPhotos" :photos="urls" @closeSlider="closeSlider" @isPhoto="isPhotos = false"></slider>
   </tr>
 </template>
 
@@ -60,16 +62,8 @@ import slider from "./slider.vue"
 
 export default {
   name: 'appHead',
-  props:['flatNumber'],
-  computed: mapGetters(['getEntrance','getFlatType','getCof','getApartments', 'getFloors','getDataFlat']),
-  mounted() {
-    if(this.getDataFlat[this.flatNumber-1]){
-      this.data = this.getDataFlat[this.flatNumber-1];
-      this.isEdit = this.getDataFlat[this.flatNumber-1].isEdit;
-      this.objectPhoto = this.getDataFlat[this.flatNumber-1].objectPhoto;
-      if(this.objectPhoto.length > 0) this.isPhotos = true;
-    }
-  },
+  props:['flat'],
+  components:{slider:slider},
   data(){
     return{
       isPhotos: false,
@@ -86,7 +80,40 @@ export default {
       "https://sib.fm/storage/article/February2020/Z0tp5pg7QDhkIZ06GKhM.jpg"]
     }
   },
-  components:{slider:slider},
+  // computed: mapGetters(['getEntrance','getFlatType','getCof','getApartments', 'getFloors','getDataFlat']),
+  mounted() {
+    debugger
+    if(typeof this.flat.counterNum !== "undefined"){
+      debugger
+      this.isEdit = false;
+      this.objectPhoto = this.flat.objectPhoto;
+
+      if(this.objectPhoto.length > 0) this.isPhotos = true;
+    }
+  },
+  computed:{
+    getEntrance() {
+      return this.$store.getters.getEntrance;
+    },
+    getFlatType() {
+      return this.$store.getters.getFlatType;
+    },
+    getCof() {
+      return this.$store.getters.getCof;
+    },
+    getApartments() {
+      return this.$store.getters.getApartments;
+    },
+    getFloors() {
+      return this.$store.getters.getFloors;
+    },
+    getDataFlat() {
+      return this.$store.getters.getDataFlat;
+    },
+    convertSnakeCaseToCamelCase(string){
+      return string.toLowerCase().replace(/([-_]\w)/g, group => group[1].toUpperCase());
+    },
+  },
   methods:{
     ...mapActions(['saveFlatData']),
     ...mapMutations(["changeIsAllFilled1"]),
@@ -102,7 +129,7 @@ export default {
       var parent = e.target.closest("tr");
       var inputs = parent.querySelectorAll("input[type=text]");
       var regEx1 = /^\d{12}$/;
-      var regEx2 = /^\d{6},\d{2}$/;
+      var regEx2 = /^\d{6}.\d{2}$/;
 
       if(!inputs[0].value.match(regEx1) || !inputs[1].value.match(regEx2)){
         if(!inputs[0].value.match(regEx1)) inputs[0].style.border = "1px solid red";
@@ -121,7 +148,8 @@ export default {
           cof: parent.children[4].children[0].value,
           counterNum: parent.children[5].children[0].value,
           counterStartVal: parent.children[6].children[0].value,
-          objectPhoto: this.objectPhoto
+          objectPhoto: this.objectPhoto,
+          buildingId: this.$route.params.id
         }
         this.data = Object.assign(this.data, obj);
         this.saveFlatData(this.data);
@@ -134,16 +162,16 @@ export default {
       this.changeIsAllFilled1(false);
     },
     validateCounter(e){
-      if(e.key == "Backspace"){
+      if(e.key === "Backspace"){
         return
-      } else if(isNaN(e.key) || e.key == " " || e.target.value.length > this.counterLengthLimit){
+      } else if(isNaN(e.key) || e.key === " " || e.target.value.length > this.counterLengthLimit){
         e.preventDefault();
       }
     },
     validateFloor(e){
-      if(e.key == "Backspace"){
+      if(e.key === "Backspace"){
         return
-      } else if(isNaN(e.key) || e.key == " " || e.target.value.length > this.floorLengthLimit){
+      } else if(isNaN(e.key) || e.key === " " || e.target.value.length > this.floorLengthLimit){
         e.preventDefault();
       }
     },
@@ -155,16 +183,16 @@ export default {
       }
     },
     validateStartCounterVal(e){
-      if(e.key == "Backspace" || e.key == ","|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
+      if(e.key === "Backspace" || e.key === "."|| e.key === "ArrowLeft" || e.key === "ArrowRight"){
         return
-      } else if(isNaN(e.key) || e.key == " " || e.target.value.length > this.startCounterValLimit){
+      } else if(isNaN(e.key) || e.key === " " || e.target.value.length > this.startCounterValLimit){
         e.preventDefault();
       }
     },
     validateStartCounterKeyUp(e){
-      if(e.target.value.length == 6){
+      if(e.target.value.length === 6){
         if(e.key === "Backspace") return
-        e.target.value += ",";
+        e.target.value += ".";
       }
     },
     saveValue(e){

@@ -3,6 +3,7 @@ package ekotermo.data.domain
 import ekotermo.data.enums.BuildingCategory
 import ekotermo.data.enums.BuildingStatus
 import groovy.transform.ToString
+import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = 'buildings')
@@ -13,11 +14,11 @@ class Building extends BaseDomain{
     String area
     String city
     String street
-    int buildingNumber
 
     BuildingCategory buildingCategory
     BuildingStatus status
 
+    int buildingNumber
     int entranceCount
     int flatsCount
     int floorsCount
@@ -37,4 +38,10 @@ class Building extends BaseDomain{
     String personPhoneNumSecond
 
     String userId
+
+    @DBRef(lazy = true)
+    List<FlatType> flatTypes = []
+
+    @DBRef(lazy = true)
+    List<Flat> flats = []
 }

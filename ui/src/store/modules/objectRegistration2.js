@@ -1,14 +1,18 @@
 import { createFlatType, editFlatType, findAllFlatTypes } from "@/api/flatType";
-import { upload} from "@/api/image";
+import { upload } from "@/api/image";
 
 export default {
   actions:{
     saveFlatTypeData(ctx, data){
       createFlatType(data.flatType).then(response => {
-        upload(data.scan, response.data.id).then(image => {
-          data.flatType.image = image.data;
+        if(data.scan !== null){
+          upload(data.scan, response.data.id).then(image => {
+            data.flatType.image = image.data;
+            ctx.commit("saveFlatTypeData", data.flatType);
+          })
+        } else {
           ctx.commit("saveFlatTypeData", data.flatType);
-        })
+        }
       });
     },
     findAllFlatTypes(ctx, data){
@@ -26,6 +30,7 @@ export default {
 
       for(var k = 0; k < keys.length;k++){
         state.flatsData[keys[k]] = data.filter(function (item) {
+          item.name = item.flatType.toLowerCase().replace(/([-_]\w)/g, group => group[1].toUpperCase());
           return item.flatType.toLowerCase() === keys[k];
         });
       }

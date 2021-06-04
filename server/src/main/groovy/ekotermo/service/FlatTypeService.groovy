@@ -1,6 +1,8 @@
 package ekotermo.service
 
+import ekotermo.data.domain.Building
 import ekotermo.data.domain.FlatType
+import ekotermo.data.service.BuildingDataService
 import ekotermo.data.service.FlatTypeDataService
 import ekotermo.dto.FlatTypeDto
 import groovy.util.logging.Slf4j
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service
 class FlatTypeService {
 
     @Autowired private FlatTypeDataService flatTypeDataService
+    @Autowired private BuildingDataService buildingDataService
 
     List<FlatTypeDto> findAllTypeByBuildingId(String userId, String buildingId){
         List<FlatType> flatTypes = flatTypeDataService.findAllByBuildingIdAndUserId(buildingId, userId)
@@ -23,7 +26,9 @@ class FlatTypeService {
 
         log.info("Saving flat ${flatDto.toString()}")
 
-        FlatType flat = new FlatType(
+        Building building = buildingDataService.findByIdAndUserId(flatDto.buildingId, userId)
+
+        FlatType flatType = new FlatType(
                 roomType: flatDto.roomType,
                 numberType: flatDto.numberType,
                 fullSpace: flatDto.fullSpace,
@@ -32,7 +37,12 @@ class FlatTypeService {
                 userId: userId
         )
 
-        return FlatTypeDto.buildFromDomain(flatTypeDataService.save(flat))
+        flatType = flatTypeDataService.save(flatType)
+
+        building.flatTypes.add(flatType)
+        buildingDataService.save(building)
+
+        return FlatTypeDto.buildFromDomain(flatType)
     }
 
     void edit(String userId, List<FlatTypeDto> flatTypeDtos){
